@@ -302,6 +302,7 @@ export default function CombatPage() {
                             onClick={(e) => {
                               e.stopPropagation();
                               setReviveTarget({
+                                dinoId: (kill as any).victimDinoId || `dino_${kill.victimSteamId.slice(-6)}_${kill.id}`,
                                 steamId: kill.victimSteamId,
                                 name: kill.victimName,
                                 species: kill.victimSpecies,
@@ -315,7 +316,7 @@ export default function CombatPage() {
                             className="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-semibold transition flex items-center gap-1 shadow-sm"
                           >
                             <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-                            <span>Hồi Sinh</span>
+                            <span>Khôi Phục / Cất Gara</span>
                           </button>
 
                           <button
@@ -434,6 +435,7 @@ export default function CombatPage() {
                 type="button"
                 onClick={() => {
                   setReviveTarget({
+                    dinoId: (selectedKill as any).victimDinoId || `dino_${selectedKill.victimSteamId.slice(-6)}_${selectedKill.id}`,
                     steamId: selectedKill.victimSteamId,
                     name: selectedKill.victimName,
                     species: selectedKill.victimSpecies,
@@ -447,7 +449,7 @@ export default function CombatPage() {
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-xs font-bold text-white transition flex items-center gap-2 shadow-lg shadow-emerald-600/30"
               >
                 <Sparkles className="w-4 h-4 text-emerald-200" />
-                <span>⚡ Rollback 5s & Hồi Sinh Nạn Nhân</span>
+                <span>⚡ Khôi Phục Dino (Cất Gara / Rollback Map)</span>
               </button>
 
               <button

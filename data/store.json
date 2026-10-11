@@ -4128,10 +4128,34 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-11T21:08:54.555Z",
-    "nextBroadcastAt": "2026-10-11T21:18:54.555Z"
+    "lastBroadcastAt": "2026-10-11T21:39:08.186Z",
+    "nextBroadcastAt": "2026-10-11T21:49:08.186Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791754748579-5yk9",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T21:39:08.579Z"
+    },
+    {
+      "id": "bc-1791754148267-yhez",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T21:29:08.267Z"
+    },
+    {
+      "id": "bc-1791753540754-0boz",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T21:19:00.754Z"
+    },
     {
       "id": "bc-1791752934986-eraq",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",

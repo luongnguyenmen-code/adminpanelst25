@@ -798,6 +798,41 @@ class AdminDataStore {
     return updated;
   }
 
+  transferDino(
+    dinoId: string,
+    targetSteamId: string,
+    targetPlayerName?: string
+  ): { success: boolean; dino?: DinoRecord; error?: string } {
+    const existing = this.dinoStore[dinoId];
+    if (!existing) {
+      return { success: false, error: `Không tìm thấy Dino với ID ${dinoId}` };
+    }
+
+    const updated: DinoRecord = {
+      ...existing,
+      steamId: targetSteamId,
+      playerName: targetPlayerName || existing.playerName,
+      updatedAt: new Date().toISOString(),
+    };
+
+    this.dinoStore[dinoId] = updated;
+
+    this.garageSlotMutations[dinoId] = {
+      mutations: updated.mutations,
+      elder: updated.elder,
+      lineage: updated.lineage,
+    };
+
+    this.playerMutations[targetSteamId] = {
+      mutations: updated.mutations,
+      elder: updated.elder,
+      lineage: updated.lineage,
+    };
+
+    this.saveToDisk();
+    return { success: true, dino: updated };
+  }
+
   getAllDinos(): Record<string, DinoRecord> {
     return { ...this.dinoStore };
   }

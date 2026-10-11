@@ -15,11 +15,14 @@ import {
   Dna,
   History,
   RotateCcw,
+  Warehouse,
+  Compass,
 } from 'lucide-react';
 import { KNOWN_SPECIES_LIST, TELEPORT_SAFE_ZONES, getDinoSpeciesImage } from '@/lib/utils';
 import { useApp } from '@/components/providers/AppProviders';
 
 interface ReviveTargetInfo {
+  dinoId?: string;
   steamId: string;
   name?: string;
   species?: string;
@@ -41,6 +44,7 @@ interface ReviveDinoModalProps {
 export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDinoModalProps) {
   const { addToast } = useApp();
 
+  const [dinoId, setDinoId] = useState('');
   const [steamId, setSteamId] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [species, setSpecies] = useState('Tyrannosaurus');
@@ -49,6 +53,9 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
   const [selectedSafeZone, setSelectedSafeZone] = useState('');
   const [reason, setReason] = useState('Đền bù sự cố / Rollback hồi sinh 5s trước khi chết');
   const [loading, setLoading] = useState(false);
+
+  // Recovery Destination: 'GARAGE' (Default - Auto back to player garage by ID) or 'LIVE_MAP' (Rollback directly to map coordinates)
+  const [destination, setDestination] = useState<'GARAGE' | 'LIVE_MAP'>('GARAGE');
 
   // Rollback coordinates state
   const [casualtyCoords, setCasualtyCoords] = useState<{ x: number; y: number; z: number } | null>(null);
@@ -62,6 +69,11 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
   // Sync state when target changes
   useEffect(() => {
     if (target) {
+      const resolvedDinoId =
+        target.dinoId ||
+        (target as any).id ||
+        `dino_${target.steamId.slice(-6)}_${Date.now().toString(36)}`;
+      setDinoId(resolvedDinoId);
       setSteamId(target.steamId || '');
       setPlayerName(target.name || '');
       if (target.species) {
@@ -78,7 +90,7 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
       if (target.reason) {
         setReason(target.reason);
       } else {
-        setReason('Đền bù sự cố / Rollback hồi sinh 5s trước khi chết');
+        setReason(`Khôi phục Dino ID #${resolvedDinoId} vào Gara`);
       }
 
       if (target.coordinates && typeof target.coordinates.x === 'number') {
@@ -131,23 +143,31 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
 
     setLoading(true);
     try {
-      const payloadCoordinates = restoreAtCasualtyCoords && casualtyCoords ? casualtyCoords : undefined;
+      const payloadCoordinates =
+        destination === 'LIVE_MAP' && restoreAtCasualtyCoords && casualtyCoords ? casualtyCoords : undefined;
       const payloadMutations = restoreMutations && playerMutations.length > 0 ? playerMutations : undefined;
 
       const res = await fetch('/api/islepilot/action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'revive',
+          action: destination === 'GARAGE' ? 'back_dino_to_garage' : 'revive',
           steamId: steamId.trim(),
           playerName: playerName.trim() || undefined,
-          reason: reason.trim() || 'Rollback hồi sinh 5s trước khi chết',
+          reason:
+            reason.trim() ||
+            (destination === 'GARAGE'
+              ? `Back đúng Dino ID #${dinoId} vào Gara người chơi`
+              : 'Rollback hồi sinh 5s trước khi chết ra bản đồ'),
           params: {
+            dinoId: dinoId.trim(),
             species: species.trim(),
             growth,
             healFull,
+            destination, // 'GARAGE' or 'LIVE_MAP'
             coordinates: payloadCoordinates,
-            teleportLocationId: !payloadCoordinates ? selectedSafeZone || undefined : undefined,
+            teleportLocationId:
+              destination === 'LIVE_MAP' && !payloadCoordinates ? selectedSafeZone || undefined : undefined,
             mutations: payloadMutations,
             elder: target?.elder,
             lineage: target?.lineage,
@@ -160,11 +180,19 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
         throw new Error(data.error || data.message || 'Lỗi từ máy chủ khi thực hiện hồi sinh');
       }
 
-      addToast(
-        'success',
-        'ROLLBACK & HỒI SINH THÀNH CÔNG! ⚡',
-        `Đã khôi phục hoàn chỉnh ${species} (${(growth * 100).toFixed(0)}%) tại vị trí tử nạn cho ${playerName || steamId}`
-      );
+      if (destination === 'GARAGE') {
+        addToast(
+          'success',
+          'ĐÃ BACK DINO THEO ID VÀO GARA THÀNH CÔNG! 🏪',
+          `Đã nạp chính xác Dino #${dinoId} (${species} ${(growth * 100).toFixed(0)}%) kèm gen đột biến vào Gara cho ${playerName || steamId}`
+        );
+      } else {
+        addToast(
+          'success',
+          'ROLLBACK & HỒI SINH RA MAP THÀNH CÔNG! ⚡',
+          `Đã khôi phục ${species} (${(growth * 100).toFixed(0)}%) tại vị trí tử nạn cho ${playerName || steamId}`
+        );
+      }
 
       if (onSuccess) onSuccess();
       onClose();
@@ -188,10 +216,10 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             </div>
             <div>
               <h3 className="text-base font-bold text-white tracking-wide flex items-center gap-2">
-                Rollback & Hồi Sinh Khủng Long (5s Trước Tử Nạn)
+                Rollback & Khôi Phục Khủng Long Theo ID
               </h3>
               <p className="text-xs text-zinc-400">
-                Khôi phục nguyên vẹn loài, tăng trưởng, cấu trúc đột biến gen và vị trí tọa độ lúc tử nạn
+                Back đúng con Dino theo ID vào Gara trên máy chủ hoặc Rollback vị trí ra bản đồ
               </p>
             </div>
           </div>
@@ -209,84 +237,168 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
           {/* Target Player Banner */}
           <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 flex items-center justify-between">
             <div>
-              <p className="text-[10px] uppercase font-mono text-zinc-400 font-bold">Nạn Nhân Giao Tranh</p>
+              <p className="text-[10px] uppercase font-mono text-zinc-400 font-bold">Người Chơi Nhận Dino</p>
               <p className="text-sm font-bold text-white mt-0.5">
                 {playerName || 'Chưa rõ tên'} <span className="text-xs font-mono text-cyan-400 font-normal">({steamId || 'Chưa nhập SteamID'})</span>
               </p>
             </div>
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold">
               <RotateCcw className="w-3.5 h-3.5" />
-              ROLLBACK READY
+              SẴN SÀNG KHÔI PHỤC
             </div>
           </div>
 
-          {/* Snapshot Status Card: Coordinates & Mutations */}
-          <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 space-y-3">
-            <p className="font-bold text-emerald-300 flex items-center gap-1.5 uppercase text-[11px] tracking-wider">
-              <History className="w-4 h-4 text-emerald-400" />
-              Trạng Thái Hiện Trường 5 Giây Trước Khi Chết (Snapshot)
-            </p>
+          {/* Dino ID Server Badge */}
+          <div className="p-3 rounded-xl bg-zinc-950/90 border border-cyan-500/30 flex items-center justify-between">
+            <div className="flex items-center gap-2 font-mono text-[11px]">
+              <span className="text-zinc-500 text-[10px] uppercase font-bold">Dino ID Trên Server:</span>
+              <span className="bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-700/80 font-bold text-cyan-300 select-all">
+                {dinoId}
+              </span>
+            </div>
+            <span className="text-[10px] text-zinc-400 italic">
+              Định danh lưu trên máy chủ
+            </span>
+          </div>
 
-            {/* Coordinates Rollback Checkbox */}
-            {casualtyCoords ? (
-              <label className="flex items-start gap-2.5 p-2.5 rounded-lg bg-zinc-900/80 border border-emerald-500/30 cursor-pointer hover:border-emerald-500/60 transition">
-                <input
-                  type="checkbox"
-                  checked={restoreAtCasualtyCoords}
-                  onChange={(e) => setRestoreAtCasualtyCoords(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 rounded text-emerald-500 focus:ring-emerald-500 bg-zinc-950 border-zinc-700"
-                />
-                <div>
-                  <p className="font-semibold text-white flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                    Dịch chuyển về đúng Tọa Độ Tử Nạn (Rollback Vị Trí)
-                  </p>
-                  <p className="text-[11px] font-mono text-cyan-300 mt-0.5">
-                    X: {Math.round(casualtyCoords.x)} | Y: {Math.round(casualtyCoords.y)} | Z: {Math.round(casualtyCoords.z)} (Nâng an toàn +50z)
-                  </p>
+          {/* DESTINATION SELECTOR: AUTO BACK TO GARAGE vs ROLLBACK LIVE MAP */}
+          <div className="space-y-2">
+            <label className="block text-zinc-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between">
+              <span>Điểm Đến Sau Khi Khôi Phục <span className="text-emerald-400">*</span></span>
+              <span className="text-[10px] text-zinc-400 font-normal">Chọn cách hệ thống trả lại con khủng long</span>
+            </label>
+            <div className="grid grid-cols-2 gap-2.5">
+              {/* Option 1: Auto Back to Garage (Default) */}
+              <button
+                type="button"
+                onClick={() => setDestination('GARAGE')}
+                className={`p-3 rounded-xl border text-left transition flex flex-col justify-between relative ${
+                  destination === 'GARAGE'
+                    ? 'bg-emerald-950/40 border-emerald-500 text-white shadow-lg shadow-emerald-500/10'
+                    : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700 text-zinc-400'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full mb-1">
+                  <div className="flex items-center gap-2">
+                    <Warehouse className={`w-4 h-4 ${destination === 'GARAGE' ? 'text-emerald-400' : 'text-zinc-400'}`} />
+                    <span className="font-bold text-xs">Cất Vào Gara Cá Nhân</span>
+                  </div>
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                    Khuyên Dùng
+                  </span>
                 </div>
-              </label>
-            ) : (
-              <div className="p-2.5 rounded-lg bg-zinc-900/50 border border-zinc-800 text-zinc-400 text-[11px]">
-                ℹ️ Không có sẵn tọa độ từ Killfeed. Bạn có thể chọn vị trí an toàn (Safe Zone) bên dưới.
-              </div>
-            )}
-
-            {/* Mutations Rollback Checkbox & Badges */}
-            <div className="p-2.5 rounded-lg bg-zinc-900/80 border border-emerald-500/30 space-y-2">
-              <label className="flex items-center gap-2.5 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={restoreMutations}
-                  onChange={(e) => setRestoreMutations(e.target.checked)}
-                  className="w-4 h-4 rounded text-emerald-500 focus:ring-emerald-500 bg-zinc-950 border-zinc-700"
-                />
-                <span className="font-semibold text-white flex items-center gap-1.5">
-                  <Dna className="w-3.5 h-3.5 text-purple-400" />
-                  Khôi Phục Toàn Bộ Đột Biến Gen Đã Có ({playerMutations.length} Đột Biến)
-                </span>
-              </label>
-
-              {isLoadingPlayerMuts ? (
-                <p className="text-[11px] text-zinc-400 italic">Đang kiểm tra hồ sơ đột biến gen của người chơi...</p>
-              ) : playerMutations.length > 0 ? (
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {playerMutations.map((mut, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/20 border border-purple-500/30 text-purple-200 text-[11px] font-medium"
-                    >
-                      <Dna className="w-3 h-3 text-purple-400" />
-                      {mut}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-[11px] text-zinc-500 italic">
-                  Khủng long chưa kích hoạt đột biến gen hoặc hệ thống sẽ nạp theo cấu hình mới nhất.
+                <p className="text-[11px] leading-relaxed opacity-90">
+                  Tự động lưu vào slot Gara. Người chơi mở Gara lấy ra dùng bất cứ lúc nào, an toàn 100%.
                 </p>
+              </button>
+
+              {/* Option 2: Live Map Coordinates */}
+              <button
+                type="button"
+                onClick={() => setDestination('LIVE_MAP')}
+                className={`p-3 rounded-xl border text-left transition flex flex-col justify-between relative ${
+                  destination === 'LIVE_MAP'
+                    ? 'bg-cyan-950/40 border-cyan-500 text-white shadow-lg shadow-cyan-500/10'
+                    : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700 text-zinc-400'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full mb-1">
+                  <div className="flex items-center gap-2">
+                    <Compass className={`w-4 h-4 ${destination === 'LIVE_MAP' ? 'text-cyan-400' : 'text-zinc-400'}`} />
+                    <span className="font-bold text-xs">Rollback Ra Bản Đồ</span>
+                  </div>
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                    Trực Tiếp
+                  </span>
+                </div>
+                <p className="text-[11px] leading-relaxed opacity-90">
+                  Hồi sinh ngay lập tức ra map tại tọa độ tử nạn 5s trước (Dành cho người chơi đang online).
+                </p>
+              </button>
+            </div>
+          </div>
+
+          {/* Conditional Destination Explainer */}
+          {destination === 'GARAGE' ? (
+            <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40 flex items-start gap-3">
+              <ShieldCheck className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <p className="font-bold text-emerald-300 text-xs">
+                  Cơ Chế Tự Động Đưa Khủng Long Trở Lại Gara (Auto Back To Garage)
+                </p>
+                <p className="text-[11px] text-zinc-300 leading-relaxed">
+                  Hệ thống sẽ tái tạo con khủng long với đúng loài, đúng % tăng trưởng và đầy đủ các đột biến gen, sau đó <b>tự động gọi lệnh cất vào Gara cá nhân</b>. Người chơi khi vào game chỉ việc mở Gara bấm sử dụng mà không lo bị cắn chết tiếp ở bãi chiến trường!
+                </p>
+              </div>
+            </div>
+          ) : (
+            /* Live Map Coordinates Box */
+            <div className="p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/30 space-y-3">
+              <p className="font-bold text-cyan-300 flex items-center gap-1.5 uppercase text-[11px] tracking-wider">
+                <History className="w-4 h-4 text-cyan-400" />
+                Trạng Thái Hiện Trường 5 Giây Trước Khi Chết (Snapshot)
+              </p>
+
+              {casualtyCoords ? (
+                <label className="flex items-start gap-2.5 p-2.5 rounded-lg bg-zinc-900/80 border border-cyan-500/30 cursor-pointer hover:border-cyan-500/60 transition">
+                  <input
+                    type="checkbox"
+                    checked={restoreAtCasualtyCoords}
+                    onChange={(e) => setRestoreAtCasualtyCoords(e.target.checked)}
+                    className="w-4 h-4 mt-0.5 rounded text-cyan-500 focus:ring-cyan-500 bg-zinc-950 border-zinc-700"
+                  />
+                  <div>
+                    <p className="font-semibold text-white flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                      Dịch chuyển về đúng Tọa Độ Tử Nạn (Rollback Vị Trí)
+                    </p>
+                    <p className="text-[11px] font-mono text-cyan-300 mt-0.5">
+                      X: {Math.round(casualtyCoords.x)} | Y: {Math.round(casualtyCoords.y)} | Z: {Math.round(casualtyCoords.z)} (Nâng an toàn +50z)
+                    </p>
+                  </div>
+                </label>
+              ) : (
+                <div className="p-2.5 rounded-lg bg-zinc-900/50 border border-zinc-800 text-zinc-400 text-[11px]">
+                  ℹ️ Không có sẵn tọa độ từ Killfeed. Hệ thống sẽ giữ nguyên vị trí hoặc dịch chuyển đến Safe Zone.
+                </div>
               )}
             </div>
+          )}
+
+          {/* Mutations Rollback Checkbox & Badges */}
+          <div className="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/30 space-y-2">
+            <label className="flex items-center gap-2.5 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={restoreMutations}
+                onChange={(e) => setRestoreMutations(e.target.checked)}
+                className="w-4 h-4 rounded text-purple-500 focus:ring-purple-500 bg-zinc-950 border-zinc-700"
+              />
+              <span className="font-semibold text-white flex items-center gap-1.5">
+                <Dna className="w-3.5 h-3.5 text-purple-400" />
+                Khôi Phục Toàn Bộ Đột Biến Gen Đã Có ({playerMutations.length} Đột Biến)
+              </span>
+            </label>
+
+            {isLoadingPlayerMuts ? (
+              <p className="text-[11px] text-zinc-400 italic">Đang kiểm tra hồ sơ đột biến gen của người chơi...</p>
+            ) : playerMutations.length > 0 ? (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {playerMutations.map((mut, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/20 border border-purple-500/30 text-purple-200 text-[11px] font-medium"
+                  >
+                    <Dna className="w-3 h-3 text-purple-400" />
+                    {mut}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-[11px] text-zinc-500 italic">
+                Khủng long chưa có hồ sơ đột biến gen ghi nhận trước đó.
+              </p>
+            )}
           </div>
 
           {/* Species Selection */}
@@ -374,7 +486,7 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
               </div>
             </label>
 
-            {!restoreAtCasualtyCoords && (
+            {destination === 'LIVE_MAP' && !restoreAtCasualtyCoords && (
               <div>
                 <label className="block text-zinc-300 font-semibold mb-1.5 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-cyan-400" />
@@ -398,13 +510,13 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             {/* Audit Reason */}
             <div>
               <label className="block text-zinc-300 font-semibold mb-1.5">
-                Lý Do Hồi Sinh / Rollback <span className="text-red-400">*</span>
+                Lý Do Khôi Phục <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                placeholder="VD: Rollback đền bù pha cắn trộm / Hồi sinh lỗi kẹt map..."
+                placeholder="VD: Đền bù tử nạn / Cất lại vào Gara cá nhân..."
                 className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -431,12 +543,17 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             {loading ? (
               <>
                 <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>Đang thực hiện Rollback...</span>
+                <span>Đang thực hiện khôi phục...</span>
+              </>
+            ) : destination === 'GARAGE' ? (
+              <>
+                <Warehouse className="w-4 h-4 text-emerald-200" />
+                <span>⚡ Khôi Phục & Tự Động Cất Vào Gara</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-4 h-4 text-emerald-200" />
-                <span>⚡ Xác Nhận Rollback & Hồi Sinh</span>
+                <span>⚡ Rollback & Hồi Sinh Ra Map</span>
               </>
             )}
           </button>

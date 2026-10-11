@@ -115,6 +115,10 @@ export async function POST(request: NextRequest) {
         allowed = hasPermission(actorRole, 'canWipeGarage', customEffective);
         requiredPermName = 'Wipe Garage';
         break;
+      case 'back_dino_to_garage':
+        allowed = hasPermission(actorRole, 'canRevive', customEffective) || hasPermission(actorRole, 'canManageGarage', customEffective);
+        requiredPermName = 'Khôi Phục Dino Vào Gara';
+        break;
       case 'grant_perk':
         allowed = hasPermission(actorRole, 'canManagePrime', customEffective);
         requiredPermName = 'Manage Prime Perks';
@@ -174,7 +178,7 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        if (species) {
+          if (species) {
           executionResult = await islePilotClient.reviveDino(steamId, {
             species,
             growth: params.growth ?? 1.0,
@@ -184,7 +188,20 @@ export async function POST(request: NextRequest) {
             mutations: targetMutations,
             elder: targetElder,
             lineage: targetLineage,
+            destination: params.destination,
           });
+
+          if (executionResult.success) {
+            adminStore.saveDino(`revived_${steamId}_${Date.now()}`, {
+              steamId,
+              playerName,
+              species,
+              growth: params.growth ?? 1.0,
+              mutations: targetMutations || [],
+              elder: targetElder,
+              lineage: targetLineage,
+            });
+          }
         } else {
           // Fallback to full heal & unfreeze
           executionResult = await islePilotClient.healPlayer(steamId, 10000);
@@ -244,6 +261,32 @@ export async function POST(request: NextRequest) {
       case 'restore_garage_dino': {
         const dinoId = params.dinoId || params.garageDinoId || params.slotId;
         executionResult = await islePilotClient.restoreGarageDino(steamId, dinoId);
+        break;
+      }
+      case 'back_dino_to_garage': {
+        const dinoId = params.dinoId || params.slotId || `dino_${steamId}_${Date.now()}`;
+        const species = params.species || 'Tyrannosaurus';
+        const growth = Number(params.growth ?? 1.0);
+        const mutations = params.mutations || [];
+
+        adminStore.saveDino(dinoId, {
+          dinoId,
+          steamId,
+          playerName,
+          species,
+          growth,
+          gender: params.gender || 'male',
+          mutations,
+          elder: params.elder,
+          lineage: params.lineage,
+        });
+
+        executionResult = await islePilotClient.restoreDinoToGarageById(steamId, dinoId, {
+          species,
+          growth,
+          gender: params.gender || 'male',
+          mutations,
+        });
         break;
       }
       case 'grant_currency': {

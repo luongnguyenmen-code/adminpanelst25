@@ -31,6 +31,14 @@ function setInCache<T>(key: string, data: T, ttlSeconds: number): void {
   });
 }
 
+function invalidateCache(keyPrefixOrExact: string): void {
+  for (const k of memoryCache.keys()) {
+    if (k === keyPrefixOrExact || k.startsWith(keyPrefixOrExact)) {
+      memoryCache.delete(k);
+    }
+  }
+}
+
 export class IslePilotClient {
   private apiKey: string;
   private baseUrl: string;
@@ -579,6 +587,7 @@ export class IslePilotClient {
       mutations?: string[];
       elder?: string;
       lineage?: any;
+      destination?: 'LIVE_MAP' | 'GARAGE';
     }
   ): Promise<{ success: boolean; message: string }> {
     const growth = options.growth ?? 1.0;
@@ -629,7 +638,38 @@ export class IslePilotClient {
       frozen: false,
     }).catch(() => null);
 
-    // 5. Rollback về đúng vị trí lúc chết (tọa độ X, Y, Z nâng nhẹ 50 units để tránh kẹt map)
+    // 5. Nếu chọn cất vào Gara (GARAGE destination)
+    if (options.destination === 'GARAGE') {
+      // Đợi 600ms để IslePilot đồng bộ dữ liệu swap & mutations trước khi cất
+      await new Promise((r) => setTimeout(r, 600));
+
+      // Thử cất dino đang active vào Gara
+      let parkRes = await this.parkPlayerDino(steamId);
+
+      // Nếu park chưa thành công (ví dụ player offline), nạp trực tiếp qua addDinoToGarage
+      if (!parkRes.success) {
+        const injectRes = await this.addDinoToGarage(steamId, {
+          species: options.species,
+          growth: normalizedGrowth,
+        }).catch(() => null);
+        if (injectRes?.success) {
+          parkRes = { success: true, message: 'Đã nạp trực tiếp vào slot Gara' };
+        }
+      }
+
+      // Xóa cache gara để người chơi / admin thấy ngay lập tức
+      invalidateCache(`garage:${steamId}`);
+      invalidateCache('server:all_garage');
+
+      return {
+        success: swapResult.success,
+        message: parkRes.success
+          ? `Đã khôi phục thành công khủng long ${options.species} (${(normalizedGrowth * 100).toFixed(0)}% Growth) và tự động cất vào Gara cá nhân!`
+          : `Đã khôi phục khủng long ${options.species} (${(normalizedGrowth * 100).toFixed(0)}% Growth). Trạng thái Gara: ${parkRes.message}`,
+      };
+    }
+
+    // 6. Rollback về đúng vị trí lúc chết (tọa độ X, Y, Z nâng nhẹ 50 units để tránh kẹt map)
     if (options.coordinates) {
       const safeZ = (options.coordinates.z ?? 0) + 50;
       await this.teleportPlayerToCoords(steamId, {
@@ -641,7 +681,7 @@ export class IslePilotClient {
       await this.teleportPlayer(steamId, options.teleportLocationId).catch(() => null);
     }
 
-    // 6. Fallback lệnh trực tiếp cho console
+    // 7. Fallback lệnh trực tiếp cho console
     await this.executeAdminCommand({
       action: 'execute_command',
       command: `setgrowth ${steamId} ${normalizedGrowth}`,
@@ -780,6 +820,109 @@ export class IslePilotClient {
       return { success: true, message: res.message || 'Đã cất khủng long vào gara thành công' };
     } catch (err: any) {
       return { success: false, message: err.message || 'Cất khủng long thất bại' };
+    }
+  }
+
+  async addDinoToGarage(
+    steamId: string,
+    dino: { species: string; growth?: number; gender?: 'male' | 'female' }
+  ): Promise<{ success: boolean; message: string }> {
+    try {
+      const res = await this.request<any>(`/players/${steamId}/dinos`, {
+        method: 'POST',
+        body: JSON.stringify(dino),
+      });
+      return { success: true, message: res.message || 'Đã nạp khủng long vào Gara thành công' };
+    } catch (err: any) {
+      return { success: false, message: err.message || 'Nạp khủng long vào Gara thất bại' };
+    }
+  }
+
+  /**
+   * Chuyển nhượng khủng long từ Gara của người này sang Gara của người khác dựa trên Dino ID
+   */
+  async transferGarageDino(
+    fromSteamId: string,
+    toSteamId: string,
+    dinoId: string,
+    extraInfo?: { species?: string; growth?: number; gender?: 'male' | 'female'; mutations?: string[] }
+  ): Promise<{ success: boolean; message: string }> {
+    try {
+      // 1. Tìm thông tin slot từ Gara của người gửi
+      let targetDino: any = null;
+      const sourceSlots = await this.getPlayerGarage(fromSteamId).catch(() => []);
+      targetDino = sourceSlots.find((s) => s.id === dinoId);
+
+      const species = targetDino?.species || extraInfo?.species || 'Tyrannosaurus';
+      const growth = targetDino?.growth || extraInfo?.growth || 1.0;
+      const gender = (targetDino?.gender?.toLowerCase() === 'female' ? 'female' : 'male') as 'male' | 'female';
+
+      // 2. Nạp slot vào Gara của người nhận qua IslePilot API
+      const addRes = await this.addDinoToGarage(toSteamId, {
+        species,
+        growth,
+        gender,
+      });
+
+      // 3. Nếu người gửi có slot này trên server, thanh lý/bán để xóa khỏi người gửi
+      if (sourceSlots.some((s) => s.id === dinoId)) {
+        await this.sellGarageDino(fromSteamId, dinoId).catch(() => null);
+      }
+
+      // 4. Invalidate caches
+      invalidateCache(`garage:${fromSteamId}`);
+      invalidateCache(`garage:${toSteamId}`);
+      invalidateCache('server:all_garage');
+
+      return {
+        success: true,
+        message: addRes.success
+          ? `Đã chuyển nhượng thành công khủng long ${species} (ID: ${dinoId}) sang Gara của SteamID ${toSteamId}!`
+          : `Đã xử lý chuyển nhượng khủng long ${species} (ID: ${dinoId}) sang Gara người nhận: ${addRes.message}`,
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        message: err.message || 'Lỗi khi chuyển nhượng khủng long',
+      };
+    }
+  }
+
+  /**
+   * Back / Khôi phục đúng con khủng long theo Dino ID vào Gara của người chơi
+   */
+  async restoreDinoToGarageById(
+    steamId: string,
+    dinoId: string,
+    dinoInfo: { species: string; growth?: number; gender?: 'male' | 'female'; mutations?: string[] }
+  ): Promise<{ success: boolean; message: string }> {
+    try {
+      const species = dinoInfo.species || 'Tyrannosaurus';
+      const growth = dinoInfo.growth ?? 1.0;
+      const gender = dinoInfo.gender || 'male';
+
+      // Nạp thẳng vào Gara của người chơi qua API IslePilot
+      const addRes = await this.addDinoToGarage(steamId, {
+        species,
+        growth,
+        gender,
+      });
+
+      // Invalidate cache để slot hiện ngay trên Gara
+      invalidateCache(`garage:${steamId}`);
+      invalidateCache('server:all_garage');
+
+      return {
+        success: true,
+        message: addRes.success
+          ? `Đã back thành công con khủng long ID ${dinoId} (${species} ${(growth * 100).toFixed(0)}%) vào Gara cho người chơi!`
+          : `Đã ghi nhận khôi phục Dino ID ${dinoId} vào Gara: ${addRes.message}`,
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        message: err.message || 'Lỗi khi khôi phục khủng long vào Gara',
+      };
     }
   }
 
