@@ -16,19 +16,16 @@ import {
   Crown,
   ChevronRight,
   RefreshCw,
-  Dna,
 } from 'lucide-react';
 import { IslePilotPlayer } from '@/types/islepilot';
 import { getDinoSpeciesImage, formatPlaytime, KNOWN_SPECIES_LIST } from '@/lib/utils';
 import { PlayerInspectorModal } from '@/components/players/PlayerInspectorModal';
-import { MutationGrantModal } from '@/components/players/MutationGrantModal';
 
 export default function PlayersPage() {
   const [search, setSearch] = useState('');
   const [onlineFilter, setOnlineFilter] = useState<'all' | 'online' | 'offline'>('all');
   const [speciesFilter, setSpeciesFilter] = useState<string>('all');
   const [selectedPlayer, setSelectedPlayer] = useState<IslePilotPlayer | null>(null);
-  const [mutationPlayer, setMutationPlayer] = useState<IslePilotPlayer | null>(null);
 
   const { data, isLoading, refetch, isFetching } = useQuery<{ players: IslePilotPlayer[] }>({
     queryKey: ['players', onlineFilter, search],
@@ -194,7 +191,6 @@ export default function PlayersPage() {
               <tr>
                 <th className="py-3.5 px-4">Người chơi</th>
                 <th className="py-3.5 px-4">Khủng long & Loài</th>
-                <th className="py-3.5 px-4 min-w-[210px]">Đột biến (Mutations)</th>
                 <th className="py-3.5 px-4">Tăng trưởng</th>
                 <th className="py-3.5 px-4">Sinh lực (HP / Ăn / Uống)</th>
                 <th className="py-3.5 px-4">Thời gian chơi</th>
@@ -204,14 +200,14 @@ export default function PlayersPage() {
             <tbody className="divide-y divide-zinc-800/60 font-sans">
               {isLoading ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-zinc-400">
+                  <td colSpan={6} className="py-12 text-center text-zinc-400">
                     <RefreshCw className="w-6 h-6 animate-spin mx-auto text-emerald-400 mb-2" />
                     Đang tải dữ liệu người chơi từ IslePilot API...
                   </td>
                 </tr>
               ) : filteredPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-zinc-400">
+                  <td colSpan={6} className="py-12 text-center text-zinc-400">
                     Không tìm thấy người chơi nào phù hợp với bộ lọc hiện tại.
                   </td>
                 </tr>
@@ -282,69 +278,6 @@ export default function PlayersPage() {
                         </div>
                       </td>
 
-                      {/* Mutations info */}
-                      <td
-                        className="py-3.5 px-4"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedPlayer(player);
-                        }}
-                      >
-                        {player.mutations && player.mutations.length > 0 ? (
-                          <div className="space-y-1.5 max-w-[340px]">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-950/60 border border-purple-800/60 text-purple-300 font-bold">
-                                {player.mutations.length} Gen
-                              </span>
-                              {player.reincarnationCount && player.reincarnationCount > 0 ? (
-                                <span
-                                  className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/60 font-bold"
-                                  title="Số lần trùng sinh (cùng 1 UID khủng long)"
-                                >
-                                  Trùng sinh x{player.reincarnationCount}
-                                </span>
-                              ) : null}
-                              {(player.elder === 'Prime' || player.isPrimeElder) && (
-                                <span className="px-1.5 py-0.2 rounded-md bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[10px] font-bold font-mono">
-                                  Prime
-                                </span>
-                              )}
-                              {player.elder === 'Frail' && (
-                                <span className="px-1.5 py-0.2 rounded-md bg-orange-500/20 border border-orange-500/30 text-orange-300 text-[10px] font-bold font-mono">
-                                  Frail
-                                </span>
-                              )}
-                            </div>
-                            <div className="flex flex-wrap items-center gap-1">
-                              {player.mutations.map((mut, mIdx) => (
-                                <span
-                                  key={`${mut}-${mIdx}`}
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-purple-500/10 border border-purple-500/25 text-purple-300 text-[11px] font-medium tracking-tight hover:bg-purple-500/25 transition cursor-pointer"
-                                  title={`Đột biến gen #${mIdx + 1}: ${mut}`}
-                                >
-                                  <Dna className="w-2.5 h-2.5 text-purple-400 flex-shrink-0" />
-                                  <span>{mut}</span>
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 text-zinc-500 text-[11px] font-mono">
-                            <span>— Chưa có</span>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setMutationPlayer(player);
-                              }}
-                              className="opacity-0 group-hover:opacity-100 px-1.5 py-0.5 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-medium transition"
-                              title="Cấp / Bù đột biến cho người chơi"
-                            >
-                              + Cấp bù
-                            </button>
-                          </div>
-                        )}
-                      </td>
-
                       {/* Growth */}
                       <td className="py-3.5 px-4">
                         <div className="w-28">
@@ -392,17 +325,6 @@ export default function PlayersPage() {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              setMutationPlayer(player);
-                            }}
-                            className="p-1.5 rounded-xl bg-zinc-850 hover:bg-emerald-500/20 text-zinc-400 hover:text-emerald-400 border border-zinc-800 transition"
-                            title="Cấp / Bù Đột Biến Gen (Mutations)"
-                          >
-                            <Dna className="w-3.5 h-3.5" />
-                          </button>
-
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
                               setSelectedPlayer(player);
                             }}
                             className="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-emerald-500/20 hover:text-emerald-300 text-zinc-300 font-medium transition inline-flex items-center gap-1"
@@ -427,14 +349,6 @@ export default function PlayersPage() {
         isOpen={!!selectedPlayer}
         onClose={() => setSelectedPlayer(null)}
         onRefresh={() => refetch()}
-      />
-
-      {/* Quick Mutation Grant Modal */}
-      <MutationGrantModal
-        player={mutationPlayer}
-        isOpen={!!mutationPlayer}
-        onClose={() => setMutationPlayer(null)}
-        onSuccess={() => refetch()}
       />
     </div>
   );

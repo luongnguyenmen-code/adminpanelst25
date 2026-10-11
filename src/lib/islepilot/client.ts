@@ -505,13 +505,30 @@ export class IslePilotClient {
   }
 
   async setPlayerGrowth(steamId: string, growth: number, frozen = false, dinoId?: string): Promise<{ success: boolean; message: string }> {
-    return this.executeAdminCommand({
+    const normalizedGrowth = growth > 1 ? Number((growth / 100).toFixed(4)) : Number(growth.toFixed(4));
+
+    // 1. IslePilot API: Growth setting is executed via action 'setstats'
+    const statsResult = await this.executeAdminCommand({
+      action: 'setstats',
+      steamId,
+      growth: normalizedGrowth,
+      dinoId: dinoId || undefined,
+    });
+
+    // 2. IslePilot API: 'setgrowth' manages freeze status (frozen: boolean)
+    await this.executeAdminCommand({
       action: 'setgrowth',
       steamId,
-      dinoId: dinoId || undefined,
-      growth,
-      frozen,
-    });
+      frozen: !!frozen,
+    }).catch(() => null);
+
+    // 3. Fallback direct console/RCON command for online player in The Isle Evrima engine
+    await this.executeAdminCommand({
+      action: 'execute_command',
+      command: `setgrowth ${steamId} ${normalizedGrowth}`,
+    }).catch(() => null);
+
+    return statsResult;
   }
 
   async grantPlayerMutations(

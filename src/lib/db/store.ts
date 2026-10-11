@@ -840,6 +840,11 @@ class AdminDataStore {
     );
   }
 
+  clearMutationLogs(): void {
+    this.mutationLogs = [];
+    this.saveToDisk();
+  }
+
   addMutationLog(entry: {
     actorName: string;
     actorRole: AdminRole;

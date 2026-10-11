@@ -180,6 +180,13 @@ export async function POST(request: NextRequest) {
           false,
           targetDinoId
         );
+        if (targetDinoId) {
+          adminStore.saveDino(targetDinoId, {
+            dinoId: targetDinoId,
+            growth: growthDec,
+            steamId,
+          });
+        }
         break;
       }
       case 'inject_dino':

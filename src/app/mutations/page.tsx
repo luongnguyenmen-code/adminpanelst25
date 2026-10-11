@@ -19,6 +19,7 @@ import {
   Eye,
   Sliders,
   Calendar,
+  Trash2,
 } from 'lucide-react';
 import { IslePilotPlayer } from '@/types/islepilot';
 import { MutationAuditLogItem } from '@/lib/db/store';
@@ -122,6 +123,20 @@ export default function MutationsHubPage() {
   const primeElderCount = useMemo(() => {
     return players.filter((p) => p.isPrimeElder || p.elder === 'Prime').length;
   }, [players]);
+
+  const [isClearingLogs, setIsClearingLogs] = useState(false);
+  const handleClearAllLogs = async () => {
+    if (!window.confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử nhật ký cấp bù đột biến?')) return;
+    setIsClearingLogs(true);
+    try {
+      const res = await fetch('/api/islepilot/mutations', { method: 'DELETE' });
+      if (res.ok) {
+        refetchLogs();
+      }
+    } finally {
+      setIsClearingLogs(false);
+    }
+  };
 
   const handleRefreshAll = () => {
     refetchPlayers();
@@ -292,6 +307,26 @@ export default function MutationsHubPage() {
             <p className="text-[11px] text-zinc-500 font-mono">
               Hiển thị {filteredPlayers.length} người chơi phù hợp
             </p>
+          </div>
+        )}
+
+        {/* Sub-Toolbar for Logs tab */}
+        {activeTab === 'logs' && (
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-zinc-800/60 text-xs">
+            <p className="text-[11px] text-zinc-400 font-mono">
+              Hiển thị <strong className="text-white font-sans">{filteredLogs.length}</strong> lượt can thiệp cấp bù đột biến
+            </p>
+            {logs.length > 0 && (
+              <button
+                onClick={handleClearAllLogs}
+                disabled={isClearingLogs}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-600/15 hover:bg-red-600/25 border border-red-500/30 text-red-300 text-xs font-semibold transition disabled:opacity-50"
+                title="Xóa toàn bộ lịch sử nhật ký cấp bù đột biến"
+              >
+                <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                <span>{isClearingLogs ? 'Đang xóa...' : 'Xóa toàn bộ lịch sử'}</span>
+              </button>
+            )}
           </div>
         )}
       </div>

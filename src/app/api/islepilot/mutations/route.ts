@@ -38,3 +38,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function DELETE() {
+  try {
+    adminStore.clearMutationLogs();
+    return NextResponse.json({ success: true, message: 'Đã xóa toàn bộ nhật ký cấp bù đột biến' });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
