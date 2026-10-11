@@ -118,22 +118,23 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     } catch {}
   }
 
-  // 2. Check Master SuperAdmin SteamIDs (Owner & Co-Owners)
-  const masterSteamIds = (process.env.ADMIN_SUPER_STEAM_IDS || '76561198681721956,76561198789527189')
+  // 2. DUY NHẤT CHỦ SỞ HỮU MỚI ĐƯỢC LÀ SUPER_ADMIN (Owner Master SteamID)
+  const masterSteamIds = (process.env.ADMIN_SUPER_STEAM_IDS || '76561198681721956')
     .split(',')
-    .map((s) => s.trim());
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   if (masterSteamIds.includes(steamId) || steamId === '76561198681721956') {
     return {
       role: 'SUPER_ADMIN',
       roleTitle: 'CHỦ SERVER / QUAN KHÂM SAI (Toàn quyền)',
-      name: player?.name || 'Chủ Server (76561198681721956)',
+      name: player?.name || 'Chủ Server ST25',
       avatarUrl,
       discord,
     };
   }
 
-  // 3. Check Direct SteamID Role Assignment in Database Store
+  // 3. Phân quyền theo SteamID do đích thân Chủ Server cấp trong trang /roles
   const directSteamRole = adminStore.getRoleForSteamId(steamId);
   if (directSteamRole && directSteamRole !== 'GUEST') {
     const roleTitles: Record<AdminRole, string> = {
@@ -152,82 +153,57 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     };
   }
 
+  // 4. Nếu có liên kết Discord với IslePilot và có danh sách vai trò:
+  // TUYỆT ĐỐI KHÔNG TỰ ĐỘNG CẤP SUPER_ADMIN QUA DISCORD (Chỉ tối đa là Senior Admin hoặc Mod)
+  if (discordRoles.length > 0) {
+    const lowerRoles = discordRoles.map((r) => r.toLowerCase().trim());
 
-  // 3. Dynamic Check from AdminStore RBAC Matrix
-  const effective = adminStore.getUserEffectivePermissions(discordRoles);
-  if (effective.canManageRoles) {
-    return {
-      role: 'SUPER_ADMIN',
-      roleTitle: 'QUAN KHÂM SAI (Toàn quyền)',
-      name,
-      avatarUrl,
-      discord,
-    };
-  }
-
-  // 4. Check Discord Roles mapped in IslePilot by keywords
-  const lowerRoles = discordRoles.map((r) => r.toLowerCase());
-
-  if (
-    lowerRoles.some((r) =>
-      ['quan khâm sai', 'long không', 'long không (ad)', 'dev', 'admin', 'superadmin', 'chủ server'].some((k) =>
-        r.includes(k)
+    if (
+      lowerRoles.some((r) =>
+        ['quan khâm sai', 'long không', 'long không (ad)', 'dev', 'senior admin', 'quản lý', 'trưởng bqt'].some((k) =>
+          r.includes(k)
+        )
       )
-    )
-  ) {
-    return {
-      role: 'SUPER_ADMIN',
-      roleTitle: 'QUAN KHÂM SAI (Toàn quyền)',
-      name,
-      avatarUrl,
-      discord,
-    };
+    ) {
+      return {
+        role: 'SENIOR_ADMIN',
+        roleTitle: 'SENIOR ADMIN (Ban Quản Trị)',
+        name,
+        avatarUrl,
+        discord,
+      };
+    }
+
+    if (
+      lowerRoles.some((r) =>
+        ['mod', 'moderator', 'ban quản trị', 'bqt'].some((k) => r.includes(k))
+      )
+    ) {
+      return {
+        role: 'MODERATOR',
+        roleTitle: 'MODERATOR (Quản trị viên)',
+        name,
+        avatarUrl,
+        discord,
+      };
+    }
+
+    if (
+      lowerRoles.some((r) =>
+        ['trial', 'trial mod', 'học việc', 'thực tập'].some((k) => r.includes(k))
+      )
+    ) {
+      return {
+        role: 'TRIAL_MOD',
+        roleTitle: 'TRIAL MOD (Học việc)',
+        name,
+        avatarUrl,
+        discord,
+      };
+    }
   }
 
-
-  if (
-    lowerRoles.some((r) =>
-      ['senior', 'senior admin', 'quản lý', 'trưởng bqt'].some((k) => r.includes(k))
-    )
-  ) {
-    return {
-      role: 'SENIOR_ADMIN',
-      roleTitle: 'SENIOR ADMIN',
-      name,
-      avatarUrl,
-      discord,
-    };
-  }
-
-  if (
-    lowerRoles.some((r) =>
-      ['mod', 'moderator', 'ban quản trị', 'bqt'].some((k) => r.includes(k))
-    )
-  ) {
-    return {
-      role: 'MODERATOR',
-      roleTitle: 'MODERATOR (Quản trị viên)',
-      name,
-      avatarUrl,
-      discord,
-    };
-  }
-
-  if (
-    lowerRoles.some((r) =>
-      ['trial', 'trial mod', 'học việc', 'thực tập'].some((k) => r.includes(k))
-    )
-  ) {
-    return {
-      role: 'TRIAL_MOD',
-      roleTitle: 'TRIAL MOD (Học việc)',
-      name,
-      avatarUrl,
-      discord,
-    };
-  }
-
-  // 5. Fallback: If player has no admin role on Discord, assign GUEST (No BQT Permission)
+  // 5. MỌI TÀI KHOẢN KHÁC: GÁN GUEST (KHÔNG CÓ QUYỀN BQT, CHẶN TRUY CẬP NGAY TỨC THÌ)
   return {
     role: 'GUEST',
     roleTitle: 'Người Chơi (Không có quyền BQT)',

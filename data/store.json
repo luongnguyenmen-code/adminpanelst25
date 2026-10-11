@@ -1,0 +1,5037 @@
+{
+  "auditLogs": [
+    {
+      "id": "aud-1791738474411-ppat",
+      "actorId": "admin-1791595278091",
+      "actorName": "Moderator",
+      "actorRole": "MODERATOR",
+      "action": "BROADCAST_MANUAL",
+      "reason": "Gửi thông báo server: báo bell...",
+      "payload": {
+        "message": "báo bell"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T17:07:54.411Z"
+    },
+    {
+      "id": "aud-1791726124238-g2vc",
+      "actorId": "admin-1791595278091",
+      "actorName": "Moderator",
+      "actorRole": "MODERATOR",
+      "action": "AUTO_ANNOUNCE_CONFIG",
+      "reason": "Cập nhật cấu hình tự động thông báo: BẬT (Mỗi 10 phút)",
+      "payload": {
+        "enabled": true,
+        "intervalMinutes": 10,
+        "mode": "sequential",
+        "currentTemplateIndex": 2,
+        "lastBroadcastAt": "2026-10-11T13:33:08.451Z",
+        "nextBroadcastAt": "2026-10-11T13:52:04.237Z"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T13:42:04.238Z"
+    },
+    {
+      "id": "aud-1791726096198-qasq",
+      "actorId": "admin-1791595278091",
+      "actorName": "Moderator",
+      "actorRole": "MODERATOR",
+      "action": "BROADCAST_MANUAL",
+      "reason": "Gửi thông báo server: Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng lu...",
+      "payload": {
+        "message": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T13:41:36.198Z"
+    },
+    {
+      "id": "aud-1791726073052-ojlw",
+      "actorId": "admin-1791595278091",
+      "actorName": "Moderator",
+      "actorRole": "MODERATOR",
+      "action": "BROADCAST_MANUAL",
+      "reason": "Gửi thông báo server: [THÔNG BÁO]...",
+      "payload": {
+        "message": "[THÔNG BÁO]"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T13:41:13.052Z"
+    },
+    {
+      "id": "aud-1791726043863-nz99",
+      "actorId": "admin-1791595278091",
+      "actorName": "Moderator",
+      "actorRole": "MODERATOR",
+      "action": "AUTO_ANNOUNCE_CONFIG",
+      "reason": "Cập nhật cấu hình tự động thông báo: TẮT (Mỗi 15 phút)",
+      "payload": {
+        "enabled": false,
+        "intervalMinutes": 15,
+        "mode": "sequential",
+        "currentTemplateIndex": 2,
+        "lastBroadcastAt": "2026-10-11T13:33:08.451Z"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T13:40:43.863Z"
+    },
+    {
+      "id": "aud-1791699492379-tja7",
+      "actorId": "admin-root",
+      "actorName": "SuperAdmin (Master Key)",
+      "actorRole": "SUPER_ADMIN",
+      "action": "WATER",
+      "targetSteamId": "76561199292380914",
+      "targetName": "luan198348",
+      "reason": "Admin phục hồi nước uống (Thirst)",
+      "payload": {},
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T06:18:12.379Z"
+    },
+    {
+      "id": "aud-1791699475610-1bmj",
+      "actorId": "admin-root",
+      "actorName": "SuperAdmin (Master Key)",
+      "actorRole": "SUPER_ADMIN",
+      "action": "FEED",
+      "targetSteamId": "76561199292380914",
+      "targetName": "luan198348",
+      "reason": "Admin phục hồi thức ăn (Hunger)",
+      "payload": {},
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T06:17:55.610Z"
+    },
+    {
+      "id": "aud-1791690860681-4pcf",
+      "actorId": "admin-root",
+      "actorName": "Admin",
+      "actorRole": "SUPER_ADMIN",
+      "action": "AUTO_ANNOUNCE_CONFIG",
+      "reason": "Cập nhật cấu hình tự động thông báo: BẬT (Mỗi 15 phút)",
+      "payload": {
+        "enabled": true,
+        "intervalMinutes": 15,
+        "mode": "sequential",
+        "currentTemplateIndex": 0,
+        "nextBroadcastAt": "2026-10-11T04:09:20.680Z"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T03:54:20.681Z"
+    },
+    {
+      "id": "aud-1791690765394-1l5b",
+      "actorId": "admin-root",
+      "actorName": "Admin",
+      "actorRole": "SUPER_ADMIN",
+      "action": "AUTO_ANNOUNCE_CONFIG",
+      "reason": "Cập nhật cấu hình tự động thông báo: TẮT (Mỗi 15 phút)",
+      "payload": {
+        "enabled": false,
+        "intervalMinutes": 15,
+        "mode": "sequential",
+        "currentTemplateIndex": 0
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T03:52:45.394Z"
+    },
+    {
+      "id": "aud-1791690734735-4ma2",
+      "actorId": "admin-root",
+      "actorName": "Admin",
+      "actorRole": "SUPER_ADMIN",
+      "action": "BROADCAST_MANUAL",
+      "reason": "Gửi thông báo server: Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng lu...",
+      "payload": {
+        "message": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái"
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-11T03:52:14.735Z"
+    },
+    {
+      "id": "aud-1791654511074-l3g0",
+      "actorId": "admin-root",
+      "actorName": "SuperAdmin (Master Key)",
+      "actorRole": "SUPER_ADMIN",
+      "action": "EXECUTE_COMMAND",
+      "targetSteamId": "ALL",
+      "targetName": "ALL",
+      "reason": "Broadcast: Ae mở laucher bật voice lại nhé !\n",
+      "payload": {
+        "command": "announce \"Ae mở laucher bật voice lại nhé !\n\""
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-10T17:48:31.074Z"
+    },
+    {
+      "id": "aud-1791654397182-12mh",
+      "actorId": "admin-root",
+      "actorName": "SuperAdmin (Master Key)",
+      "actorRole": "SUPER_ADMIN",
+      "action": "EXECUTE_COMMAND",
+      "targetSteamId": "ALL",
+      "targetName": "ALL",
+      "reason": "Broadcast: AE vui lòng khởi động lại voice chat nhé \n",
+      "payload": {
+        "command": "announce \"AE vui lòng khởi động lại voice chat nhé \n\""
+      },
+      "status": "SUCCESS",
+      "createdAt": "2026-10-10T17:46:37.182Z"
+    }
+  ],
+  "playerNotes": [],
+  "primeMembers": [],
+  "mutationLogs": [],
+  "playerMutations": {
+    "76561198789527189": {
+      "mutations": []
+    },
+    "76561198870866539": {
+      "mutations": []
+    },
+    "76561199734141244": {
+      "mutations": [
+        "Nocturnal",
+        "Hydroregenerative",
+        "Hematophagy"
+      ]
+    },
+    "76561199115530052": {
+      "mutations": [
+        "Reniculate Kidneys"
+      ]
+    },
+    "76561198354799757": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "76561199776820411": {
+      "mutations": []
+    },
+    "76561198801960259": {
+      "mutations": []
+    },
+    "76561199553482722": {
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Cellular Regeneration",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "76561198640338951": {
+      "mutations": []
+    },
+    "76561198634062964": {
+      "mutations": [
+        "Tactile Endurance",
+        "Xerocole Adaptation",
+        "Multichambered Lungs",
+        "Cellular Regeneration"
+      ]
+    },
+    "76561199445536966": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "76561199065578765": {
+      "mutations": [
+        "Hydrodynamic"
+      ]
+    },
+    "76561198195380990": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ]
+    },
+    "76561198779840705": {
+      "mutations": [
+        "Hydrodynamic",
+        "Reniculate Kidneys"
+      ]
+    },
+    "76561199827477895": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "76561198375858476": {
+      "mutations": []
+    },
+    "76561199647607952": {
+      "mutations": []
+    },
+    "76561198882795413": {
+      "mutations": []
+    },
+    "76561199207273112": {
+      "mutations": []
+    },
+    "76561199874650793": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ]
+    },
+    "76561199761700104": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "76561199809182645": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "76561198754687631": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "76561198694488278": {
+      "mutations": [
+        "Hematophagy",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "76561199428153526": {
+      "mutations": []
+    }
+  },
+  "garageSlotMutations": {
+    "cmv2twgv0006gry01cax1ey9d": {
+      "mutations": [
+        "Barometric Sensitivity",
+        "Cannibalistic",
+        "Barometric Sensitivity",
+        "Cannibalistic"
+      ],
+      "elder": "Prime",
+      "lineage": {
+        "parent": [
+          "Advanced Gestation",
+          "Augmented Tapetum",
+          "Cannibalistic",
+          null
+        ],
+        "elderA": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "elderB": [
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "cmv407yn2117wlq01dk4otl2l": {
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic",
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmv40qts413yur101el46u03l": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Osteosclerosis",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv3fc7za6ptslm01j4d5sdb9": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Hydrodynamic",
+        "Multichambered Lungs"
+      ]
+    },
+    "cmv1btj1g68bzn701vaymol3p": {
+      "mutations": [
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmv15m5o653oqrr0183ifexm7": {
+      "mutations": []
+    },
+    "cmv15hnly56s5lc014pu2q2w9": {
+      "mutations": [
+        "Photosynthetic Tissue",
+        "Hypermetabolic Inanition",
+        "Multichambered Lungs",
+        "Congenital Hypoalgesia"
+      ]
+    },
+    "cmuy82dt60045p4018hd1vnr7": {
+      "mutations": []
+    },
+    "cmuxp4fyk1mwpp9013vgz469o": {
+      "mutations": []
+    },
+    "cmuxp3fbb1me1lt011dths5nr": {
+      "mutations": []
+    },
+    "cmuxp2z6j1mdymr01kdc42jpr": {
+      "mutations": []
+    },
+    "cmuxp2r4d1mhepa01e2zonz06": {
+      "mutations": []
+    },
+    "cmuwx9p2y015hr401drcouk55": {
+      "mutations": [
+        "Osteosclerosis",
+        "Congenital Hypoalgesia"
+      ]
+    },
+    "cmuwrhof605dcms0188c36ox9": {
+      "mutations": []
+    },
+    "cmv3zqlo211o0mr01rcaxems6": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Reinforced Tendons"
+      ]
+    },
+    "cmv3wf4f90bdblh01o8j39qvc": {
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Accelerated Prey Drive"
+      ]
+    },
+    "cmv3w1s0608h4oh01h1wtdrb8": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv3sgerj0n28nx010s433eej": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmv2erhl40d8wp901mes5bjjf": {
+      "mutations": []
+    },
+    "cmv2eqzu90c9hs101rbr8lp2n": {
+      "mutations": []
+    },
+    "cmv2eojr60ci5o601i2o7szey": {
+      "mutations": []
+    },
+    "cmv2entr00c40o801kchf1igq": {
+      "mutations": []
+    },
+    "cmv28d73rau44qz01jt2kpzmd": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Cannibalistic"
+      ]
+    },
+    "cmv24g9cv9wkmk401goq80xdt": {
+      "mutations": [
+        "Hydrodynamic",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis",
+        "Enhanced Digestion"
+      ]
+    },
+    "cmv16lacz6kn6pl01vuwaxbw1": {
+      "mutations": []
+    },
+    "cmv15x49g538uk401f5gyge5b": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv15vf3y589mlc01kl13dt2t": {
+      "mutations": []
+    },
+    "cmv15udkg52s9k401nj83er1c": {
+      "mutations": []
+    },
+    "cmv15j2q454zpnt01lj9czgv0": {
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmv0aqogw1490mz0139ydggte": {
+      "mutations": []
+    },
+    "cmuzhbzjs01tnqn014zi3mvzv": {
+      "mutations": []
+    },
+    "cmuzh4mhx01lrqz01hg2edsj9": {
+      "mutations": []
+    },
+    "cmuzbpabz0059t101a80p7tgn": {
+      "mutations": []
+    },
+    "cmuya2qz6056kqd01oesto4ir": {
+      "mutations": [
+        "Photosynthetic Tissue",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmuxfw8ck0o05q901m6yom7he": {
+      "mutations": []
+    },
+    "cmuxfvz770on2o601cqy0448j": {
+      "mutations": []
+    },
+    "cmuxftezh0o2gmr01yp6bhtnq": {
+      "mutations": []
+    },
+    "cmuxfsv7l0nneq9015ply8sow": {
+      "mutations": []
+    },
+    "cmuxfsb9v01d6qp01vcw2lvrf": {
+      "mutations": []
+    },
+    "cmuxfrwf80o8hp901rib090ag": {
+      "mutations": []
+    },
+    "cmuxfrmwu01egpo01jv9aemym": {
+      "mutations": []
+    },
+    "cmuwrkike0559s501fuoo8qrn": {
+      "mutations": [
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmuu1ms2zgzfkpb012wg3p17h": {
+      "mutations": [
+        "Nocturnal",
+        "Hydroregenerative",
+        "Hematophagy"
+      ]
+    },
+    "cmv3ymrig0s0omr0192glngag": {
+      "mutations": []
+    },
+    "cmv3ij16e3kq0nx01o5jvvz9d": {
+      "mutations": []
+    },
+    "cmv3flru93787o201vp9i3es2": {
+      "mutations": []
+    },
+    "cmv2njv4o02h6pd016511jgqr": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv2kx5zo1eawo801mig59z6v": {
+      "mutations": []
+    },
+    "cmv2kw1nu040zmh01b53nbto5": {
+      "mutations": []
+    },
+    "cmv22mp3v9nigqx01afqirggc": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv20uns19k1tnt019lkuitp4": {
+      "mutations": []
+    },
+    "cmv1vz06o91cwn701cdywo569": {
+      "mutations": []
+    },
+    "cmv1mra797ltwpf01puesfw4z": {
+      "mutations": [
+        "Reniculate Kidneys",
+        "Enhanced Digestion"
+      ]
+    },
+    "cmv1b89yp0epnpb01v5wbfhom": {
+      "mutations": []
+    },
+    "cmv1943cu0mamo001iwyumrd9": {
+      "mutations": []
+    },
+    "cmv043srg0dljke01e7p76pcd": {
+      "mutations": []
+    },
+    "cmuzvwhb10u43lu01g3t08t74": {
+      "mutations": []
+    },
+    "cmuyim6bs0hk8od012n4tr5hs": {
+      "mutations": [
+        "Reniculate Kidneys"
+      ]
+    },
+    "cmv3tl9te0tdppo018a3ec2mf": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv2jkt92152jl401mliy32dq": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmv0inwka23ehke01jzcmir41": {
+      "mutations": []
+    },
+    "cmuz3q99i3hhepe01fqpufkjy": {
+      "mutations": []
+    },
+    "cmuz3pu204768qn01sxkxjp0w": {
+      "mutations": []
+    },
+    "cmuycwyru02jjpv011v39gcsc": {
+      "mutations": []
+    },
+    "cmuycv6ad02vame01rls4qza0": {
+      "mutations": []
+    },
+    "cmuycub0802jznt01k7tof5y2": {
+      "mutations": []
+    },
+    "cmuy2j9z2019mow01qsatsym9": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv3zrmud1043lh01et1enuw0": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Reinforced Tendons"
+      ]
+    },
+    "cmv3v7hc600w7r101zrte1scp": {
+      "mutations": [
+        "Augmented Tapetum",
+        "Augmented Tapetum",
+        "Augmented Tapetum",
+        "Advanced Gestation"
+      ]
+    },
+    "cmv3fb75905weqd01tytzufnl": {
+      "mutations": []
+    },
+    "cmv3faymd36hbo7018hzna28e": {
+      "mutations": []
+    },
+    "cmv3faa7b36dro701dmur3ybp": {
+      "mutations": []
+    },
+    "cmv3f9tzq378onw01fnm92urv": {
+      "mutations": []
+    },
+    "cmv2ggj710mvho80107ym6uok": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Multichambered Lungs"
+      ]
+    },
+    "cmv2f3f3s0e7bo80155dlnu28": {
+      "mutations": []
+    },
+    "cmv2f2qm90130qi01qe8isp75": {
+      "mutations": []
+    },
+    "cmv2f2ida01lvpf014ys0eopa": {
+      "mutations": []
+    },
+    "cmv24m0iz9whbpf01phrca9pc": {
+      "mutations": [
+        "Osteosclerosis"
+      ]
+    },
+    "cmv22nkql10x3o00132xfefy9": {
+      "mutations": []
+    },
+    "cmv20nfo60lnio1012dujel0i": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Cannibalistic",
+        "Osteosclerosis",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmuzgf2hs0fjmnz01katfgr8m": {
+      "mutations": []
+    },
+    "cmuyah39000lsob0197judoso": {
+      "mutations": []
+    },
+    "cmv3egdg832luku01pc7bkje3": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv1cocv20fixpf01dk2mp8ag": {
+      "mutations": []
+    },
+    "cmv1br7jo64jxqx01vyety1kt": {
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic"
+      ]
+    },
+    "cmv16kusv5cewn701fcmfu0h4": {
+      "mutations": []
+    },
+    "cmv0zm6he4612qz01ljswf5n0": {
+      "mutations": []
+    },
+    "cmv0l44za2dm8rr01sp14qyzo": {
+      "mutations": [
+        "Hemomania",
+        "Hypermetabolic Inanition",
+        "Accelerated Prey Drive",
+        "Prolific Reproduction"
+      ]
+    },
+    "cmv0gcm2d1thmmv015ezii6dv": {
+      "mutations": []
+    },
+    "cmv2qh5ef0ib7ln01oa53f7qr": {
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv2kp3ho1a1wo401mis7hack": {
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Cellular Regeneration",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv3to06t0uvunx01a2u3dld2": {
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs"
+      ]
+    },
+    "cmv2jghu117lbmt01ijpmuf0z": {
+      "mutations": []
+    },
+    "cmv2h3a1w0ybqs101267py01b": {
+      "mutations": []
+    },
+    "cmv2h31yi0qtrmw018nlkhe0r": {
+      "mutations": []
+    },
+    "cmv2h2u0r0p8go401m6yy8bfm": {
+      "mutations": []
+    },
+    "cmv2h2m390p19o801d9ijw336": {
+      "mutations": []
+    },
+    "cmv2h2e4d021dmh01un0rp8ts": {
+      "mutations": []
+    },
+    "cmv2h1y0d02vjpf01knb9pjc3": {
+      "mutations": []
+    },
+    "cmv2h1pna0q6ro001gyv7ckq7": {
+      "mutations": []
+    },
+    "cmv18pror5m6kke01bv8nk7l8": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmuzj10jk0cjsqp01upum9v6x": {
+      "mutations": [
+        "Osteosclerosis",
+        "Epidermal Fibrosis",
+        "Congenital Hypoalgesia",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmuyd0nej00burv01p5px429h": {
+      "mutations": []
+    },
+    "cmuyd0ev803jcmi0137c02453": {
+      "mutations": []
+    },
+    "cmv3l6chk44wto701at8ngpx3": {
+      "mutations": []
+    },
+    "cmv2jgsnt15knp901bi3lq7x0": {
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Osteosclerosis",
+        "Congenital Hypoalgesia",
+        "Truculency"
+      ]
+    },
+    "cmv18pzfg5muvnt0158o4b6oa": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmuzs8jne0blfp601s0yutjqk": {
+      "mutations": []
+    },
+    "cmuydgin7050bnt01g1ztfi70": {
+      "mutations": []
+    },
+    "cmuyd0qvf03awpb01ein3hgg5": {
+      "mutations": []
+    },
+    "cmuyd06z9037sqx010wf0gbs9": {
+      "mutations": []
+    },
+    "cmuyczyko03ecme01fopoiy0s": {
+      "mutations": []
+    },
+    "cmuy6m69c029nph0104vskp9u": {
+      "mutations": [
+        "Tactile Endurance",
+        "Xerocole Adaptation",
+        "Multichambered Lungs",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmuy5soto0f52qi01nn4rjd4e": {
+      "mutations": [
+        "Tactile Endurance",
+        "Xerocole Adaptation",
+        "Multichambered Lungs",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmv2t3sdw00nwpr01r53qu9gh": {
+      "mutations": []
+    },
+    "cmv2rcjw80hm4nx014qrc6633": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv2odq7q06x2mq014u15b070": {
+      "mutations": [
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmv1xk6fw9dlzqz019nzz1zzj": {
+      "mutations": [
+        "Xerocole Adaptation"
+      ]
+    },
+    "cmv1hwjkt73gik401vc0wvjjo": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmv1b5w7r63umrr01t6to7h3k": {
+      "mutations": []
+    },
+    "cmv01643a0016pf01coypsw2g": {
+      "mutations": []
+    },
+    "cmuzzeloj1f7ro9015n2etakb": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmuzsfadc00cgnv01j4909rta": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmuwtcxqa0eklms01fyd1o580": {
+      "mutations": [
+        "Hydrodynamic"
+      ]
+    },
+    "cmv40c2ts11pclq013yfzrbb3": {
+      "mutations": [
+        "Hydrodynamic",
+        "Increased Inspiratory Capacity",
+        "Accelerated Prey Drive",
+        "Hemomania"
+      ]
+    },
+    "cmuzsyqil035cok0199l67pov": {
+      "mutations": [
+        "Hemomania",
+        "Osteosclerosis",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ]
+    },
+    "cmuyc8scm00egpd01e6ijgshz": {
+      "mutations": []
+    },
+    "cmuybro7001cdr201ypq1fsgw": {
+      "mutations": []
+    },
+    "cmuyap9sq00nnor017rsr2i9j": {
+      "mutations": []
+    },
+    "cmuyaoyhq07p2p501o0djsxab": {
+      "mutations": []
+    },
+    "cmuyaone807b1qr01fqos8epv": {
+      "mutations": []
+    },
+    "cmuwvysk70bh0mw01ptv0uk46": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv3w8k2t08a4lq017msxvzzd": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis",
+        "Congenital Hypoalgesia",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmv3n07ek4adxof01mbfn3sn4": {
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic"
+      ]
+    },
+    "cmv1hpj6t6yekqx018bdll4cd": {
+      "mutations": [
+        "Hydrodynamic",
+        "Reniculate Kidneys"
+      ]
+    },
+    "cmv3w4snl0832r101sp3zbn8u": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Tactile Endurance",
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmv3p1pwr004ipg01berz5kwo": {
+      "mutations": []
+    },
+    "cmv3p03h1004gpc01m5uynykt": {
+      "mutations": []
+    },
+    "cmv146x4b4vu0qz01llf5cauu": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv3krtjc41lmnw011zcauzdr": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv3in7du3o24pa01mrnf441b": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv23146ocdcqpl011g0r6rqw": {
+      "mutations": []
+    },
+    "cmv1y5v0x9av8n7017gcexkgq": {
+      "mutations": [
+        "Cellular Regeneration",
+        "Prolific Reproduction"
+      ]
+    },
+    "cmv163ir559pfss01mhy5fegg": {
+      "mutations": []
+    },
+    "cmv13yfg84qyyk401pkeeli4c": {
+      "mutations": []
+    },
+    "cmv12jvuz5or5pl014uml2o1p": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Sequential Hermaphroditism",
+        "Parthenogenesis"
+      ]
+    },
+    "cmv026qzl05giqx01pn7qmq8v": {
+      "mutations": []
+    },
+    "cmv41he4z1axaod01qqfm6yk5": {
+      "mutations": [
+        "Multichambered Lungs",
+        "Photosynthetic Tissue"
+      ]
+    },
+    "cmv41saxi1e4cmr01c8y58xan": {
+      "mutations": []
+    },
+    "cmv41s0qo1akrld01hcwabie6": {
+      "mutations": []
+    },
+    "cmv41pwlc1chaod01azlgfspa": {
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Photosynthetic Tissue",
+        "Multichambered Lungs",
+        "Prolific Reproduction"
+      ]
+    },
+    "cmv41owj31bvnmu0132dbxmo5": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Gastronomic Regeneration",
+        "Photosynthetic Regeneration",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv425rj11dsxoh01pb51u7cw": {
+      "mutations": [
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv42flsp1fftoh0183zfq5u6": {
+      "mutations": [
+        "Featherweight",
+        "Multichambered Lungs",
+        "Reinforced Tendons",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv2kpnzv1by1mw01mklxnxvs": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Cannibalistic"
+      ]
+    },
+    "cmv2hac620rvasa01itlvq3ie": {
+      "mutations": []
+    },
+    "cmv2ha3q10sfvoj01vbrwe2zq": {
+      "mutations": []
+    },
+    "cmv2ej5vl0bv2mt01bvagxx4b": {
+      "mutations": [
+        "Cellular Regeneration",
+        "Tactile Endurance",
+        "Multichambered Lungs",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmv0wvjwu08eto101tjbemixb": {
+      "mutations": []
+    },
+    "cmv0wuub43t1yke01mereh3m1": {
+      "mutations": []
+    },
+    "cmv0rczye35gzlc01p701jxwk": {
+      "mutations": []
+    },
+    "cmuztig7806smmm01geel5zeb": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Hypermetabolic Inanition",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmuzg8q9v0b6hrv01sdplakt0": {
+      "mutations": []
+    },
+    "cmuycxg9v0316me01rrpyjcjy": {
+      "mutations": []
+    },
+    "cmv40gytr11mqld01tvmm9g6a": {
+      "mutations": [
+        "Hydrodynamic",
+        "Hemomania"
+      ]
+    },
+    "cmv40cwxl11uor101i33zlpjd": {
+      "mutations": []
+    },
+    "cmuzpuyg00jbelf013u0s2y92": {
+      "mutations": []
+    },
+    "cmuvjuge10lqary011o9qzz0h": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ]
+    },
+    "cmuppghk702j8l801ydeme7iu": {
+      "mutations": []
+    },
+    "cmv43esod02h4p80146hieq7b": {
+      "mutations": []
+    },
+    "cmv46v8tl00kirq012he3gxgf": {
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmv45smrm016xqu01jv0pu9oi": {
+      "mutations": []
+    },
+    "cmv45scfv0guzmg01dwsaf2dy": {
+      "mutations": []
+    },
+    "cmv45s40s0iqps201ok8vh5fi": {
+      "mutations": []
+    },
+    "cmv3zwle612y8mr01edymkb11": {
+      "mutations": [
+        "Reniculate Kidneys",
+        "Gastronomic Regeneration",
+        "Hemomania",
+        "Cellular Regeneration"
+      ]
+    },
+    "cmv34hk5s1poglj01cct5l59e": {
+      "mutations": []
+    },
+    "cmv34gp0m1olcpa018xcbp0hr": {
+      "mutations": []
+    },
+    "cmv2h9u65020qpl01gmw11yl4": {
+      "mutations": []
+    },
+    "cmv2f3lyg0f32oj01assiyvq6": {
+      "mutations": []
+    },
+    "cmv1s9eul8feont01a0u8kdsp": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv0wu0g93uunmv0162qja93a": {
+      "mutations": []
+    },
+    "cmv0vebe13leynt013lahgm77": {
+      "mutations": []
+    },
+    "cmuyf0d7301m7o201x3e9vwzy": {
+      "mutations": []
+    },
+    "cmuyf03yg01abnm01hlvk7vfp": {
+      "mutations": []
+    },
+    "cmuwwh32h0coxrw014ifh2ai5": {
+      "mutations": []
+    },
+    "cmuwwgf640coqrt013eu8oa5e": {
+      "mutations": []
+    },
+    "cmuwwfyvs0e7wmr014m9n4atm": {
+      "mutations": []
+    },
+    "cmv45vv090j49mq01pg82d58b": {
+      "mutations": [
+        "Hydrodynamic",
+        "Gastronomic Regeneration",
+        "Increased Inspiratory Capacity",
+        "Osteosclerosis"
+      ]
+    },
+    "cmuydinwf0587nt01ip2xj171": {
+      "mutations": [
+        "Osteosclerosis",
+        "Cannibalistic"
+      ]
+    },
+    "cmuycx2n002tfpb018556bzh5": {
+      "mutations": []
+    },
+    "cmuycwm8602ikpv01z768brpm": {
+      "mutations": []
+    },
+    "cmuycwdyb00anrv018y14b23f": {
+      "mutations": []
+    },
+    "cmuybcwa00ay5ls01u3w3fxh3": {
+      "mutations": [
+        "Cellular Regeneration",
+        "Gastronomic Regeneration",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ]
+    },
+    "cmuyatfud08g6rx01qc94xp1j": {
+      "mutations": []
+    },
+    "cmuyaq1k6080gl7014z841zo3": {
+      "mutations": []
+    },
+    "cmuyapt2e00vnpb0104tmrvox": {
+      "mutations": []
+    },
+    "cmuyapkwo0757p50196ensxx6": {
+      "mutations": []
+    },
+    "cmuyapcxn088fn101tcrepz70": {
+      "mutations": []
+    },
+    "cmuyaowvi07gurt018nmron23": {
+      "mutations": []
+    },
+    "cmuyao8hx00muor013ohxgx3k": {
+      "mutations": []
+    },
+    "cmuyao07q07lvp501yi9bkwq7": {
+      "mutations": []
+    },
+    "cmuyans9a00mlor01818rcex1": {
+      "mutations": []
+    },
+    "cmuyamenk00ljqk01en0sqrks": {
+      "mutations": []
+    },
+    "cmuya9ctk08i8qy01c4xc9zla": {
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv3ebxw23219ku01iiy8be37": {
+      "mutations": [
+        "Osteosclerosis",
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmv3dvr182y1dnx01szfoy363": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmv46q6vk0np6le01o99pflyt": {
+      "mutations": [
+        "Hemomania",
+        "Osteosclerosis"
+      ]
+    },
+    "cmv3wsamk0bk1lq016duur3hj": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmuy05dqb05u9nz01gqxogew5": {
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Gastronomic Regeneration"
+      ]
+    },
+    "cmv42ma9r1i0aod01fobssds9": {
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Congenital Hypoalgesia",
+        "Reinforced Tendons"
+      ]
+    },
+    "cmv3itf1z3q3yqx01piuwrc0m": {
+      "mutations": [
+        "Osteosclerosis"
+      ]
+    },
+    "cmv3hysoo3hvgof01cqsmsjqb": {
+      "mutations": [
+        "Multichambered Lungs"
+      ]
+    },
+    "cmv3hpueo3iogqi01e910uhsg": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive"
+      ]
+    },
+    "cmv3eq7jt6k3olm01ydawno97": {
+      "mutations": [
+        "Hemomania",
+        "Hematophagy"
+      ]
+    },
+    "cmv15n9v552wyke013k07u14c": {
+      "mutations": [
+        "Cellular Regeneration",
+        "Efficient Digestion",
+        "Nocturnal",
+        "Photosynthetic Tissue"
+      ]
+    },
+    "cmv13xryg5ywipl01slqxso4d": {
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ]
+    },
+    "cmv0xyza53x33k401uak1sked": {
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Reinforced Tendons",
+        "Osteosclerosis"
+      ]
+    },
+    "cmuz68lsk06r0qq018gi3bg7j": {
+      "mutations": [
+        "Enhanced Digestion",
+        "Hematophagy"
+      ]
+    },
+    "cmuyztygt2x05qf01l1j7o7ui": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmuy8nwjc01w3nw01shkc5ewa": {
+      "mutations": []
+    },
+    "cmuy8jr5801y5qd01v6yz4x4f": {
+      "mutations": []
+    },
+    "cmuwk4ft006rdrz019s2vprbk": {
+      "mutations": []
+    },
+    "cmuwjpx4g04y2pp01hieitf8u": {
+      "mutations": [
+        "Hydrodynamic",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis"
+      ]
+    },
+    "cmuwh4s3e0cvmrh01zbxcn2ad": {
+      "mutations": []
+    },
+    "cmuv0uvs606gdni01l8v9ukua": {
+      "mutations": [
+        "Hematophagy",
+        "Efficient Digestion"
+      ]
+    },
+    "cmuqi3uxt4kurlg01bp3pylji": {
+      "mutations": [
+        "Hematophagy",
+        "Hypermetabolic Inanition"
+      ]
+    },
+    "cmuzsn02400xemm01qepjlc8c": {
+      "mutations": [
+        "Nocturnal",
+        "Efficient Digestion",
+        "Hydroregenerative",
+        "Enlarged meniscus"
+      ]
+    },
+    "cmuzlh4le00mqmo01tl11m3ib": {
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive"
+      ]
+    },
+    "cmuycavtu00j4mi01nepmye9o": {
+      "mutations": [
+        "Hemomania"
+      ]
+    },
+    "cmuy9145f00e5qt01tlft2xyp": {
+      "mutations": []
+    },
+    "cmuy90vpu00d6o801r23ykcpd": {
+      "mutations": []
+    },
+    "cmuy8xiqe03gap901ogbz6fd1": {
+      "mutations": []
+    }
+  },
+  "dinoStore": {
+    "cmv2twgv0006gry01cax1ey9d": {
+      "dinoId": "cmv2twgv0006gry01cax1ey9d",
+      "mutations": [
+        "Barometric Sensitivity",
+        "Cannibalistic",
+        "Barometric Sensitivity",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198789527189",
+      "playerName": "Báo",
+      "elder": "Prime",
+      "lineage": {
+        "parent": [
+          "Advanced Gestation",
+          "Augmented Tapetum",
+          "Cannibalistic",
+          null
+        ],
+        "elderA": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "elderB": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "updatedAt": "2026-10-11T15:34:02.063Z",
+      "species": "Tyrannosaurus"
+    },
+    "cmv407yn2117wlq01dk4otl2l": {
+      "dinoId": "cmv407yn2117wlq01dk4otl2l",
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic",
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198789527189",
+      "playerName": "Báo",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.811Z"
+    },
+    "cmv40qts413yur101el46u03l": {
+      "dinoId": "cmv40qts413yur101el46u03l",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Osteosclerosis",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.813Z"
+    },
+    "cmv3fc7za6ptslm01j4d5sdb9": {
+      "dinoId": "cmv3fc7za6ptslm01j4d5sdb9",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Hydrodynamic",
+        "Multichambered Lungs"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.814Z"
+    },
+    "cmv1btj1g68bzn701vaymol3p": {
+      "dinoId": "cmv1btj1g68bzn701vaymol3p",
+      "mutations": [
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.816Z"
+    },
+    "cmv15m5o653oqrr0183ifexm7": {
+      "dinoId": "cmv15m5o653oqrr0183ifexm7",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.817Z"
+    },
+    "cmv15hnly56s5lc014pu2q2w9": {
+      "dinoId": "cmv15hnly56s5lc014pu2q2w9",
+      "mutations": [
+        "Photosynthetic Tissue",
+        "Hypermetabolic Inanition",
+        "Multichambered Lungs",
+        "Congenital Hypoalgesia"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.818Z"
+    },
+    "cmuy82dt60045p4018hd1vnr7": {
+      "dinoId": "cmuy82dt60045p4018hd1vnr7",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.819Z"
+    },
+    "cmuxp4fyk1mwpp9013vgz469o": {
+      "dinoId": "cmuxp4fyk1mwpp9013vgz469o",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.820Z"
+    },
+    "cmuxp3fbb1me1lt011dths5nr": {
+      "dinoId": "cmuxp3fbb1me1lt011dths5nr",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.822Z"
+    },
+    "cmuxp2z6j1mdymr01kdc42jpr": {
+      "dinoId": "cmuxp2z6j1mdymr01kdc42jpr",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.825Z"
+    },
+    "cmuxp2r4d1mhepa01e2zonz06": {
+      "dinoId": "cmuxp2r4d1mhepa01e2zonz06",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.826Z"
+    },
+    "cmuwx9p2y015hr401drcouk55": {
+      "dinoId": "cmuwx9p2y015hr401drcouk55",
+      "mutations": [
+        "Osteosclerosis",
+        "Congenital Hypoalgesia"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.827Z"
+    },
+    "cmuwrhof605dcms0188c36ox9": {
+      "dinoId": "cmuwrhof605dcms0188c36ox9",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198870866539",
+      "playerName": "GreY",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.829Z"
+    },
+    "cmv3zqlo211o0mr01rcaxems6": {
+      "dinoId": "cmv3zqlo211o0mr01rcaxems6",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Reinforced Tendons"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Omniraptor",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.959Z"
+    },
+    "cmv3wf4f90bdblh01o8j39qvc": {
+      "dinoId": "cmv3wf4f90bdblh01o8j39qvc",
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Accelerated Prey Drive"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.960Z"
+    },
+    "cmv3w1s0608h4oh01h1wtdrb8": {
+      "dinoId": "cmv3w1s0608h4oh01h1wtdrb8",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.961Z"
+    },
+    "cmv3sgerj0n28nx010s433eej": {
+      "dinoId": "cmv3sgerj0n28nx010s433eej",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Dilophosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.963Z"
+    },
+    "cmv2erhl40d8wp901mes5bjjf": {
+      "dinoId": "cmv2erhl40d8wp901mes5bjjf",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.964Z"
+    },
+    "cmv2eqzu90c9hs101rbr8lp2n": {
+      "dinoId": "cmv2eqzu90c9hs101rbr8lp2n",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.966Z"
+    },
+    "cmv2eojr60ci5o601i2o7szey": {
+      "dinoId": "cmv2eojr60ci5o601i2o7szey",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.968Z"
+    },
+    "cmv2entr00c40o801kchf1igq": {
+      "dinoId": "cmv2entr00c40o801kchf1igq",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.970Z"
+    },
+    "cmv28d73rau44qz01jt2kpzmd": {
+      "dinoId": "cmv28d73rau44qz01jt2kpzmd",
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.972Z"
+    },
+    "cmv24g9cv9wkmk401goq80xdt": {
+      "dinoId": "cmv24g9cv9wkmk401goq80xdt",
+      "mutations": [
+        "Hydrodynamic",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis",
+        "Enhanced Digestion"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.973Z"
+    },
+    "cmv16lacz6kn6pl01vuwaxbw1": {
+      "dinoId": "cmv16lacz6kn6pl01vuwaxbw1",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.974Z"
+    },
+    "cmv15x49g538uk401f5gyge5b": {
+      "dinoId": "cmv15x49g538uk401f5gyge5b",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.976Z"
+    },
+    "cmv15vf3y589mlc01kl13dt2t": {
+      "dinoId": "cmv15vf3y589mlc01kl13dt2t",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.977Z"
+    },
+    "cmv15udkg52s9k401nj83er1c": {
+      "dinoId": "cmv15udkg52s9k401nj83er1c",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.979Z"
+    },
+    "cmv15j2q454zpnt01lj9czgv0": {
+      "dinoId": "cmv15j2q454zpnt01lj9czgv0",
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.980Z"
+    },
+    "cmv0aqogw1490mz0139ydggte": {
+      "dinoId": "cmv0aqogw1490mz0139ydggte",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.982Z"
+    },
+    "cmuzhbzjs01tnqn014zi3mvzv": {
+      "dinoId": "cmuzhbzjs01tnqn014zi3mvzv",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.984Z"
+    },
+    "cmuzh4mhx01lrqz01hg2edsj9": {
+      "dinoId": "cmuzh4mhx01lrqz01hg2edsj9",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.985Z"
+    },
+    "cmuzbpabz0059t101a80p7tgn": {
+      "dinoId": "cmuzbpabz0059t101a80p7tgn",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.986Z"
+    },
+    "cmuya2qz6056kqd01oesto4ir": {
+      "dinoId": "cmuya2qz6056kqd01oesto4ir",
+      "mutations": [
+        "Photosynthetic Tissue",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.989Z"
+    },
+    "cmuxfw8ck0o05q901m6yom7he": {
+      "dinoId": "cmuxfw8ck0o05q901m6yom7he",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.991Z"
+    },
+    "cmuxfvz770on2o601cqy0448j": {
+      "dinoId": "cmuxfvz770on2o601cqy0448j",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.992Z"
+    },
+    "cmuxftezh0o2gmr01yp6bhtnq": {
+      "dinoId": "cmuxftezh0o2gmr01yp6bhtnq",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.993Z"
+    },
+    "cmuxfsv7l0nneq9015ply8sow": {
+      "dinoId": "cmuxfsv7l0nneq9015ply8sow",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.995Z"
+    },
+    "cmuxfsb9v01d6qp01vcw2lvrf": {
+      "dinoId": "cmuxfsb9v01d6qp01vcw2lvrf",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.996Z"
+    },
+    "cmuxfrwf80o8hp901rib090ag": {
+      "dinoId": "cmuxfrwf80o8hp901rib090ag",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.997Z"
+    },
+    "cmuxfrmwu01egpo01jv9aemym": {
+      "dinoId": "cmuxfrmwu01egpo01jv9aemym",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.999Z"
+    },
+    "cmuwrkike0559s501fuoo8qrn": {
+      "dinoId": "cmuwrkike0559s501fuoo8qrn",
+      "mutations": [
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.000Z"
+    },
+    "cmuu1ms2zgzfkpb012wg3p17h": {
+      "dinoId": "cmuu1ms2zgzfkpb012wg3p17h",
+      "mutations": [
+        "Nocturnal",
+        "Hydroregenerative",
+        "Hematophagy"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.002Z"
+    },
+    "cmv3ymrig0s0omr0192glngag": {
+      "dinoId": "cmv3ymrig0s0omr0192glngag",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.832Z"
+    },
+    "cmv3ij16e3kq0nx01o5jvvz9d": {
+      "dinoId": "cmv3ij16e3kq0nx01o5jvvz9d",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.833Z"
+    },
+    "cmv3flru93787o201vp9i3es2": {
+      "dinoId": "cmv3flru93787o201vp9i3es2",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.834Z"
+    },
+    "cmv2njv4o02h6pd016511jgqr": {
+      "dinoId": "cmv2njv4o02h6pd016511jgqr",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.837Z"
+    },
+    "cmv2kx5zo1eawo801mig59z6v": {
+      "dinoId": "cmv2kx5zo1eawo801mig59z6v",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.838Z"
+    },
+    "cmv2kw1nu040zmh01b53nbto5": {
+      "dinoId": "cmv2kw1nu040zmh01b53nbto5",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.839Z"
+    },
+    "cmv22mp3v9nigqx01afqirggc": {
+      "dinoId": "cmv22mp3v9nigqx01afqirggc",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.840Z"
+    },
+    "cmv20uns19k1tnt019lkuitp4": {
+      "dinoId": "cmv20uns19k1tnt019lkuitp4",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.841Z"
+    },
+    "cmv1vz06o91cwn701cdywo569": {
+      "dinoId": "cmv1vz06o91cwn701cdywo569",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.843Z"
+    },
+    "cmv1mra797ltwpf01puesfw4z": {
+      "dinoId": "cmv1mra797ltwpf01puesfw4z",
+      "mutations": [
+        "Reniculate Kidneys",
+        "Enhanced Digestion"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Triceratops",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.844Z"
+    },
+    "cmv1b89yp0epnpb01v5wbfhom": {
+      "dinoId": "cmv1b89yp0epnpb01v5wbfhom",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.845Z"
+    },
+    "cmv1943cu0mamo001iwyumrd9": {
+      "dinoId": "cmv1943cu0mamo001iwyumrd9",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.847Z"
+    },
+    "cmv043srg0dljke01e7p76pcd": {
+      "dinoId": "cmv043srg0dljke01e7p76pcd",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.848Z"
+    },
+    "cmuzvwhb10u43lu01g3t08t74": {
+      "dinoId": "cmuzvwhb10u43lu01g3t08t74",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.850Z"
+    },
+    "cmuyim6bs0hk8od012n4tr5hs": {
+      "dinoId": "cmuyim6bs0hk8od012n4tr5hs",
+      "mutations": [
+        "Reniculate Kidneys"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.851Z"
+    },
+    "cmv3tl9te0tdppo018a3ec2mf": {
+      "dinoId": "cmv3tl9te0tdppo018a3ec2mf",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.144Z"
+    },
+    "cmv2jkt92152jl401mliy32dq": {
+      "dinoId": "cmv2jkt92152jl401mliy32dq",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Stegosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.855Z"
+    },
+    "cmv0inwka23ehke01jzcmir41": {
+      "dinoId": "cmv0inwka23ehke01jzcmir41",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.857Z"
+    },
+    "cmuz3q99i3hhepe01fqpufkjy": {
+      "dinoId": "cmuz3q99i3hhepe01fqpufkjy",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.859Z"
+    },
+    "cmuz3pu204768qn01sxkxjp0w": {
+      "dinoId": "cmuz3pu204768qn01sxkxjp0w",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.860Z"
+    },
+    "cmuycwyru02jjpv011v39gcsc": {
+      "dinoId": "cmuycwyru02jjpv011v39gcsc",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.861Z"
+    },
+    "cmuycv6ad02vame01rls4qza0": {
+      "dinoId": "cmuycv6ad02vame01rls4qza0",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.862Z"
+    },
+    "cmuycub0802jznt01k7tof5y2": {
+      "dinoId": "cmuycub0802jznt01k7tof5y2",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.863Z"
+    },
+    "cmuy2j9z2019mow01qsatsym9": {
+      "dinoId": "cmuy2j9z2019mow01qsatsym9",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.865Z"
+    },
+    "cmv3zrmud1043lh01et1enuw0": {
+      "dinoId": "cmv3zrmud1043lh01et1enuw0",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Reinforced Tendons"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Omniraptor",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.164Z"
+    },
+    "cmv3v7hc600w7r101zrte1scp": {
+      "dinoId": "cmv3v7hc600w7r101zrte1scp",
+      "mutations": [
+        "Augmented Tapetum",
+        "Augmented Tapetum",
+        "Augmented Tapetum",
+        "Advanced Gestation"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.166Z"
+    },
+    "cmv3fb75905weqd01tytzufnl": {
+      "dinoId": "cmv3fb75905weqd01tytzufnl",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.167Z"
+    },
+    "cmv3faymd36hbo7018hzna28e": {
+      "dinoId": "cmv3faymd36hbo7018hzna28e",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.170Z"
+    },
+    "cmv3faa7b36dro701dmur3ybp": {
+      "dinoId": "cmv3faa7b36dro701dmur3ybp",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.173Z"
+    },
+    "cmv3f9tzq378onw01fnm92urv": {
+      "dinoId": "cmv3f9tzq378onw01fnm92urv",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.175Z"
+    },
+    "cmv2ggj710mvho80107ym6uok": {
+      "dinoId": "cmv2ggj710mvho80107ym6uok",
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Multichambered Lungs"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T16:51:46.176Z"
+    },
+    "cmv2f3f3s0e7bo80155dlnu28": {
+      "dinoId": "cmv2f3f3s0e7bo80155dlnu28",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.177Z"
+    },
+    "cmv2f2qm90130qi01qe8isp75": {
+      "dinoId": "cmv2f2qm90130qi01qe8isp75",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.180Z"
+    },
+    "cmv2f2ida01lvpf014ys0eopa": {
+      "dinoId": "cmv2f2ida01lvpf014ys0eopa",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.182Z"
+    },
+    "cmv24m0iz9whbpf01phrca9pc": {
+      "dinoId": "cmv24m0iz9whbpf01phrca9pc",
+      "mutations": [
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.184Z"
+    },
+    "cmv22nkql10x3o00132xfefy9": {
+      "dinoId": "cmv22nkql10x3o00132xfefy9",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.186Z"
+    },
+    "cmv20nfo60lnio1012dujel0i": {
+      "dinoId": "cmv20nfo60lnio1012dujel0i",
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Cannibalistic",
+        "Osteosclerosis",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.188Z"
+    },
+    "cmuzgf2hs0fjmnz01katfgr8m": {
+      "dinoId": "cmuzgf2hs0fjmnz01katfgr8m",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.190Z"
+    },
+    "cmuyah39000lsob0197judoso": {
+      "dinoId": "cmuyah39000lsob0197judoso",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199776820411",
+      "playerName": "Chan bố mày đê",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.193Z"
+    },
+    "cmv3egdg832luku01pc7bkje3": {
+      "dinoId": "cmv3egdg832luku01pc7bkje3",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.871Z"
+    },
+    "cmv1cocv20fixpf01dk2mp8ag": {
+      "dinoId": "cmv1cocv20fixpf01dk2mp8ag",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.872Z"
+    },
+    "cmv1br7jo64jxqx01vyety1kt": {
+      "dinoId": "cmv1br7jo64jxqx01vyety1kt",
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.874Z"
+    },
+    "cmv16kusv5cewn701fcmfu0h4": {
+      "dinoId": "cmv16kusv5cewn701fcmfu0h4",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.875Z"
+    },
+    "cmv0zm6he4612qz01ljswf5n0": {
+      "dinoId": "cmv0zm6he4612qz01ljswf5n0",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.876Z"
+    },
+    "cmv0l44za2dm8rr01sp14qyzo": {
+      "dinoId": "cmv0l44za2dm8rr01sp14qyzo",
+      "mutations": [
+        "Hemomania",
+        "Hypermetabolic Inanition",
+        "Accelerated Prey Drive",
+        "Prolific Reproduction"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.878Z"
+    },
+    "cmv0gcm2d1thmmv015ezii6dv": {
+      "dinoId": "cmv0gcm2d1thmmv015ezii6dv",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.879Z"
+    },
+    "cmv2qh5ef0ib7ln01oa53f7qr": {
+      "dinoId": "cmv2qh5ef0ib7ln01oa53f7qr",
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199553482722",
+      "playerName": "trieuvi2632000",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.481Z"
+    },
+    "cmv2kp3ho1a1wo401mis7hack": {
+      "dinoId": "cmv2kp3ho1a1wo401mis7hack",
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Cellular Regeneration",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199553482722",
+      "playerName": "trieuvi2632000",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.482Z"
+    },
+    "cmv3to06t0uvunx01a2u3dld2": {
+      "dinoId": "cmv3to06t0uvunx01a2u3dld2",
+      "mutations": [
+        "Hemomania",
+        "Cellular Regeneration",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:51:46.232Z"
+    },
+    "cmv2jghu117lbmt01ijpmuf0z": {
+      "dinoId": "cmv2jghu117lbmt01ijpmuf0z",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Stegosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.483Z"
+    },
+    "cmv2h3a1w0ybqs101267py01b": {
+      "dinoId": "cmv2h3a1w0ybqs101267py01b",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.484Z"
+    },
+    "cmv2h31yi0qtrmw018nlkhe0r": {
+      "dinoId": "cmv2h31yi0qtrmw018nlkhe0r",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.485Z"
+    },
+    "cmv2h2u0r0p8go401m6yy8bfm": {
+      "dinoId": "cmv2h2u0r0p8go401m6yy8bfm",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.486Z"
+    },
+    "cmv2h2m390p19o801d9ijw336": {
+      "dinoId": "cmv2h2m390p19o801d9ijw336",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.487Z"
+    },
+    "cmv2h2e4d021dmh01un0rp8ts": {
+      "dinoId": "cmv2h2e4d021dmh01un0rp8ts",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.488Z"
+    },
+    "cmv2h1y0d02vjpf01knb9pjc3": {
+      "dinoId": "cmv2h1y0d02vjpf01knb9pjc3",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.489Z"
+    },
+    "cmv2h1pna0q6ro001gyv7ckq7": {
+      "dinoId": "cmv2h1pna0q6ro001gyv7ckq7",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.490Z"
+    },
+    "cmv18pror5m6kke01bv8nk7l8": {
+      "dinoId": "cmv18pror5m6kke01bv8nk7l8",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.491Z"
+    },
+    "cmuzj10jk0cjsqp01upum9v6x": {
+      "dinoId": "cmuzj10jk0cjsqp01upum9v6x",
+      "mutations": [
+        "Osteosclerosis",
+        "Epidermal Fibrosis",
+        "Congenital Hypoalgesia",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.493Z"
+    },
+    "cmuyd0nej00burv01p5px429h": {
+      "dinoId": "cmuyd0nej00burv01p5px429h",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.494Z"
+    },
+    "cmuyd0ev803jcmi0137c02453": {
+      "dinoId": "cmuyd0ev803jcmi0137c02453",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198640338951",
+      "playerName": "Geo ッ",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.495Z"
+    },
+    "cmv3l6chk44wto701at8ngpx3": {
+      "dinoId": "cmv3l6chk44wto701at8ngpx3",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.496Z"
+    },
+    "cmv2jgsnt15knp901bi3lq7x0": {
+      "dinoId": "cmv2jgsnt15knp901bi3lq7x0",
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Osteosclerosis",
+        "Congenital Hypoalgesia",
+        "Truculency"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Stegosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.497Z"
+    },
+    "cmv18pzfg5muvnt0158o4b6oa": {
+      "dinoId": "cmv18pzfg5muvnt0158o4b6oa",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.498Z"
+    },
+    "cmuzs8jne0blfp601s0yutjqk": {
+      "dinoId": "cmuzs8jne0blfp601s0yutjqk",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.499Z"
+    },
+    "cmuydgin7050bnt01g1ztfi70": {
+      "dinoId": "cmuydgin7050bnt01g1ztfi70",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.500Z"
+    },
+    "cmuyd0qvf03awpb01ein3hgg5": {
+      "dinoId": "cmuyd0qvf03awpb01ein3hgg5",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.501Z"
+    },
+    "cmuyd06z9037sqx010wf0gbs9": {
+      "dinoId": "cmuyd06z9037sqx010wf0gbs9",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.501Z"
+    },
+    "cmuyczyko03ecme01fopoiy0s": {
+      "dinoId": "cmuyczyko03ecme01fopoiy0s",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.502Z"
+    },
+    "cmuy6m69c029nph0104vskp9u": {
+      "dinoId": "cmuy6m69c029nph0104vskp9u",
+      "mutations": [
+        "Tactile Endurance",
+        "Xerocole Adaptation",
+        "Multichambered Lungs",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.503Z"
+    },
+    "cmuy5soto0f52qi01nn4rjd4e": {
+      "dinoId": "cmuy5soto0f52qi01nn4rjd4e",
+      "mutations": [
+        "Tactile Endurance",
+        "Xerocole Adaptation",
+        "Multichambered Lungs",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198634062964",
+      "playerName": "homyy",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.504Z"
+    },
+    "cmv2t3sdw00nwpr01r53qu9gh": {
+      "dinoId": "cmv2t3sdw00nwpr01r53qu9gh",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.895Z"
+    },
+    "cmv2rcjw80hm4nx014qrc6633": {
+      "dinoId": "cmv2rcjw80hm4nx014qrc6633",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.896Z"
+    },
+    "cmv2odq7q06x2mq014u15b070": {
+      "dinoId": "cmv2odq7q06x2mq014u15b070",
+      "mutations": [
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T16:29:39.263Z"
+    },
+    "cmv1xk6fw9dlzqz019nzz1zzj": {
+      "dinoId": "cmv1xk6fw9dlzqz019nzz1zzj",
+      "mutations": [
+        "Xerocole Adaptation"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Triceratops",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.897Z"
+    },
+    "cmv1hwjkt73gik401vc0wvjjo": {
+      "dinoId": "cmv1hwjkt73gik401vc0wvjjo",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.898Z"
+    },
+    "cmv1b5w7r63umrr01t6to7h3k": {
+      "dinoId": "cmv1b5w7r63umrr01t6to7h3k",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.900Z"
+    },
+    "cmv01643a0016pf01coypsw2g": {
+      "dinoId": "cmv01643a0016pf01coypsw2g",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.901Z"
+    },
+    "cmuzzeloj1f7ro9015n2etakb": {
+      "dinoId": "cmuzzeloj1f7ro9015n2etakb",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.902Z"
+    },
+    "cmuzsfadc00cgnv01j4909rta": {
+      "dinoId": "cmuzsfadc00cgnv01j4909rta",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.903Z"
+    },
+    "cmuwtcxqa0eklms01fyd1o580": {
+      "dinoId": "cmuwtcxqa0eklms01fyd1o580",
+      "mutations": [
+        "Hydrodynamic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199065578765",
+      "playerName": "OPG Blueeeee",
+      "species": "Triceratops",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T16:51:46.300Z"
+    },
+    "cmv40c2ts11pclq013yfzrbb3": {
+      "dinoId": "cmv40c2ts11pclq013yfzrbb3",
+      "mutations": [
+        "Hydrodynamic",
+        "Increased Inspiratory Capacity",
+        "Accelerated Prey Drive",
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.512Z"
+    },
+    "cmuzsyqil035cok0199l67pov": {
+      "dinoId": "cmuzsyqil035cok0199l67pov",
+      "mutations": [
+        "Hemomania",
+        "Osteosclerosis",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.513Z"
+    },
+    "cmuyc8scm00egpd01e6ijgshz": {
+      "dinoId": "cmuyc8scm00egpd01e6ijgshz",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.515Z"
+    },
+    "cmuybro7001cdr201ypq1fsgw": {
+      "dinoId": "cmuybro7001cdr201ypq1fsgw",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.516Z"
+    },
+    "cmuyap9sq00nnor017rsr2i9j": {
+      "dinoId": "cmuyap9sq00nnor017rsr2i9j",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.516Z"
+    },
+    "cmuyaoyhq07p2p501o0djsxab": {
+      "dinoId": "cmuyaoyhq07p2p501o0djsxab",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.517Z"
+    },
+    "cmuyaone807b1qr01fqos8epv": {
+      "dinoId": "cmuyaone807b1qr01fqos8epv",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.518Z"
+    },
+    "cmuwvysk70bh0mw01ptv0uk46": {
+      "dinoId": "cmuwvysk70bh0mw01ptv0uk46",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198195380990",
+      "playerName": "Peach Fire",
+      "species": "Diabloceratops",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.519Z"
+    },
+    "cmv3w8k2t08a4lq017msxvzzd": {
+      "dinoId": "cmv3w8k2t08a4lq017msxvzzd",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis",
+        "Congenital Hypoalgesia",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198779840705",
+      "playerName": "Tùng Dương",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.520Z"
+    },
+    "cmv3n07ek4adxof01mbfn3sn4": {
+      "dinoId": "cmv3n07ek4adxof01mbfn3sn4",
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198779840705",
+      "playerName": "Tùng Dương",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.521Z"
+    },
+    "cmv1hpj6t6yekqx018bdll4cd": {
+      "dinoId": "cmv1hpj6t6yekqx018bdll4cd",
+      "mutations": [
+        "Hydrodynamic",
+        "Reniculate Kidneys"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198779840705",
+      "playerName": "Tùng Dương",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.522Z"
+    },
+    "cmv3w4snl0832r101sp3zbn8u": {
+      "dinoId": "cmv3w4snl0832r101sp3zbn8u",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Tactile Endurance",
+        "Osteosclerosis",
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199827477895",
+      "playerName": "nguyenvietcuong20119",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.524Z"
+    },
+    "cmv3p1pwr004ipg01berz5kwo": {
+      "dinoId": "cmv3p1pwr004ipg01berz5kwo",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199827477895",
+      "playerName": "nguyenvietcuong20119",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.524Z"
+    },
+    "cmv3p03h1004gpc01m5uynykt": {
+      "dinoId": "cmv3p03h1004gpc01m5uynykt",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199827477895",
+      "playerName": "nguyenvietcuong20119",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.525Z"
+    },
+    "cmv146x4b4vu0qz01llf5cauu": {
+      "dinoId": "cmv146x4b4vu0qz01llf5cauu",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199827477895",
+      "playerName": "nguyenvietcuong20119",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.526Z"
+    },
+    "cmv3krtjc41lmnw011zcauzdr": {
+      "dinoId": "cmv3krtjc41lmnw011zcauzdr",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.881Z"
+    },
+    "cmv3in7du3o24pa01mrnf441b": {
+      "dinoId": "cmv3in7du3o24pa01mrnf441b",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.882Z"
+    },
+    "cmv23146ocdcqpl011g0r6rqw": {
+      "dinoId": "cmv23146ocdcqpl011g0r6rqw",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.883Z"
+    },
+    "cmv1y5v0x9av8n7017gcexkgq": {
+      "dinoId": "cmv1y5v0x9av8n7017gcexkgq",
+      "mutations": [
+        "Cellular Regeneration",
+        "Prolific Reproduction"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.885Z"
+    },
+    "cmv163ir559pfss01mhy5fegg": {
+      "dinoId": "cmv163ir559pfss01mhy5fegg",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.886Z"
+    },
+    "cmv13yfg84qyyk401pkeeli4c": {
+      "dinoId": "cmv13yfg84qyyk401pkeeli4c",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.887Z"
+    },
+    "cmv12jvuz5or5pl014uml2o1p": {
+      "dinoId": "cmv12jvuz5or5pl014uml2o1p",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Sequential Hermaphroditism",
+        "Parthenogenesis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Maiasaura",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.888Z"
+    },
+    "cmv026qzl05giqx01pn7qmq8v": {
+      "dinoId": "cmv026qzl05giqx01pn7qmq8v",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198375858476",
+      "playerName": "Kai ha vát",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.889Z"
+    },
+    "cmv41he4z1axaod01qqfm6yk5": {
+      "dinoId": "cmv41he4z1axaod01qqfm6yk5",
+      "mutations": [
+        "Multichambered Lungs",
+        "Photosynthetic Tissue"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T16:51:46.280Z"
+    },
+    "cmv41saxi1e4cmr01c8y58xan": {
+      "dinoId": "cmv41saxi1e4cmr01c8y58xan",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.868Z"
+    },
+    "cmv41s0qo1akrld01hcwabie6": {
+      "dinoId": "cmv41s0qo1akrld01hcwabie6",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.869Z"
+    },
+    "cmv41pwlc1chaod01azlgfspa": {
+      "dinoId": "cmv41pwlc1chaod01azlgfspa",
+      "mutations": [
+        "Epidermal Fibrosis",
+        "Photosynthetic Tissue",
+        "Multichambered Lungs",
+        "Prolific Reproduction"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T16:45:32.108Z"
+    },
+    "cmv41owj31bvnmu0132dbxmo5": {
+      "dinoId": "cmv41owj31bvnmu0132dbxmo5",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Gastronomic Regeneration",
+        "Photosynthetic Regeneration",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199553482722",
+      "playerName": "trieuvi2632000",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.481Z"
+    },
+    "cmv425rj11dsxoh01pb51u7cw": {
+      "dinoId": "cmv425rj11dsxoh01pb51u7cw",
+      "mutations": [
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198801960259",
+      "playerName": "khủng long đá",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.867Z"
+    },
+    "cmv42flsp1fftoh0183zfq5u6": {
+      "dinoId": "cmv42flsp1fftoh0183zfq5u6",
+      "mutations": [
+        "Featherweight",
+        "Multichambered Lungs",
+        "Reinforced Tendons",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Pteranodon",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.854Z"
+    },
+    "cmv2kpnzv1by1mw01mklxnxvs": {
+      "dinoId": "cmv2kpnzv1by1mw01mklxnxvs",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Multichambered Lungs",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.449Z"
+    },
+    "cmv2hac620rvasa01itlvq3ie": {
+      "dinoId": "cmv2hac620rvasa01itlvq3ie",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.450Z"
+    },
+    "cmv2ha3q10sfvoj01vbrwe2zq": {
+      "dinoId": "cmv2ha3q10sfvoj01vbrwe2zq",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.452Z"
+    },
+    "cmv2ej5vl0bv2mt01bvagxx4b": {
+      "dinoId": "cmv2ej5vl0bv2mt01bvagxx4b",
+      "mutations": [
+        "Cellular Regeneration",
+        "Tactile Endurance",
+        "Multichambered Lungs",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.453Z"
+    },
+    "cmv0wvjwu08eto101tjbemixb": {
+      "dinoId": "cmv0wvjwu08eto101tjbemixb",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.453Z"
+    },
+    "cmv0wuub43t1yke01mereh3m1": {
+      "dinoId": "cmv0wuub43t1yke01mereh3m1",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.454Z"
+    },
+    "cmv0rczye35gzlc01p701jxwk": {
+      "dinoId": "cmv0rczye35gzlc01p701jxwk",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.456Z"
+    },
+    "cmuztig7806smmm01geel5zeb": {
+      "dinoId": "cmuztig7806smmm01geel5zeb",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Hypermetabolic Inanition",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.457Z"
+    },
+    "cmuzg8q9v0b6hrv01sdplakt0": {
+      "dinoId": "cmuzg8q9v0b6hrv01sdplakt0",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.458Z"
+    },
+    "cmuycxg9v0316me01rrpyjcjy": {
+      "dinoId": "cmuycxg9v0316me01rrpyjcjy",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199647607952",
+      "playerName": "Lucifer",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.460Z"
+    },
+    "cmv40gytr11mqld01tvmm9g6a": {
+      "dinoId": "cmv40gytr11mqld01tvmm9g6a",
+      "mutations": [
+        "Hydrodynamic",
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198882795413",
+      "playerName": "Lê Thị Tú An",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.527Z"
+    },
+    "cmv40cwxl11uor101i33zlpjd": {
+      "dinoId": "cmv40cwxl11uor101i33zlpjd",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198882795413",
+      "playerName": "Lê Thị Tú An",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.528Z"
+    },
+    "cmuzpuyg00jbelf013u0s2y92": {
+      "dinoId": "cmuzpuyg00jbelf013u0s2y92",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198882795413",
+      "playerName": "Lê Thị Tú An",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.529Z"
+    },
+    "cmuvjuge10lqary011o9qzz0h": {
+      "dinoId": "cmuvjuge10lqary011o9qzz0h",
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198882795413",
+      "playerName": "Lê Thị Tú An",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T17:07:42.530Z"
+    },
+    "cmuppghk702j8l801ydeme7iu": {
+      "dinoId": "cmuppghk702j8l801ydeme7iu",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198882795413",
+      "playerName": "Lê Thị Tú An",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T17:07:42.531Z"
+    },
+    "cmv43esod02h4p80146hieq7b": {
+      "dinoId": "cmv43esod02h4p80146hieq7b",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199115530052",
+      "playerName": "nhai và nuốt",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.831Z"
+    },
+    "cmv46v8tl00kirq012he3gxgf": {
+      "dinoId": "cmv46v8tl00kirq012he3gxgf",
+      "mutations": [
+        "Hemomania",
+        "Gastronomic Regeneration",
+        "Multichambered Lungs",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198354799757",
+      "playerName": "Khủng Nhất Long",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.853Z"
+    },
+    "cmv45smrm016xqu01jv0pu9oi": {
+      "dinoId": "cmv45smrm016xqu01jv0pu9oi",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.891Z"
+    },
+    "cmv45scfv0guzmg01dwsaf2dy": {
+      "dinoId": "cmv45scfv0guzmg01dwsaf2dy",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.893Z"
+    },
+    "cmv45s40s0iqps201ok8vh5fi": {
+      "dinoId": "cmv45s40s0iqps201ok8vh5fi",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199445536966",
+      "playerName": "Kaze",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.894Z"
+    },
+    "cmv3zwle612y8mr01edymkb11": {
+      "dinoId": "cmv3zwle612y8mr01edymkb11",
+      "mutations": [
+        "Reniculate Kidneys",
+        "Gastronomic Regeneration",
+        "Hemomania",
+        "Cellular Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.904Z"
+    },
+    "cmv34hk5s1poglj01cct5l59e": {
+      "dinoId": "cmv34hk5s1poglj01cct5l59e",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.906Z"
+    },
+    "cmv34gp0m1olcpa018xcbp0hr": {
+      "dinoId": "cmv34gp0m1olcpa018xcbp0hr",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.907Z"
+    },
+    "cmv2h9u65020qpl01gmw11yl4": {
+      "dinoId": "cmv2h9u65020qpl01gmw11yl4",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.908Z"
+    },
+    "cmv2f3lyg0f32oj01assiyvq6": {
+      "dinoId": "cmv2f3lyg0f32oj01assiyvq6",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.909Z"
+    },
+    "cmv1s9eul8feont01a0u8kdsp": {
+      "dinoId": "cmv1s9eul8feont01a0u8kdsp",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.910Z"
+    },
+    "cmv0wu0g93uunmv0162qja93a": {
+      "dinoId": "cmv0wu0g93uunmv0162qja93a",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.912Z"
+    },
+    "cmv0vebe13leynt013lahgm77": {
+      "dinoId": "cmv0vebe13leynt013lahgm77",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.913Z"
+    },
+    "cmuyf0d7301m7o201x3e9vwzy": {
+      "dinoId": "cmuyf0d7301m7o201x3e9vwzy",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.915Z"
+    },
+    "cmuyf03yg01abnm01hlvk7vfp": {
+      "dinoId": "cmuyf03yg01abnm01hlvk7vfp",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.916Z"
+    },
+    "cmuwwh32h0coxrw014ifh2ai5": {
+      "dinoId": "cmuwwh32h0coxrw014ifh2ai5",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.917Z"
+    },
+    "cmuwwgf640coqrt013eu8oa5e": {
+      "dinoId": "cmuwwgf640coqrt013eu8oa5e",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.918Z"
+    },
+    "cmuwwfyvs0e7wmr014m9n4atm": {
+      "dinoId": "cmuwwfyvs0e7wmr014m9n4atm",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199207273112",
+      "playerName": "Atheebabi",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.919Z"
+    },
+    "cmv45vv090j49mq01pg82d58b": {
+      "dinoId": "cmv45vv090j49mq01pg82d58b",
+      "mutations": [
+        "Hydrodynamic",
+        "Gastronomic Regeneration",
+        "Increased Inspiratory Capacity",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.922Z"
+    },
+    "cmuydinwf0587nt01ip2xj171": {
+      "dinoId": "cmuydinwf0587nt01ip2xj171",
+      "mutations": [
+        "Osteosclerosis",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.923Z"
+    },
+    "cmuycx2n002tfpb018556bzh5": {
+      "dinoId": "cmuycx2n002tfpb018556bzh5",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.924Z"
+    },
+    "cmuycwm8602ikpv01z768brpm": {
+      "dinoId": "cmuycwm8602ikpv01z768brpm",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.926Z"
+    },
+    "cmuycwdyb00anrv018y14b23f": {
+      "dinoId": "cmuycwdyb00anrv018y14b23f",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.927Z"
+    },
+    "cmuybcwa00ay5ls01u3w3fxh3": {
+      "dinoId": "cmuybcwa00ay5ls01u3w3fxh3",
+      "mutations": [
+        "Cellular Regeneration",
+        "Gastronomic Regeneration",
+        "Epidermal Fibrosis",
+        "Cannibalistic"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.928Z"
+    },
+    "cmuyatfud08g6rx01qc94xp1j": {
+      "dinoId": "cmuyatfud08g6rx01qc94xp1j",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.930Z"
+    },
+    "cmuyaq1k6080gl7014z841zo3": {
+      "dinoId": "cmuyaq1k6080gl7014z841zo3",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.932Z"
+    },
+    "cmuyapt2e00vnpb0104tmrvox": {
+      "dinoId": "cmuyapt2e00vnpb0104tmrvox",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.934Z"
+    },
+    "cmuyapkwo0757p50196ensxx6": {
+      "dinoId": "cmuyapkwo0757p50196ensxx6",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.935Z"
+    },
+    "cmuyapcxn088fn101tcrepz70": {
+      "dinoId": "cmuyapcxn088fn101tcrepz70",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.936Z"
+    },
+    "cmuyaowvi07gurt018nmron23": {
+      "dinoId": "cmuyaowvi07gurt018nmron23",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.938Z"
+    },
+    "cmuyao8hx00muor013ohxgx3k": {
+      "dinoId": "cmuyao8hx00muor013ohxgx3k",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.938Z"
+    },
+    "cmuyao07q07lvp501yi9bkwq7": {
+      "dinoId": "cmuyao07q07lvp501yi9bkwq7",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.940Z"
+    },
+    "cmuyans9a00mlor01818rcex1": {
+      "dinoId": "cmuyans9a00mlor01818rcex1",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.942Z"
+    },
+    "cmuyamenk00ljqk01en0sqrks": {
+      "dinoId": "cmuyamenk00ljqk01en0sqrks",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.945Z"
+    },
+    "cmuya9ctk08i8qy01c4xc9zla": {
+      "dinoId": "cmuya9ctk08i8qy01c4xc9zla",
+      "mutations": [
+        "Xerocole Adaptation",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199874650793",
+      "playerName": "hungkaka",
+      "species": "Diabloceratops",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.946Z"
+    },
+    "cmv3ebxw23219ku01iiy8be37": {
+      "dinoId": "cmv3ebxw23219ku01iiy8be37",
+      "mutations": [
+        "Osteosclerosis",
+        "Hemomania",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199761700104",
+      "playerName": "CXP MEO",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.948Z"
+    },
+    "cmv3dvr182y1dnx01szfoy363": {
+      "dinoId": "cmv3dvr182y1dnx01szfoy363",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199761700104",
+      "playerName": "CXP MEO",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.950Z"
+    },
+    "cmv46q6vk0np6le01o99pflyt": {
+      "dinoId": "cmv46q6vk0np6le01o99pflyt",
+      "mutations": [
+        "Hemomania",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199809182645",
+      "playerName": "hungleanh291",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.951Z"
+    },
+    "cmv3wsamk0bk1lq016duur3hj": {
+      "dinoId": "cmv3wsamk0bk1lq016duur3hj",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199809182645",
+      "playerName": "hungleanh291",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.953Z"
+    },
+    "cmuy05dqb05u9nz01gqxogew5": {
+      "dinoId": "cmuy05dqb05u9nz01gqxogew5",
+      "mutations": [
+        "Accelerated Prey Drive",
+        "Gastronomic Regeneration"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198754687631",
+      "playerName": "hoanghaiii2709",
+      "species": "Deinosuchus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:37.955Z"
+    },
+    "cmv42ma9r1i0aod01fobssds9": {
+      "dinoId": "cmv42ma9r1i0aod01fobssds9",
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Congenital Hypoalgesia",
+        "Reinforced Tendons"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199734141244",
+      "playerName": "Cường",
+      "species": "Troodon",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:37.958Z"
+    },
+    "cmv3itf1z3q3yqx01piuwrc0m": {
+      "dinoId": "cmv3itf1z3q3yqx01piuwrc0m",
+      "mutations": [
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Stegosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.004Z"
+    },
+    "cmv3hysoo3hvgof01cqsmsjqb": {
+      "dinoId": "cmv3hysoo3hvgof01cqsmsjqb",
+      "mutations": [
+        "Multichambered Lungs"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Stegosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.006Z"
+    },
+    "cmv3hpueo3iogqi01e910uhsg": {
+      "dinoId": "cmv3hpueo3iogqi01e910uhsg",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Dilophosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.007Z"
+    },
+    "cmv3eq7jt6k3olm01ydawno97": {
+      "dinoId": "cmv3eq7jt6k3olm01ydawno97",
+      "mutations": [
+        "Hemomania",
+        "Hematophagy"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Carnotaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.008Z"
+    },
+    "cmv15n9v552wyke013k07u14c": {
+      "dinoId": "cmv15n9v552wyke013k07u14c",
+      "mutations": [
+        "Cellular Regeneration",
+        "Efficient Digestion",
+        "Nocturnal",
+        "Photosynthetic Tissue"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Pteranodon",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.010Z"
+    },
+    "cmv13xryg5ywipl01slqxso4d": {
+      "dinoId": "cmv13xryg5ywipl01slqxso4d",
+      "mutations": [
+        "Osteosclerosis",
+        "Tactile Endurance"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Triceratops",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.012Z"
+    },
+    "cmv0xyza53x33k401uak1sked": {
+      "dinoId": "cmv0xyza53x33k401uak1sked",
+      "mutations": [
+        "Hemomania",
+        "Multichambered Lungs",
+        "Reinforced Tendons",
+        "Osteosclerosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Omniraptor",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.013Z"
+    },
+    "cmuz68lsk06r0qq018gi3bg7j": {
+      "dinoId": "cmuz68lsk06r0qq018gi3bg7j",
+      "mutations": [
+        "Enhanced Digestion",
+        "Hematophagy"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.014Z"
+    },
+    "cmuyztygt2x05qf01l1j7o7ui": {
+      "dinoId": "cmuyztygt2x05qf01l1j7o7ui",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.015Z"
+    },
+    "cmuy8nwjc01w3nw01shkc5ewa": {
+      "dinoId": "cmuy8nwjc01w3nw01shkc5ewa",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.017Z"
+    },
+    "cmuy8jr5801y5qd01v6yz4x4f": {
+      "dinoId": "cmuy8jr5801y5qd01v6yz4x4f",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.019Z"
+    },
+    "cmuwk4ft006rdrz019s2vprbk": {
+      "dinoId": "cmuwk4ft006rdrz019s2vprbk",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.021Z"
+    },
+    "cmuwjpx4g04y2pp01hieitf8u": {
+      "dinoId": "cmuwjpx4g04y2pp01hieitf8u",
+      "mutations": [
+        "Hydrodynamic",
+        "Gastronomic Regeneration",
+        "Accelerated Prey Drive",
+        "Epidermal Fibrosis"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Deinosuchus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.023Z"
+    },
+    "cmuwh4s3e0cvmrh01zbxcn2ad": {
+      "dinoId": "cmuwh4s3e0cvmrh01zbxcn2ad",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.026Z"
+    },
+    "cmuv0uvs606gdni01l8v9ukua": {
+      "dinoId": "cmuv0uvs606gdni01l8v9ukua",
+      "mutations": [
+        "Hematophagy",
+        "Efficient Digestion"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Ceratosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.027Z"
+    },
+    "cmuqi3uxt4kurlg01bp3pylji": {
+      "dinoId": "cmuqi3uxt4kurlg01bp3pylji",
+      "mutations": [
+        "Hematophagy",
+        "Hypermetabolic Inanition"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561198694488278",
+      "playerName": "tôm to bự",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.029Z"
+    },
+    "cmuzsn02400xemm01qepjlc8c": {
+      "dinoId": "cmuzsn02400xemm01qepjlc8c",
+      "mutations": [
+        "Nocturnal",
+        "Efficient Digestion",
+        "Hydroregenerative",
+        "Enlarged meniscus"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.030Z"
+    },
+    "cmuzlh4le00mqmo01tl11m3ib": {
+      "dinoId": "cmuzlh4le00mqmo01tl11m3ib",
+      "mutations": [
+        "Hemomania",
+        "Accelerated Prey Drive"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.032Z"
+    },
+    "cmuycavtu00j4mi01nepmye9o": {
+      "dinoId": "cmuycavtu00j4mi01nepmye9o",
+      "mutations": [
+        "Hemomania"
+      ],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Allosaurus",
+      "isPrimeElder": false,
+      "updatedAt": "2026-10-11T19:02:38.034Z"
+    },
+    "cmuy9145f00e5qt01tlft2xyp": {
+      "dinoId": "cmuy9145f00e5qt01tlft2xyp",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.036Z"
+    },
+    "cmuy90vpu00d6o801r23ykcpd": {
+      "dinoId": "cmuy90vpu00d6o801r23ykcpd",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Tyrannosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.038Z"
+    },
+    "cmuy8xiqe03gap901ogbz6fd1": {
+      "dinoId": "cmuy8xiqe03gap901ogbz6fd1",
+      "mutations": [],
+      "reincarnationCount": 0,
+      "steamId": "76561199428153526",
+      "playerName": "PéGấu",
+      "species": "Allosaurus",
+      "isPrimeElder": true,
+      "updatedAt": "2026-10-11T19:02:38.039Z"
+    }
+  },
+  "announcementTemplates": [
+    {
+      "id": "tpl-1791690728658-huio",
+      "title": "Thông Báo Quan Trọng",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "category": "general",
+      "enabledForAuto": true,
+      "createdAt": "2026-10-11T03:52:08.658Z",
+      "updatedAt": "2026-10-11T13:41:06.241Z"
+    },
+    {
+      "id": "tpl-1",
+      "title": "Tham gia Discord Cộng Đồng ST25",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "category": "discord",
+      "enabledForAuto": false,
+      "createdAt": "2026-10-11T03:50:05.605Z",
+      "updatedAt": "2026-10-11T13:41:07.117Z"
+    },
+    {
+      "id": "tpl-3",
+      "title": "Khuyến cáo không Glitch/Bug Kẹt Map",
+      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
+      "category": "general",
+      "enabledForAuto": false,
+      "createdAt": "2026-10-11T03:50:05.605Z",
+      "updatedAt": "2026-10-11T13:41:08.186Z"
+    }
+  ],
+  "autoAnnounceConfig": {
+    "enabled": true,
+    "intervalMinutes": 10,
+    "mode": "sequential",
+    "currentTemplateIndex": 0,
+    "lastBroadcastAt": "2026-10-11T20:08:24.787Z",
+    "nextBroadcastAt": "2026-10-11T20:18:24.787Z"
+  },
+  "broadcastHistory": [
+    {
+      "id": "bc-1791749305253-rob9",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:08:25.253Z"
+    },
+    {
+      "id": "bc-1791748631432-d0b1",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:57:11.432Z"
+    },
+    {
+      "id": "bc-1791748031108-682g",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:47:11.108Z"
+    },
+    {
+      "id": "bc-1791747430858-dkq9",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:37:10.858Z"
+    },
+    {
+      "id": "bc-1791746830778-9srw",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:27:10.779Z"
+    },
+    {
+      "id": "bc-1791746230193-7z8r",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:17:10.193Z"
+    },
+    {
+      "id": "bc-1791745629798-4ti0",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T19:07:09.798Z"
+    },
+    {
+      "id": "bc-1791745029438-m529",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:57:09.438Z"
+    },
+    {
+      "id": "bc-1791744415337-7d0r",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:46:55.337Z"
+    },
+    {
+      "id": "bc-1791743814968-a2a9",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:36:54.968Z"
+    },
+    {
+      "id": "bc-1791743214653-52c8",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:26:54.653Z"
+    },
+    {
+      "id": "bc-1791742614488-is7f",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:16:54.488Z"
+    },
+    {
+      "id": "bc-1791742014045-tzn7",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T18:06:54.045Z"
+    },
+    {
+      "id": "bc-1791741413712-lgo8",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:56:53.712Z"
+    },
+    {
+      "id": "bc-1791740813701-3j1o",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:46:53.701Z"
+    },
+    {
+      "id": "bc-1791740213234-j3bg",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:36:53.235Z"
+    },
+    {
+      "id": "bc-1791739612775-rixl",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:26:52.776Z"
+    },
+    {
+      "id": "bc-1791739012494-2pgr",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:16:52.494Z"
+    },
+    {
+      "id": "bc-1791738474408-gx0v",
+      "content": "báo bell",
+      "source": "manual",
+      "senderName": "Moderator",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:07:54.408Z"
+    },
+    {
+      "id": "bc-1791738398600-ao3m",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:06:38.600Z"
+    },
+    {
+      "id": "bc-1791737798533-6a7f",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:56:38.533Z"
+    },
+    {
+      "id": "bc-1791737187754-3gum",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:46:27.754Z"
+    },
+    {
+      "id": "bc-1791736587476-y1t2",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:36:27.476Z"
+    },
+    {
+      "id": "bc-1791735972497-8lmt",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:26:12.497Z"
+    },
+    {
+      "id": "bc-1791735367807-smig",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:16:07.807Z"
+    },
+    {
+      "id": "bc-1791734767194-c93l",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T16:06:07.194Z"
+    },
+    {
+      "id": "bc-1791734166894-k6oe",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:56:06.894Z"
+    },
+    {
+      "id": "bc-1791733565694-gt82",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:46:05.694Z"
+    },
+    {
+      "id": "bc-1791732965312-77fm",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:36:05.312Z"
+    },
+    {
+      "id": "bc-1791732357151-5l31",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:25:57.151Z"
+    },
+    {
+      "id": "bc-1791731756978-lw0t",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:15:56.978Z"
+    },
+    {
+      "id": "bc-1791731156439-3grk",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T15:05:56.439Z"
+    },
+    {
+      "id": "bc-1791730556702-lm4k",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:55:56.702Z"
+    },
+    {
+      "id": "bc-1791729733843-r57x",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:42:13.843Z"
+    },
+    {
+      "id": "bc-1791729133353-jeqp",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:32:13.353Z"
+    },
+    {
+      "id": "bc-1791728532968-a6ju",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:22:12.968Z"
+    },
+    {
+      "id": "bc-1791727929456-l0xo",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:12:09.456Z"
+    },
+    {
+      "id": "bc-1791727329461-gilj",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T14:02:09.461Z"
+    },
+    {
+      "id": "bc-1791726728904-ejvc",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T13:52:08.904Z"
+    },
+    {
+      "id": "bc-1791726096196-8up2",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "manual",
+      "senderName": "Moderator",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T13:41:36.196Z"
+    },
+    {
+      "id": "bc-1791726073051-wnq7",
+      "content": "[THÔNG BÁO]",
+      "source": "manual",
+      "senderName": "Moderator",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T13:41:13.051Z"
+    },
+    {
+      "id": "bc-1791725588878-i240",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T13:33:08.878Z"
+    },
+    {
+      "id": "bc-1791724688254-erpr",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T13:18:08.254Z"
+    },
+    {
+      "id": "bc-1791701667091-5ufz",
+      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T06:54:27.091Z"
+    },
+    {
+      "id": "bc-1791700766708-8pij",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T06:39:26.708Z"
+    },
+    {
+      "id": "bc-1791699866160-x4mv",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T06:24:26.160Z"
+    },
+    {
+      "id": "bc-1791698965653-curd",
+      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T06:09:25.653Z"
+    },
+    {
+      "id": "bc-1791698065163-h15c",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T05:54:25.163Z"
+    },
+    {
+      "id": "bc-1791697164602-ext4",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T05:39:24.602Z"
+    },
+    {
+      "id": "bc-1791696264123-ltsw",
+      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T05:24:24.123Z"
+    },
+    {
+      "id": "bc-1791695363393-3gdh",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T05:09:23.393Z"
+    },
+    {
+      "id": "bc-1791694462863-sx0n",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T04:54:22.863Z"
+    },
+    {
+      "id": "bc-1791693562474-zd00",
+      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T04:39:22.474Z"
+    },
+    {
+      "id": "bc-1791692662127-d3eq",
+      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T04:24:22.127Z"
+    },
+    {
+      "id": "bc-1791691761773-fqzs",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T04:09:21.773Z"
+    },
+    {
+      "id": "bc-1791690734735-glkz",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "manual",
+      "senderName": "Admin",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T03:52:14.735Z"
+    }
+  ],
+  "rolePermissions": {
+    "QUAN KHÂM SAI": {
+      "roleName": "QUAN KHÂM SAI",
+      "description": "Quản trị viên cấp cao nhất - Toàn quyền điều hành máy chủ",
+      "badgeColor": "#ef4444",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": true,
+        "canEditStats": true,
+        "canManageGarage": true,
+        "canInjectDino": true,
+        "canWipeGarage": true,
+        "canBroadcast": true,
+        "canManageAnnouncer": true,
+        "canHealFeed": true,
+        "canTeleport": true,
+        "canKick": true,
+        "canBan": true,
+        "canSlay": true,
+        "canRevive": true,
+        "canManagePrime": true,
+        "canManageQuests": true,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": true,
+        "canViewAuditLogs": true,
+        "canManageRoles": true
+      },
+      "updatedAt": "2026-10-11T13:34:21.330Z"
+    },
+    "LONG KHÔNG (AD)": {
+      "roleName": "LONG KHÔNG (AD)",
+      "description": "Admin sáng lập & điều hành server ST25",
+      "badgeColor": "#dc2626",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": true,
+        "canEditStats": true,
+        "canManageGarage": true,
+        "canInjectDino": true,
+        "canWipeGarage": true,
+        "canBroadcast": true,
+        "canManageAnnouncer": true,
+        "canHealFeed": true,
+        "canTeleport": true,
+        "canKick": true,
+        "canBan": true,
+        "canSlay": true,
+        "canRevive": true,
+        "canManagePrime": true,
+        "canManageQuests": true,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": true,
+        "canViewAuditLogs": true,
+        "canManageRoles": true
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "DEV": {
+      "roleName": "DEV",
+      "description": "Nhà phát triển kỹ thuật & kiến trúc hệ thống",
+      "badgeColor": "#8b5cf6",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": true,
+        "canEditStats": true,
+        "canManageGarage": true,
+        "canInjectDino": true,
+        "canWipeGarage": true,
+        "canBroadcast": true,
+        "canManageAnnouncer": true,
+        "canHealFeed": true,
+        "canTeleport": true,
+        "canKick": true,
+        "canBan": true,
+        "canSlay": true,
+        "canRevive": true,
+        "canManagePrime": true,
+        "canManageQuests": true,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": true,
+        "canViewAuditLogs": true,
+        "canManageRoles": true
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Mod": {
+      "roleName": "Mod",
+      "description": "Ban quản trị hỗ trợ thành viên, xử lý vi phạm & đột biến",
+      "badgeColor": "#10b981",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": true,
+        "canEditStats": true,
+        "canManageGarage": true,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": true,
+        "canManageAnnouncer": false,
+        "canHealFeed": true,
+        "canTeleport": true,
+        "canKick": true,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": true,
+        "canManagePrime": false,
+        "canManageQuests": true,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": true,
+        "canViewAuditLogs": true,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "LONG ĐẠI ĐỊA CHỦ": {
+      "roleName": "LONG ĐẠI ĐỊA CHỦ",
+      "description": "Thành viên VIP cấp 1 - Nhiều slot gara & theo dõi combat",
+      "badgeColor": "#f59e0b",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "LONG PHÚ NÔNG": {
+      "roleName": "LONG PHÚ NÔNG",
+      "description": "Thành viên VIP cấp 2 - Xem trạng thái người chơi",
+      "badgeColor": "#eab308",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "LONG CHỦ": {
+      "roleName": "LONG CHỦ",
+      "description": "Thành viên VIP cấp 3",
+      "badgeColor": "#3b82f6",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "LONG TÁ ĐIỀN": {
+      "roleName": "LONG TÁ ĐIỀN",
+      "description": "Thành viên đóng góp tích cực",
+      "badgeColor": "#06b6d4",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Server - Booster": {
+      "roleName": "Server - Booster",
+      "description": "Thành viên Boost Discord server ST25",
+      "badgeColor": "#ec4899",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Streamer": {
+      "roleName": "Streamer",
+      "description": "Nhà sáng tạo nội dung chính thức",
+      "badgeColor": "#a855f7",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Bảo Trợ": {
+      "roleName": "Bảo Trợ",
+      "description": "Thành viên quỹ phát triển máy chủ",
+      "badgeColor": "#14b8a6",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Luật sư": {
+      "roleName": "Luật sư",
+      "description": "Giám sát viên quy tắc và luật giao tranh",
+      "badgeColor": "#6366f1",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": true,
+        "canInspectPlayer": true,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": true,
+        "canFlagCombatViolations": true,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Đầm Lầy": {
+      "roleName": "Đầm Lầy",
+      "description": "Gia tộc / Clan đặc nhiệm Đầm Lầy",
+      "badgeColor": "#84cc16",
+      "permissions": {
+        "canViewDashboard": true,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "Người mới": {
+      "roleName": "Người mới",
+      "description": "Thành viên mới tham gia cộng đồng ST25",
+      "badgeColor": "#71717a",
+      "permissions": {
+        "canViewDashboard": false,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    },
+    "BOT SERVER": {
+      "roleName": "BOT SERVER",
+      "description": "Tài khoản bot tự động của server",
+      "badgeColor": "#64748b",
+      "permissions": {
+        "canViewDashboard": false,
+        "canViewPlayers": false,
+        "canInspectPlayer": false,
+        "canEditMutations": false,
+        "canEditStats": false,
+        "canManageGarage": false,
+        "canInjectDino": false,
+        "canWipeGarage": false,
+        "canBroadcast": false,
+        "canManageAnnouncer": false,
+        "canHealFeed": false,
+        "canTeleport": false,
+        "canKick": false,
+        "canBan": false,
+        "canSlay": false,
+        "canRevive": false,
+        "canManagePrime": false,
+        "canManageQuests": false,
+        "canViewCombatLogs": false,
+        "canFlagCombatViolations": false,
+        "canViewAuditLogs": false,
+        "canManageRoles": false
+      },
+      "updatedAt": "2026-10-11T13:34:21.331Z"
+    }
+  },
+  "steamRoleAssignments": {}
+}
