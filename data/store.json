@@ -3286,10 +3286,26 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-11T17:16:52.063Z",
-    "nextBroadcastAt": "2026-10-11T17:26:52.063Z"
+    "lastBroadcastAt": "2026-10-11T17:36:52.759Z",
+    "nextBroadcastAt": "2026-10-11T17:46:52.759Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791740213234-j3bg",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:36:53.235Z"
+    },
+    {
+      "id": "bc-1791739612775-rixl",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T17:26:52.776Z"
+    },
     {
       "id": "bc-1791739012494-2pgr",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
