@@ -6,12 +6,13 @@ import { AdminRole, AdminUserSession } from '@/types/islepilot';
 const COOKIE_NAME = 'st25_admin_session';
 
 // Passcodes for each tier (from env or defaults)
-export const ROLE_PASSCODES: Record<AdminRole, string> = {
+export const ROLE_PASSCODES: Record<Exclude<AdminRole, 'GUEST'>, string> = {
   SUPER_ADMIN: process.env.ADMIN_SUPER_KEY || 'st25_superadmin_2026',
   SENIOR_ADMIN: process.env.ADMIN_SENIOR_KEY || 'st25_senior_2026',
   MODERATOR: process.env.ADMIN_MOD_KEY || 'st25_mod_2026',
   TRIAL_MOD: process.env.ADMIN_TRIAL_KEY || 'st25_trial_2026',
 };
+
 
 const SECRET = process.env.ADMIN_SUPER_KEY || 'st25_super_secure_secret_hash_2026';
 

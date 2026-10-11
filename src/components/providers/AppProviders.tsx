@@ -44,9 +44,10 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   );
 
   const [currentSession, setCurrentSession] = useState<AdminUserSession>({
-    id: 'admin-st25',
-    username: 'BQT ST25',
-    role: 'SUPER_ADMIN',
+    id: 'guest',
+    username: 'Khách',
+    role: 'GUEST',
+    authenticated: false,
   });
 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -65,7 +66,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   };
 
   const setCurrentRole = (role: AdminRole) => {
-    setCurrentSession((prev) => ({ ...prev, role }));
+    setCurrentSession((prev) => ({ ...prev, role, authenticated: role !== 'GUEST' }));
     addToast('info', 'RBAC Role Switch', `Đã chuyển sang vai trò: ${role}`);
   };
 
@@ -87,10 +88,27 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.authenticated && data.session) {
-          setCurrentSession(data.session);
+          setCurrentSession({
+            ...data.session,
+            authenticated: true,
+          });
+        } else {
+          setCurrentSession({
+            id: 'guest',
+            username: 'Khách',
+            role: 'GUEST',
+            authenticated: false,
+          });
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        setCurrentSession({
+          id: 'guest',
+          username: 'Khách',
+          role: 'GUEST',
+          authenticated: false,
+        });
+      });
 
     // Check for Steam Auth redirects
     if (typeof window !== 'undefined') {

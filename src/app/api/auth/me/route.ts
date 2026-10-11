@@ -12,12 +12,12 @@ export async function GET() {
       return NextResponse.json({
         authenticated: false,
         session: null,
-        permissions: ROLE_PERMISSIONS.TRIAL_MOD,
+        permissions: ROLE_PERMISSIONS.GUEST,
       });
     }
 
     // 1. Base RBAC permissions
-    const basePermissions = ROLE_PERMISSIONS[session.role] || ROLE_PERMISSIONS.TRIAL_MOD;
+    const basePermissions = ROLE_PERMISSIONS[session.role] || ROLE_PERMISSIONS.GUEST;
 
     // 2. Realtime Discord RBAC permissions calculated from active store matrix
     const discordRoles = session.discordRoles || [];

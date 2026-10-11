@@ -14,6 +14,7 @@ import {
   Radio,
   Lock,
   LogOut,
+  LogIn,
 } from 'lucide-react';
 import { AdminRole, ServerStatus } from '@/types/islepilot';
 import { ROLE_BADGE_STYLE } from '@/lib/auth/rbac';
@@ -75,8 +76,8 @@ export function Header() {
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
-    setCurrentRole('TRIAL_MOD');
-    addToast('info', 'Đã đăng xuất', 'Phiên làm việc đã chuyển về quyền Trial Mod');
+    setCurrentRole('GUEST');
+    addToast('info', 'Đã đăng xuất', 'Phiên làm việc đã trở về trạng thái Khách');
   };
 
   const roleStyle = ROLE_BADGE_STYLE[currentSession.role];
@@ -155,8 +156,12 @@ export function Header() {
           {/* Active Auth Role Badge & Login Trigger */}
           <button
             onClick={() => setShowLoginModal(true)}
-            title="Nhấp để đăng nhập Steam / đổi phân quyền BQT"
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition hover:scale-105 ${roleStyle.bg} ${roleStyle.text} ${roleStyle.border}`}
+            title={currentSession.role === 'GUEST' ? 'Nhấp để đăng nhập Steam / BQT' : 'Nhấp để đổi phân quyền BQT'}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition hover:scale-105 ${
+              currentSession.role === 'GUEST'
+                ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-500/20'
+                : `${roleStyle.bg} ${roleStyle.text} ${roleStyle.border}`
+            }`}
           >
             {currentSession.avatarUrl ? (
               <img
@@ -164,27 +169,31 @@ export function Header() {
                 alt={currentSession.username}
                 className="w-5 h-5 rounded-full object-cover border border-white/20"
               />
+            ) : currentSession.role === 'GUEST' ? (
+              <LogIn className="w-3.5 h-3.5 text-cyan-400" />
             ) : (
               <Lock className="w-3.5 h-3.5" />
             )}
             <div className="flex flex-col text-left">
               <span className="text-[10px] opacity-80 leading-tight">
-                {currentSession.username || 'BQT ST25'}
+                {currentSession.role === 'GUEST' ? 'Chưa đăng nhập' : currentSession.username}
               </span>
               <span className="text-[11px] font-mono font-bold leading-tight">
-                {roleStyle.label}
+                {currentSession.role === 'GUEST' ? 'Đăng nhập BQT' : roleStyle.label}
               </span>
             </div>
           </button>
 
-          {/* Logout button */}
-          <button
-            onClick={handleLogout}
-            title="Đăng xuất khỏi phiên BQT"
-            className="p-2 rounded-xl bg-zinc-900/80 hover:bg-red-500/20 border border-zinc-800 text-zinc-400 hover:text-red-400 transition"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-          </button>
+          {/* Logout button - only show when authenticated */}
+          {currentSession.role !== 'GUEST' && (
+            <button
+              onClick={handleLogout}
+              title="Đăng xuất khỏi phiên BQT"
+              className="p-2 rounded-xl bg-zinc-900/80 hover:bg-red-500/20 border border-zinc-800 text-zinc-400 hover:text-red-400 transition"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         {/* Broadcast Modal */}

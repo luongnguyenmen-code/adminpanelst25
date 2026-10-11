@@ -1,6 +1,6 @@
 // Types and Interfaces for IslePilot API and ST25 Admin Control Panel
 
-export type AdminRole = 'SUPER_ADMIN' | 'SENIOR_ADMIN' | 'MODERATOR' | 'TRIAL_MOD';
+export type AdminRole = 'SUPER_ADMIN' | 'SENIOR_ADMIN' | 'MODERATOR' | 'TRIAL_MOD' | 'GUEST';
 
 export interface AdminUserSession {
   id: string;
@@ -9,7 +9,9 @@ export interface AdminUserSession {
   discordId?: string;
   avatarUrl?: string;
   role: AdminRole;
+  authenticated?: boolean;
 }
+
 
 export interface PlayerPosition {
   x: number;

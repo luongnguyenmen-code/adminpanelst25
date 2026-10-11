@@ -27,6 +27,31 @@ export interface PermissionDefinition {
 }
 
 export const ROLE_PERMISSIONS: Record<AdminRole, PermissionDefinition> = {
+  GUEST: {
+    canViewDashboard: true,
+    canViewPlayers: false,
+    canInspectPlayer: false,
+    canEditMutations: false,
+    canEditStats: false,
+    canHealFeed: false,
+    canTeleport: false,
+    canKick: false,
+    canSlay: false,
+    canRevive: false,
+    canBan: false,
+    canManageGarage: false,
+    canInjectDino: false,
+    canWipeGarage: false,
+    canBroadcast: false,
+    canManageAnnouncer: false,
+    canManagePrime: false,
+    canManageQuests: false,
+    canViewCombatLogs: false,
+    canFlagCombatViolations: false,
+    canViewAuditLogs: false,
+    canManageRoles: false,
+    canManageAdminRoles: false,
+  },
   TRIAL_MOD: {
     canViewDashboard: true,
     canViewPlayers: true,
@@ -181,5 +206,11 @@ export const ROLE_BADGE_STYLE: Record<AdminRole, { label: string; bg: string; te
     bg: 'bg-cyan-500/10',
     text: 'text-cyan-400',
     border: 'border-cyan-500/30',
+  },
+  GUEST: {
+    label: 'Chưa đăng nhập',
+    bg: 'bg-zinc-800/80',
+    text: 'text-zinc-400',
+    border: 'border-zinc-700/80',
   },
 };

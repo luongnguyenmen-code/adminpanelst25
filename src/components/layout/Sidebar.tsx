@@ -160,11 +160,21 @@ export function Sidebar() {
       {/* Admin User Card & Role */}
       <div className="p-3 border-t border-zinc-800/80 bg-zinc-900/30">
         <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-900/70 border border-zinc-800">
-          <div className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center font-bold text-xs text-white border border-zinc-700">
-            AD
-          </div>
+          {currentSession.avatarUrl ? (
+            <img
+              src={currentSession.avatarUrl}
+              alt={currentSession.username}
+              className="w-8 h-8 rounded-lg object-cover border border-zinc-700"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center font-bold text-xs text-white border border-zinc-700">
+              {currentSession.role === 'GUEST' ? '?' : 'AD'}
+            </div>
+          )}
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-white truncate">{currentSession.username}</p>
+            <p className="text-xs font-semibold text-white truncate">
+              {currentSession.role === 'GUEST' ? 'Khách (Chưa đăng nhập)' : currentSession.username}
+            </p>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span
                 className={`text-[9px] px-1.5 py-0.5 rounded-md font-mono font-medium border ${roleStyle.bg} ${roleStyle.text} ${roleStyle.border}`}
@@ -175,6 +185,7 @@ export function Sidebar() {
           </div>
         </div>
       </div>
+
     </aside>
   );
 }
