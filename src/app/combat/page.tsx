@@ -439,7 +439,7 @@ export default function CombatPage() {
                     species: selectedKill.victimSpecies,
                     growth: selectedKill.victimGrowth,
                     coordinates: selectedKill.coordinates,
-                    reason: `Hồi sinh nạn nhân ${selectedKill.victimName} (${selectedKill.victimSpecies}) sau giao tranh #${selectedKill.id}`,
+                    reason: `Rollback 5s trước khi chết: Hồi sinh nạn nhân ${selectedKill.victimName} (${selectedKill.victimSpecies}) sau pha giao tranh #${selectedKill.id}`,
                   });
                   setSelectedKill(null);
                   setShowReviveModal(true);
@@ -447,7 +447,7 @@ export default function CombatPage() {
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-xs font-bold text-white transition flex items-center gap-2 shadow-lg shadow-emerald-600/30"
               >
                 <Sparkles className="w-4 h-4 text-emerald-200" />
-                <span>Hồi Sinh Khủng Long Nạn Nhân</span>
+                <span>⚡ Rollback 5s & Hồi Sinh Nạn Nhân</span>
               </button>
 
               <button

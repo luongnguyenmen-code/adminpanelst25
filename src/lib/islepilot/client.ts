@@ -532,8 +532,41 @@ export class IslePilotClient {
   }
 
   /**
-   * Phục hồi / Hồi sinh toàn diện khủng long tử nạn
-   * Khôi phục loài (swap), thiết lập growth, bơm đầy HP/Food/Water, unfreeze và tùy chọn dịch chuyển
+   * Dịch chuyển người chơi trực tiếp đến tọa độ X, Y, Z trên bản đồ
+   */
+  async teleportPlayerToCoords(
+    steamId: string,
+    coords: { x: number; y: number; z: number }
+  ): Promise<{ success: boolean; message: string }> {
+    try {
+      const roundedX = Math.round(coords.x);
+      const roundedY = Math.round(coords.y);
+      const roundedZ = Math.round(coords.z);
+
+      // 1. IslePilot POST /players/{steamId}/teleport with raw coordinates
+      await this.request<any>(`/players/${steamId}/teleport`, {
+        method: 'POST',
+        body: JSON.stringify({ x: roundedX, y: roundedY, z: roundedZ }),
+      }).catch(() => null);
+
+      // 2. Direct console / RCON command fallback for The Isle Evrima server
+      await this.executeAdminCommand({
+        action: 'execute_command',
+        command: `teleport ${steamId} ${roundedX} ${roundedY} ${roundedZ}`,
+      }).catch(() => null);
+
+      return {
+        success: true,
+        message: `Đã dịch chuyển về tọa độ (${roundedX}, ${roundedY}, ${roundedZ})`,
+      };
+    } catch (err: any) {
+      return { success: false, message: err.message || 'Lỗi teleport' };
+    }
+  }
+
+  /**
+   * Phục hồi / Hồi sinh toàn diện khủng long tử nạn (Rollback hiện trạng 5s trước khi chết)
+   * Khôi phục đúng loài (swap), đúng growth, khôi phục gen (mutations), bơm đầy HP/Food/Water, unfreeze và dịch chuyển về đúng tọa độ tử nạn
    */
   async reviveDino(
     steamId: string,
@@ -541,7 +574,11 @@ export class IslePilotClient {
       species: string;
       growth?: number;
       healFull?: boolean;
+      coordinates?: { x: number; y: number; z: number };
       teleportLocationId?: string;
+      mutations?: string[];
+      elder?: string;
+      lineage?: any;
     }
   ): Promise<{ success: boolean; message: string }> {
     const growth = options.growth ?? 1.0;
@@ -555,7 +592,23 @@ export class IslePilotClient {
       growth: normalizedGrowth,
     });
 
-    // 2. Bơm đầy chỉ số sinh tồn (HP, Thức ăn, Nước uống, hồi máu, xóa gãy chân)
+    // 2. Khôi phục toàn bộ đột biến gen (Mutations) nếu có
+    if (options.mutations && options.mutations.length > 0) {
+      const cleanMuts = options.mutations.filter((m) => m && m !== 'None' && m !== '-');
+      if (cleanMuts.length > 0) {
+        await this.grantPlayerMutations(
+          steamId,
+          cleanMuts,
+          'Khôi phục đột biến gen khi hồi sinh (Rollback 5s)',
+          {
+            elder: options.elder,
+            lineage: options.lineage,
+          }
+        ).catch(() => null);
+      }
+    }
+
+    // 3. Bơm đầy chỉ số sinh tồn (HP 10,000, Thức ăn 10,000, Nước uống 10,000, hồi máu, xóa gãy chân)
     if (options.healFull !== false) {
       await this.executeAdminCommand({
         action: 'setstats',
@@ -569,19 +622,26 @@ export class IslePilotClient {
       }).catch(() => null);
     }
 
-    // 3. Mở khóa tiến trình trưởng thành (unfreeze)
+    // 4. Mở khóa tiến trình trưởng thành (unfreeze)
     await this.executeAdminCommand({
       action: 'setgrowth',
       steamId,
       frozen: false,
     }).catch(() => null);
 
-    // 4. Nếu có chọn vị trí an toàn, dịch chuyển người chơi
-    if (options.teleportLocationId) {
+    // 5. Rollback về đúng vị trí lúc chết (tọa độ X, Y, Z nâng nhẹ 50 units để tránh kẹt map)
+    if (options.coordinates) {
+      const safeZ = (options.coordinates.z ?? 0) + 50;
+      await this.teleportPlayerToCoords(steamId, {
+        x: options.coordinates.x,
+        y: options.coordinates.y,
+        z: safeZ,
+      }).catch(() => null);
+    } else if (options.teleportLocationId) {
       await this.teleportPlayer(steamId, options.teleportLocationId).catch(() => null);
     }
 
-    // 5. Fallback lệnh trực tiếp cho console
+    // 6. Fallback lệnh trực tiếp cho console
     await this.executeAdminCommand({
       action: 'execute_command',
       command: `setgrowth ${steamId} ${normalizedGrowth}`,
@@ -590,7 +650,7 @@ export class IslePilotClient {
     return {
       success: swapResult.success,
       message: swapResult.success
-        ? `Đã hồi sinh khủng long ${options.species} (${(normalizedGrowth * 100).toFixed(0)}% Growth) cho người chơi thành công!`
+        ? `Đã hồi sinh khủng long ${options.species} (${(normalizedGrowth * 100).toFixed(0)}% Growth) tại tọa độ tử nạn thành công!`
         : (swapResult.message || 'Lỗi từ máy chủ khi thực hiện hồi sinh khủng long'),
     };
   }

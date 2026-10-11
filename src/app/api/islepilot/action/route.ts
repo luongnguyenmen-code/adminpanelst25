@@ -152,12 +152,38 @@ export async function POST(request: NextRequest) {
         break;
       case 'revive': {
         const species = params.species;
+
+        // Auto retrieve pre-death mutations from store or target dino record if not provided
+        let targetMutations = params.mutations;
+        let targetElder = params.elder;
+        let targetLineage = params.lineage;
+
+        if (!targetMutations || targetMutations.length === 0) {
+          const storedMutInfo = adminStore.getPlayerMutations(steamId);
+          if (storedMutInfo) {
+            targetMutations = storedMutInfo.mutations;
+            targetElder = storedMutInfo.elder;
+            targetLineage = storedMutInfo.lineage;
+          } else {
+            const storedDino = adminStore.getDinoBySteamId(steamId);
+            if (storedDino?.mutations && storedDino.mutations.length > 0) {
+              targetMutations = storedDino.mutations;
+              targetElder = storedDino.elder;
+              targetLineage = storedDino.lineage;
+            }
+          }
+        }
+
         if (species) {
           executionResult = await islePilotClient.reviveDino(steamId, {
             species,
             growth: params.growth ?? 1.0,
             healFull: params.healFull !== false,
+            coordinates: params.coordinates,
             teleportLocationId: params.teleportLocationId || params.locationId,
+            mutations: targetMutations,
+            elder: targetElder,
+            lineage: targetLineage,
           });
         } else {
           // Fallback to full heal & unfreeze

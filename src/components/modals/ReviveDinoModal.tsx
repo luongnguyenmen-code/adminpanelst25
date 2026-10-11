@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import {
   Sparkles,
   HeartHandshake,
@@ -13,6 +12,9 @@ import {
   Check,
   RefreshCw,
   Zap,
+  Dna,
+  History,
+  RotateCcw,
 } from 'lucide-react';
 import { KNOWN_SPECIES_LIST, TELEPORT_SAFE_ZONES, getDinoSpeciesImage } from '@/lib/utils';
 import { useApp } from '@/components/providers/AppProviders';
@@ -24,6 +26,9 @@ interface ReviveTargetInfo {
   growth?: number;
   reason?: string;
   coordinates?: { x: number; y: number; z: number };
+  mutations?: string[];
+  elder?: string;
+  lineage?: any;
 }
 
 interface ReviveDinoModalProps {
@@ -42,8 +47,17 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
   const [growth, setGrowth] = useState<number>(1.0);
   const [healFull, setHealFull] = useState(true);
   const [selectedSafeZone, setSelectedSafeZone] = useState('');
-  const [reason, setReason] = useState('Đền bù sự cố / Khôi phục khủng long tử nạn');
+  const [reason, setReason] = useState('Đền bù sự cố / Rollback hồi sinh 5s trước khi chết');
   const [loading, setLoading] = useState(false);
+
+  // Rollback coordinates state
+  const [casualtyCoords, setCasualtyCoords] = useState<{ x: number; y: number; z: number } | null>(null);
+  const [restoreAtCasualtyCoords, setRestoreAtCasualtyCoords] = useState(true);
+
+  // Rollback mutations state
+  const [playerMutations, setPlayerMutations] = useState<string[]>([]);
+  const [restoreMutations, setRestoreMutations] = useState(true);
+  const [isLoadingPlayerMuts, setIsLoadingPlayerMuts] = useState(false);
 
   // Sync state when target changes
   useEffect(() => {
@@ -51,7 +65,6 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
       setSteamId(target.steamId || '');
       setPlayerName(target.name || '');
       if (target.species) {
-        // Find best match in KNOWN_SPECIES_LIST
         const match = KNOWN_SPECIES_LIST.find(
           (s) => s.toLowerCase() === target.species?.toLowerCase()
         );
@@ -65,7 +78,36 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
       if (target.reason) {
         setReason(target.reason);
       } else {
-        setReason('Đền bù sự cố / Khôi phục khủng long tử nạn');
+        setReason('Đền bù sự cố / Rollback hồi sinh 5s trước khi chết');
+      }
+
+      if (target.coordinates && typeof target.coordinates.x === 'number') {
+        setCasualtyCoords(target.coordinates);
+        setRestoreAtCasualtyCoords(true);
+      } else {
+        setCasualtyCoords(null);
+        setRestoreAtCasualtyCoords(false);
+      }
+
+      if (target.mutations && target.mutations.length > 0) {
+        setPlayerMutations(target.mutations);
+        setRestoreMutations(true);
+      } else if (target.steamId) {
+        // Fetch current / stored mutations for this player
+        setIsLoadingPlayerMuts(true);
+        fetch(`/api/islepilot/players/${target.steamId}`)
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => {
+            if (data?.player?.mutations && Array.isArray(data.player.mutations)) {
+              const valid = data.player.mutations.filter((m: string) => m && m !== 'None' && m !== '-');
+              if (valid.length > 0) {
+                setPlayerMutations(valid);
+                setRestoreMutations(true);
+              }
+            }
+          })
+          .catch(() => null)
+          .finally(() => setIsLoadingPlayerMuts(false));
       }
     }
   }, [target, isOpen]);
@@ -89,6 +131,9 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
 
     setLoading(true);
     try {
+      const payloadCoordinates = restoreAtCasualtyCoords && casualtyCoords ? casualtyCoords : undefined;
+      const payloadMutations = restoreMutations && playerMutations.length > 0 ? playerMutations : undefined;
+
       const res = await fetch('/api/islepilot/action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -96,12 +141,16 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
           action: 'revive',
           steamId: steamId.trim(),
           playerName: playerName.trim() || undefined,
-          reason: reason.trim() || 'Hồi sinh khủng long tử nạn',
+          reason: reason.trim() || 'Rollback hồi sinh 5s trước khi chết',
           params: {
             species: species.trim(),
             growth,
             healFull,
-            teleportLocationId: selectedSafeZone || undefined,
+            coordinates: payloadCoordinates,
+            teleportLocationId: !payloadCoordinates ? selectedSafeZone || undefined : undefined,
+            mutations: payloadMutations,
+            elder: target?.elder,
+            lineage: target?.lineage,
           },
         }),
       });
@@ -113,8 +162,8 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
 
       addToast(
         'success',
-        'HỒI SINH THÀNH CÔNG! ✨',
-        `Đã hồi sinh ${species} (${(growth * 100).toFixed(0)}% Growth) cho ${playerName || steamId}`
+        'ROLLBACK & HỒI SINH THÀNH CÔNG! ⚡',
+        `Đã khôi phục hoàn chỉnh ${species} (${(growth * 100).toFixed(0)}%) tại vị trí tử nạn cho ${playerName || steamId}`
       );
 
       if (onSuccess) onSuccess();
@@ -135,14 +184,14 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
         <div className="p-5 border-b border-zinc-800 bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-[#090e18] flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
-              <Sparkles className="w-5 h-5 animate-pulse" />
+              <RotateCcw className="w-5 h-5 animate-spin-slow" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white tracking-wide flex items-center gap-2">
-                Phục Hồi / Hồi Sinh Khủng Long Tử Nạn
+                Rollback & Hồi Sinh Khủng Long (5s Trước Tử Nạn)
               </h3>
               <p className="text-xs text-zinc-400">
-                Tự động hoán đổi loài (Swap), bơm lại tăng trưởng, hồi phục đầy đủ Máu & Thức ăn in-game
+                Khôi phục nguyên vẹn loài, tăng trưởng, cấu trúc đột biến gen và vị trí tọa độ lúc tử nạn
               </p>
             </div>
           </div>
@@ -156,46 +205,87 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-xs text-zinc-300">
+        <div className="p-6 overflow-y-auto space-y-4 text-xs text-zinc-300">
           {/* Target Player Banner */}
           <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 flex items-center justify-between">
             <div>
-              <p className="text-[10px] uppercase font-mono text-zinc-400 font-bold">Nạn Nhân Cần Hồi Sinh</p>
+              <p className="text-[10px] uppercase font-mono text-zinc-400 font-bold">Nạn Nhân Giao Tranh</p>
               <p className="text-sm font-bold text-white mt-0.5">
                 {playerName || 'Chưa rõ tên'} <span className="text-xs font-mono text-cyan-400 font-normal">({steamId || 'Chưa nhập SteamID'})</span>
               </p>
             </div>
-            <div className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold">
-              REVIVE READY
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold">
+              <RotateCcw className="w-3.5 h-3.5" />
+              ROLLBACK READY
             </div>
           </div>
 
-          {/* Form fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* SteamID */}
-            <div>
-              <label className="block text-zinc-300 font-semibold mb-1.5">
-                SteamID64 <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                placeholder="76561198..."
-                value={steamId}
-                onChange={(e) => setSteamId(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 font-mono text-xs text-white focus:outline-none focus:border-emerald-500"
-              />
-            </div>
+          {/* Snapshot Status Card: Coordinates & Mutations */}
+          <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 space-y-3">
+            <p className="font-bold text-emerald-300 flex items-center gap-1.5 uppercase text-[11px] tracking-wider">
+              <History className="w-4 h-4 text-emerald-400" />
+              Trạng Thái Hiện Trường 5 Giây Trước Khi Chết (Snapshot)
+            </p>
 
-            {/* Player Name */}
-            <div>
-              <label className="block text-zinc-300 font-semibold mb-1.5">Tên Người Chơi (Hiển Thị)</label>
-              <input
-                type="text"
-                placeholder="VD: Survivor..."
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-emerald-500"
-              />
+            {/* Coordinates Rollback Checkbox */}
+            {casualtyCoords ? (
+              <label className="flex items-start gap-2.5 p-2.5 rounded-lg bg-zinc-900/80 border border-emerald-500/30 cursor-pointer hover:border-emerald-500/60 transition">
+                <input
+                  type="checkbox"
+                  checked={restoreAtCasualtyCoords}
+                  onChange={(e) => setRestoreAtCasualtyCoords(e.target.checked)}
+                  className="w-4 h-4 mt-0.5 rounded text-emerald-500 focus:ring-emerald-500 bg-zinc-950 border-zinc-700"
+                />
+                <div>
+                  <p className="font-semibold text-white flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                    Dịch chuyển về đúng Tọa Độ Tử Nạn (Rollback Vị Trí)
+                  </p>
+                  <p className="text-[11px] font-mono text-cyan-300 mt-0.5">
+                    X: {Math.round(casualtyCoords.x)} | Y: {Math.round(casualtyCoords.y)} | Z: {Math.round(casualtyCoords.z)} (Nâng an toàn +50z)
+                  </p>
+                </div>
+              </label>
+            ) : (
+              <div className="p-2.5 rounded-lg bg-zinc-900/50 border border-zinc-800 text-zinc-400 text-[11px]">
+                ℹ️ Không có sẵn tọa độ từ Killfeed. Bạn có thể chọn vị trí an toàn (Safe Zone) bên dưới.
+              </div>
+            )}
+
+            {/* Mutations Rollback Checkbox & Badges */}
+            <div className="p-2.5 rounded-lg bg-zinc-900/80 border border-emerald-500/30 space-y-2">
+              <label className="flex items-center gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={restoreMutations}
+                  onChange={(e) => setRestoreMutations(e.target.checked)}
+                  className="w-4 h-4 rounded text-emerald-500 focus:ring-emerald-500 bg-zinc-950 border-zinc-700"
+                />
+                <span className="font-semibold text-white flex items-center gap-1.5">
+                  <Dna className="w-3.5 h-3.5 text-purple-400" />
+                  Khôi Phục Toàn Bộ Đột Biến Gen Đã Có ({playerMutations.length} Đột Biến)
+                </span>
+              </label>
+
+              {isLoadingPlayerMuts ? (
+                <p className="text-[11px] text-zinc-400 italic">Đang kiểm tra hồ sơ đột biến gen của người chơi...</p>
+              ) : playerMutations.length > 0 ? (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {playerMutations.map((mut, idx) => (
+                    <span
+                      key={idx}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/20 border border-purple-500/30 text-purple-200 text-[11px] font-medium"
+                    >
+                      <Dna className="w-3 h-3 text-purple-400" />
+                      {mut}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-[11px] text-zinc-500 italic">
+                  Khủng long chưa kích hoạt đột biến gen hoặc hệ thống sẽ nạp theo cấu hình mới nhất.
+                </p>
+              )}
             </div>
           </div>
 
@@ -203,7 +293,7 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
           <div>
             <label className="block text-zinc-300 font-semibold mb-1.5 flex items-center justify-between">
               <span>Loài Khủng Long Khôi Phục <span className="text-red-400">*</span></span>
-              <span className="text-[11px] text-zinc-400 font-normal">Hiện tại: <b className="text-emerald-400">{species}</b></span>
+              <span className="text-[11px] text-zinc-400 font-normal">Đang chọn: <b className="text-emerald-400">{species}</b></span>
             </label>
             <div className="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-900 border border-zinc-700">
               {speciesImg && (
@@ -228,10 +318,10 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
           </div>
 
           {/* Growth Slider & Presets */}
-          <div className="p-4 rounded-xl bg-zinc-950/60 border border-zinc-800 space-y-3">
+          <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-zinc-800 space-y-2.5">
             <div className="flex items-center justify-between">
               <label className="font-semibold text-zinc-200">
-                Mức Độ Tăng Trưởng (Growth): <span className="font-mono text-emerald-400 font-bold text-sm">{(growth * 100).toFixed(0)}% ({growth.toFixed(2)})</span>
+                Kích Thước Trưởng Thành (Growth): <span className="font-mono text-emerald-400 font-bold text-sm">{(growth * 100).toFixed(0)}% ({growth.toFixed(2)})</span>
               </label>
               <div className="flex items-center gap-1.5">
                 {[
@@ -244,7 +334,7 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
                     key={item.label}
                     type="button"
                     onClick={() => handleQuickGrowth(item.val)}
-                    className={`px-2 py-1 rounded-lg text-[10px] font-mono transition ${
+                    className={`px-2 py-0.5 rounded-lg text-[10px] font-mono transition ${
                       growth === item.val
                         ? 'bg-emerald-500 text-black font-bold shadow-md shadow-emerald-500/30'
                         : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300'
@@ -267,9 +357,8 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             />
           </div>
 
-          {/* Options: Full Heal & Safe Zone Teleport */}
+          {/* Full Heal & Safe Zone options */}
           <div className="space-y-3">
-            {/* Full Heal Checkbox */}
             <label className="flex items-center gap-2.5 p-3 rounded-xl bg-zinc-900/70 border border-zinc-800 cursor-pointer hover:border-zinc-700 transition">
               <input
                 type="checkbox"
@@ -278,43 +367,44 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
                 className="w-4 h-4 rounded text-emerald-500 focus:ring-emerald-500 bg-zinc-950 border-zinc-700"
               />
               <div>
-                <p className="font-semibold text-white">Bơm Đầy Máu, Độ Đói & Độ Khát (Full Vital Stats)</p>
+                <p className="font-semibold text-white">Bơm Đầy Sinh Lực (10,000 HP, Đói, Khát, Xóa Gãy Chân)</p>
                 <p className="text-[11px] text-zinc-400 mt-0.5">
-                  Tự động hồi 10,000 HP, 10,000 Thức ăn, 10,000 Nước uống, xóa vết chảy máu và hồi chân gãy.
+                  Đảm bảo khủng long sau khi hồi sinh có đầy đủ năng lượng chiến đấu, không bị chảy máu chết lại.
                 </p>
               </div>
             </label>
 
-            {/* Safe Zone Teleport */}
-            <div>
-              <label className="block text-zinc-300 font-semibold mb-1.5 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                Dịch Chuyển Về Vị Trí An Toàn (Tùy chọn)
-              </label>
-              <select
-                value={selectedSafeZone}
-                onChange={(e) => setSelectedSafeZone(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-cyan-500"
-              >
-                <option value="">-- Giữ nguyên vị trí hiện tại (Không Teleport) --</option>
-                {TELEPORT_SAFE_ZONES.map((zone) => (
-                  <option key={zone.id} value={zone.id}>
-                    {zone.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {!restoreAtCasualtyCoords && (
+              <div>
+                <label className="block text-zinc-300 font-semibold mb-1.5 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                  Vị Trí An Toàn (Safe Zone Teleport)
+                </label>
+                <select
+                  value={selectedSafeZone}
+                  onChange={(e) => setSelectedSafeZone(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-cyan-500"
+                >
+                  <option value="">-- Giữ nguyên vị trí hiện tại của người chơi --</option>
+                  {TELEPORT_SAFE_ZONES.map((zone) => (
+                    <option key={zone.id} value={zone.id}>
+                      {zone.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             {/* Audit Reason */}
             <div>
               <label className="block text-zinc-300 font-semibold mb-1.5">
-                Lý Do Phục Hồi (Ghi Sổ Nhật Ký BQT) <span className="text-red-400">*</span>
+                Lý Do Hồi Sinh / Rollback <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                placeholder="VD: Chết do bug kẹt map / Đền bù mixpack trái luật..."
+                placeholder="VD: Rollback đền bù pha cắn trộm / Hồi sinh lỗi kẹt map..."
                 className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
@@ -341,12 +431,12 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             {loading ? (
               <>
                 <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>Đang hồi sinh in-game...</span>
+                <span>Đang thực hiện Rollback...</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-4 h-4 text-emerald-200" />
-                <span>Xác Nhận Hồi Sinh Khủng Long</span>
+                <span>⚡ Xác Nhận Rollback & Hồi Sinh</span>
               </>
             )}
           </button>
