@@ -118,14 +118,8 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const quickRoles = [
-    { label: 'Super Admin (Quan Khâm Sai)', code: 'st25_superadmin_2026', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
-    { label: 'Senior Admin', code: 'st25_senior_2026', color: 'text-amber-400 border-amber-500/30 bg-amber-500/10' },
-    { label: 'Moderator', code: 'st25_mod_2026', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-    { label: 'Trial Mod', code: 'st25_trial_2026', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-  ];
-
   return (
+
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#040711] overflow-y-auto">
       {/* Background aesthetics & glowing ambient grids */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c1322_1px,transparent_1px),linear-gradient(to_bottom,#0c1322_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
@@ -282,29 +276,9 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
                 <span>Xác Nhận Đăng Nhập Khẩn Cấp</span>
               </button>
             </div>
-
-            {/* Quick Presets for development/testing */}
-            <div className="pt-3 border-t border-zinc-800">
-              <span className="text-[10px] uppercase font-mono text-zinc-500 block mb-2 font-semibold">
-                Chọn Nhanh Vai Trò (Test / Debug Khẩn Cấp):
-              </span>
-              <div className="grid grid-cols-2 gap-2">
-                {quickRoles.map((r) => (
-                  <button
-                    key={r.label}
-                    type="button"
-                    onClick={() => handlePasscodeLogin(r.code, r.label)}
-                    disabled={loading}
-                    className={`p-2 rounded-xl border text-[11px] font-mono font-medium transition text-left flex items-center justify-between hover:scale-[1.02] ${r.color}`}
-                  >
-                    <span className="truncate">{r.label}</span>
-                    <Key className="w-3 h-3 opacity-60 flex-shrink-0" />
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
         )}
+
 
         {/* Footer Info */}
         <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-500">

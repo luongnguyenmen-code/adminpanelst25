@@ -32,10 +32,13 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    const steamRoleAssignments = adminStore.getSteamRoleAssignments();
+
     return NextResponse.json({
       success: true,
       roles,
       defaults: DEFAULT_ST25_ROLES,
+      steamRoleAssignments,
     });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -62,9 +65,43 @@ export async function POST(request: NextRequest) {
       );
     }
 
-
     const body = await request.json();
     const { action } = body;
+
+    // Cấp quyền trực tiếp theo SteamID
+    if (action === 'assign_steam') {
+      const { steamId: targetSteamId, role: targetRole, note, playerName: targetName } = body;
+      if (!targetSteamId || !targetRole) {
+        return NextResponse.json({ success: false, error: 'Thiếu SteamID hoặc Role cần cấp' }, { status: 400 });
+      }
+      const assigned = adminStore.assignRoleToSteamId(
+        targetSteamId.trim(),
+        targetRole,
+        note,
+        targetName,
+        session.username
+      );
+      return NextResponse.json({
+        success: true,
+        message: `Đã cấp vai trò ${targetRole} cho SteamID ${targetSteamId}`,
+        assignment: assigned,
+        steamRoleAssignments: adminStore.getSteamRoleAssignments(),
+      });
+    }
+
+    // Thu hồi quyền trực tiếp theo SteamID
+    if (action === 'remove_steam') {
+      const { steamId: targetSteamId } = body;
+      if (!targetSteamId) {
+        return NextResponse.json({ success: false, error: 'Thiếu SteamID cần thu hồi quyền' }, { status: 400 });
+      }
+      const ok = adminStore.removeRoleFromSteamId(targetSteamId.trim());
+      return NextResponse.json({
+        success: ok,
+        message: ok ? `Đã thu hồi quyền của SteamID ${targetSteamId}` : 'Không tìm thấy SteamID',
+        steamRoleAssignments: adminStore.getSteamRoleAssignments(),
+      });
+    }
 
     if (action === 'reset') {
       const resetList = adminStore.resetRolePermissionsToDefault();
@@ -74,6 +111,7 @@ export async function POST(request: NextRequest) {
         roles: resetList,
       });
     }
+
 
     if (action === 'delete') {
       const { roleName } = body;

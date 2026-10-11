@@ -82,14 +82,17 @@ const NAVIGATION_ITEMS: NavItem[] = [
     name: 'Prime & Đặc quyền',
     href: '/prime',
     icon: Crown,
+    badge: 'BETA',
     requiredPerm: 'canManagePrime',
   },
   {
     name: 'Nhiệm vụ & Phần thưởng',
     href: '/quests',
     icon: Scroll,
+    badge: 'BETA',
     requiredPerm: 'canManageQuests',
   },
+
   {
     name: 'Nhật ký hệ thống (Logs)',
     href: '/audit',
@@ -189,7 +192,10 @@ export function Sidebar() {
                   className={`text-[9px] font-bold px-1.5 py-0.5 rounded font-mono ${
                     item.badge === 'LIVE'
                       ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pulse'
+                      : item.badge === 'BETA'
+                      ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                       : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+
                   }`}
                 >
                   {item.badge}

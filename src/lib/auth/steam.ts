@@ -118,20 +118,40 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     } catch {}
   }
 
-  // 2. Check Master SuperAdmin SteamIDs from ENV (e.g. Server Owner)
-  const masterSteamIds = (process.env.ADMIN_SUPER_STEAM_IDS || '76561198789527189')
+  // 2. Check Master SuperAdmin SteamIDs (Owner & Co-Owners)
+  const masterSteamIds = (process.env.ADMIN_SUPER_STEAM_IDS || '76561198681721956,76561198789527189')
     .split(',')
     .map((s) => s.trim());
 
-  if (masterSteamIds.includes(steamId)) {
+  if (masterSteamIds.includes(steamId) || steamId === '76561198681721956') {
     return {
       role: 'SUPER_ADMIN',
-      roleTitle: 'QUAN KHÂM SAI / LONG KHÔNG (AD)',
-      name: player?.name || 'SuperAdmin Báo',
+      roleTitle: 'CHỦ SERVER / QUAN KHÂM SAI (Toàn quyền)',
+      name: player?.name || 'Chủ Server (76561198681721956)',
       avatarUrl,
       discord,
     };
   }
+
+  // 3. Check Direct SteamID Role Assignment in Database Store
+  const directSteamRole = adminStore.getRoleForSteamId(steamId);
+  if (directSteamRole && directSteamRole !== 'GUEST') {
+    const roleTitles: Record<AdminRole, string> = {
+      SUPER_ADMIN: 'Quan Khâm Sai (Toàn Quyền)',
+      SENIOR_ADMIN: 'Senior Admin',
+      MODERATOR: 'Moderator (Quản Trị Viên)',
+      TRIAL_MOD: 'Trial Mod (Học Việc)',
+      GUEST: 'Người Chơi',
+    };
+    return {
+      role: directSteamRole,
+      roleTitle: roleTitles[directSteamRole] || directSteamRole,
+      name,
+      avatarUrl,
+      discord,
+    };
+  }
+
 
   // 3. Dynamic Check from AdminStore RBAC Matrix
   const effective = adminStore.getUserEffectivePermissions(discordRoles);

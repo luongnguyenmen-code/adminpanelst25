@@ -26,7 +26,8 @@ import {
   Copy,
   Info,
 } from 'lucide-react';
-import { DiscordRolePermissionItem } from '@/lib/db/store';
+import { DiscordRolePermissionItem, SteamRoleAssignment } from '@/lib/db/store';
+import { AdminRole } from '@/types/islepilot';
 import { useApp } from '@/components/providers/AppProviders';
 
 interface PermissionCategory {
@@ -203,7 +204,13 @@ export default function RolesManagementPage() {
   const [roleSearch, setRoleSearch] = useState('');
   const [selectedRoleName, setSelectedRoleName] = useState<string>('Mod');
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [activeView, setActiveView] = useState<'matrix' | 'simulator'>('matrix');
+  const [activeView, setActiveView] = useState<'matrix' | 'simulator' | 'steam_assign'>('matrix');
+
+  // SteamID Assignment state
+  const [assignSteamId, setAssignSteamId] = useState('');
+  const [assignPlayerName, setAssignPlayerName] = useState('');
+  const [assignRole, setAssignRole] = useState<AdminRole>('MODERATOR');
+  const [assignNote, setAssignNote] = useState('');
 
   // Simulator state
   const [simSteamId, setSimSteamId] = useState('');
@@ -219,6 +226,7 @@ export default function RolesManagementPage() {
   const { data: rolesData, isLoading, refetch } = useQuery<{
     success: boolean;
     roles: DiscordRolePermissionItem[];
+    steamRoleAssignments?: Record<string, SteamRoleAssignment>;
   }>({
     queryKey: ['discord-roles'],
     queryFn: async () => {
@@ -229,6 +237,62 @@ export default function RolesManagementPage() {
   });
 
   const roles = rolesData?.roles || [];
+  const steamRoleAssignments = rolesData?.steamRoleAssignments || {};
+
+  // Mutation: Assign Role to SteamID
+  const assignSteamMutation = useMutation({
+    mutationFn: async () => {
+      if (!assignSteamId.trim()) throw new Error('Vui lòng nhập SteamID64');
+      const res = await fetch('/api/islepilot/roles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'assign_steam',
+          steamId: assignSteamId.trim(),
+          role: assignRole,
+          playerName: assignPlayerName.trim(),
+          note: assignNote.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.error || 'Lỗi cấp quyền');
+      return data;
+    },
+    onSuccess: (data) => {
+      addToast('success', 'Cấp quyền thành công!', data.message);
+      setAssignSteamId('');
+      setAssignPlayerName('');
+      setAssignNote('');
+      queryClient.invalidateQueries({ queryKey: ['discord-roles'] });
+    },
+    onError: (err: any) => {
+      addToast('error', 'Lỗi cấp quyền', err.message);
+    },
+  });
+
+  // Mutation: Remove Role from SteamID
+  const removeSteamMutation = useMutation({
+    mutationFn: async (targetSteamId: string) => {
+      const res = await fetch('/api/islepilot/roles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'remove_steam',
+          steamId: targetSteamId,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.error || 'Lỗi thu hồi quyền');
+      return data;
+    },
+    onSuccess: (data) => {
+      addToast('info', 'Đã thu hồi quyền', data.message);
+      queryClient.invalidateQueries({ queryKey: ['discord-roles'] });
+    },
+    onError: (err: any) => {
+      addToast('error', 'Lỗi thu hồi quyền', err.message);
+    },
+  });
 
   // Local editing state for selected role permissions
   const [localPermissions, setLocalPermissions] = useState<Record<string, DiscordRolePermissionItem>>({});
@@ -521,6 +585,17 @@ export default function RolesManagementPage() {
             Ma Trận Phân Quyền (Matrix)
           </button>
           <button
+            onClick={() => setActiveView('steam_assign')}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition ${
+              activeView === 'steam_assign'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Cấp Quyền Theo SteamID (Direct Assign)
+          </button>
+          <button
             onClick={() => setActiveView('simulator')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition ${
               activeView === 'simulator'
@@ -533,6 +608,7 @@ export default function RolesManagementPage() {
           </button>
         </div>
       </div>
+
 
       {activeView === 'matrix' ? (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -787,8 +863,181 @@ export default function RolesManagementPage() {
             )}
           </div>
         </div>
+      ) : activeView === 'steam_assign' ? (
+        /* View 3: Direct SteamID Role Assignment */
+        <div className="space-y-6">
+          {/* Form to Assign Role */}
+          <div className="p-6 rounded-2xl bg-[#090e18] border border-zinc-800 shadow-xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white">
+                  Cấp Quyền Quản Trị Trực Tiếp Cho SteamID
+                </h3>
+                <p className="text-xs text-zinc-400">
+                  Gán vai trò BQT cố định bằng SteamID64. Khi người chơi đăng nhập bằng Steam này, hệ thống sẽ mở khóa ngay lập tức mà không cần kiểm tra lại Discord.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
+              <div>
+                <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                  SteamID64 Người Dùng <span className="text-red-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="VD: 76561198681721956..."
+                  value={assignSteamId}
+                  onChange={(e) => setAssignSteamId(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 font-mono"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                  Tên Người Dùng / Biệt Danh
+                </label>
+                <input
+                  type="text"
+                  placeholder="VD: NguyenMen..."
+                  value={assignPlayerName}
+                  onChange={(e) => setAssignPlayerName(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                  Vai Trò Cấp <span className="text-red-400">*</span>
+                </label>
+                <select
+                  value={assignRole}
+                  onChange={(e) => setAssignRole(e.target.value as AdminRole)}
+                  className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-blue-500"
+                >
+                  <option value="SUPER_ADMIN">Super Admin (Quan Khâm Sai - Toàn quyền)</option>
+                  <option value="SENIOR_ADMIN">Senior Admin (Trưởng BQT)</option>
+                  <option value="MODERATOR">Moderator (Quản trị viên)</option>
+                  <option value="TRIAL_MOD">Trial Mod (Học việc)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                  Ghi Chú Nhiệm Vụ
+                </label>
+                <input
+                  type="text"
+                  placeholder="VD: Admin Ca Đêm, Dev..."
+                  value={assignNote}
+                  onChange={(e) => setAssignNote(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end pt-2">
+              <button
+                type="button"
+                onClick={() => assignSteamMutation.mutate()}
+                disabled={assignSteamMutation.isPending || !assignSteamId.trim()}
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-blue-600/30"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>{assignSteamMutation.isPending ? 'Đang cấp...' : 'Xác Nhận Cấp Quyền BQT'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* List of Assigned Steam Accounts */}
+          <div className="p-6 rounded-2xl bg-[#090e18] border border-zinc-800 shadow-xl space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                  Danh Sách SteamID Được Cấp Quyền Trực Tiếp ({Object.keys(steamRoleAssignments).length})
+                </h3>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  Các tài khoản dưới đây được lưu trong cơ sở dữ liệu hệ thống ST25 và tự động nhận quyền khi đăng nhập.
+                </p>
+              </div>
+            </div>
+
+            {Object.keys(steamRoleAssignments).length === 0 ? (
+              <div className="text-center py-10 text-zinc-500 text-xs">
+                Chưa có SteamID nào được gán quyền trực tiếp. Mọi phân quyền hiện đang chạy theo Discord Roles.
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead>
+                    <tr className="border-b border-zinc-800 text-zinc-400 font-mono text-[11px]">
+                      <th className="pb-3 px-3">STEAMID64</th>
+                      <th className="pb-3 px-3">TÊN ADMIN</th>
+                      <th className="pb-3 px-3">VAI TRÒ</th>
+                      <th className="pb-3 px-3">GHI CHÚ</th>
+                      <th className="pb-3 px-3">NGƯỜI CẤP</th>
+                      <th className="pb-3 px-3">NGÀY CẤP</th>
+                      <th className="pb-3 px-3 text-right">THAO TÁC</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-850">
+                    {Object.values(steamRoleAssignments).map((item) => {
+                      const roleColors: Record<string, string> = {
+                        SUPER_ADMIN: 'bg-red-500/10 text-red-400 border-red-500/30',
+                        SENIOR_ADMIN: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+                        MODERATOR: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+                        TRIAL_MOD: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+                      };
+                      const color = roleColors[item.role] || 'bg-zinc-800 text-zinc-400';
+
+                      return (
+                        <tr key={item.steamId} className="hover:bg-zinc-900/40 transition">
+                          <td className="py-3 px-3 font-mono text-cyan-400">
+                            {item.steamId}
+                          </td>
+                          <td className="py-3 px-3 font-semibold text-white">
+                            {item.playerName || '—'}
+                          </td>
+                          <td className="py-3 px-3">
+                            <span className={`px-2 py-0.5 rounded-md border text-[11px] font-mono font-bold ${color}`}>
+                              {item.roleTitle || item.role}
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 text-zinc-400">
+                            {item.note || '—'}
+                          </td>
+                          <td className="py-3 px-3 text-zinc-500 font-mono">
+                            {item.assignedBy || 'Admin'}
+                          </td>
+                          <td className="py-3 px-3 text-zinc-500 font-mono text-[10px]">
+                            {new Date(item.assignedAt).toLocaleDateString('vi-VN')}
+                          </td>
+                          <td className="py-3 px-3 text-right">
+                            <button
+                              type="button"
+                              onClick={() => removeSteamMutation.mutate(item.steamId)}
+                              disabled={removeSteamMutation.isPending}
+                              title="Thu hồi vai trò BQT"
+                              className="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-semibold transition"
+                            >
+                              Thu hồi
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
         /* View 2: Permission Simulator & Checker */
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-4 p-5 rounded-2xl bg-[#090e18] border border-zinc-800/80 shadow-lg space-y-4">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">

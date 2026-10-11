@@ -26,6 +26,17 @@ export interface PlayerNoteItem {
   createdAt: string;
 }
 
+export interface SteamRoleAssignment {
+  steamId: string;
+  playerName?: string;
+  role: AdminRole;
+  roleTitle?: string;
+  note?: string;
+  assignedBy?: string;
+  assignedAt: string;
+}
+
+
 export interface MutationAuditLogItem {
   id: string;
   actorName: string;
@@ -398,6 +409,7 @@ class AdminDataStore {
   > = {};
 
   private rolePermissions: Record<string, DiscordRolePermissionItem> = {};
+  private steamRoleAssignments: Record<string, SteamRoleAssignment> = {};
 
   constructor() {
     this.initDefaultRoles();
@@ -447,6 +459,9 @@ class AdminDataStore {
             ...parsed.rolePermissions,
           };
         }
+        if (parsed.steamRoleAssignments && typeof parsed.steamRoleAssignments === 'object') {
+          this.steamRoleAssignments = parsed.steamRoleAssignments;
+        }
       }
     } catch (err) {
       console.warn('[AdminDataStore] Failed to load data from disk:', err);
@@ -468,11 +483,60 @@ class AdminDataStore {
         autoAnnounceConfig: this.autoAnnounceConfig,
         broadcastHistory: this.broadcastHistory,
         rolePermissions: this.rolePermissions,
+        steamRoleAssignments: this.steamRoleAssignments,
       };
       fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
     } catch (err) {
       console.warn('[AdminDataStore] Failed to save data to disk:', err);
     }
+  }
+
+  // ==========================================
+  // STEAMID DIRECT ROLE ASSIGNMENTS
+  // ==========================================
+  getSteamRoleAssignments(): Record<string, SteamRoleAssignment> {
+    return this.steamRoleAssignments;
+  }
+
+  assignRoleToSteamId(
+    steamId: string,
+    role: AdminRole,
+    note?: string,
+    playerName?: string,
+    actor?: string
+  ): SteamRoleAssignment {
+    const roleTitles: Record<AdminRole, string> = {
+      SUPER_ADMIN: 'Quan Khâm Sai (Toàn Quyền)',
+      SENIOR_ADMIN: 'Senior Admin',
+      MODERATOR: 'Moderator (Quản Trị Viên)',
+      TRIAL_MOD: 'Trial Mod (Học Việc)',
+      GUEST: 'Người Chơi',
+    };
+    const item: SteamRoleAssignment = {
+      steamId,
+      playerName: playerName || '',
+      role,
+      roleTitle: roleTitles[role] || role,
+      note: note || '',
+      assignedBy: actor || 'SuperAdmin',
+      assignedAt: new Date().toISOString(),
+    };
+    this.steamRoleAssignments[steamId] = item;
+    this.saveToDisk();
+    return item;
+  }
+
+  removeRoleFromSteamId(steamId: string): boolean {
+    if (this.steamRoleAssignments[steamId]) {
+      delete this.steamRoleAssignments[steamId];
+      this.saveToDisk();
+      return true;
+    }
+    return false;
+  }
+
+  getRoleForSteamId(steamId: string): AdminRole | null {
+    return this.steamRoleAssignments[steamId]?.role || null;
   }
 
   // ==========================================

@@ -78,12 +78,7 @@ export function AdminLoginModal({ isOpen, onClose }: AdminLoginModalProps) {
     }
   };
 
-  const quickRoles = [
-    { label: 'Super Admin', code: 'st25_superadmin_2026', color: 'text-red-400 border-red-500/30 bg-red-500/10' },
-    { label: 'Senior Admin', code: 'st25_senior_2026', color: 'text-amber-400 border-amber-500/30 bg-amber-500/10' },
-    { label: 'Moderator', code: 'st25_mod_2026', color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-    { label: 'Trial Mod', code: 'st25_trial_2026', color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
-  ];
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in">
@@ -196,28 +191,6 @@ export function AdminLoginModal({ isOpen, onClose }: AdminLoginModalProps) {
               </div>
             </div>
 
-            {/* Quick Preset Selector for Fast Role Switch */}
-            <div className="pt-2">
-              <p className="text-[10px] font-semibold text-zinc-400 uppercase font-mono mb-2">
-                Hoặc chọn nhanh mã cấp quyền (Server Presets):
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {quickRoles.map((r) => (
-                  <button
-                    key={r.label}
-                    type="button"
-                    onClick={() => {
-                      setPasscode(r.code);
-                      handlePasscodeLogin(r.code, adminName || `${r.label}`);
-                    }}
-                    className={`p-2 rounded-xl border text-[11px] font-semibold transition text-left flex items-center justify-between hover:scale-[1.02] ${r.color}`}
-                  >
-                    <span>{r.label}</span>
-                    <span className="text-[9px] font-mono opacity-70">1-Click</span>
-                  </button>
-                ))}
-              </div>
-            </div>
 
             <div className="mt-6 flex items-center justify-end gap-3 pt-3 border-t border-zinc-800">
               <button
