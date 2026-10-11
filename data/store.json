@@ -4128,10 +4128,50 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-11T20:08:24.787Z",
-    "nextBroadcastAt": "2026-10-11T20:18:24.787Z"
+    "lastBroadcastAt": "2026-10-11T20:58:54.248Z",
+    "nextBroadcastAt": "2026-10-11T21:08:54.248Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791752334700-7vec",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:58:54.700Z"
+    },
+    {
+      "id": "bc-1791751711336-3z2r",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:48:31.336Z"
+    },
+    {
+      "id": "bc-1791751106095-fs4r",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:38:26.095Z"
+    },
+    {
+      "id": "bc-1791750505720-6iwl",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:28:25.720Z"
+    },
+    {
+      "id": "bc-1791749905414-ifci",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-11T20:18:25.414Z"
+    },
     {
       "id": "bc-1791749305253-rob9",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
@@ -5033,5 +5073,15 @@
       "updatedAt": "2026-10-11T13:34:21.331Z"
     }
   },
-  "steamRoleAssignments": {}
+  "steamRoleAssignments": {
+    "76561198681721956": {
+      "steamId": "76561198681721956",
+      "playerName": "NguyenMen",
+      "role": "SUPER_ADMIN",
+      "roleTitle": "Quan Khâm Sai (Toàn Quyền)",
+      "note": "Chủ Server Master",
+      "assignedBy": "System",
+      "assignedAt": "2026-10-11T20:40:25.104Z"
+    }
+  }
 }

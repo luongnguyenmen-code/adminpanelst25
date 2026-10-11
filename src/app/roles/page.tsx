@@ -230,10 +230,15 @@ export default function RolesManagementPage() {
   }>({
     queryKey: ['discord-roles'],
     queryFn: async () => {
-      const res = await fetch('/api/islepilot/roles');
+      const res = await fetch('/api/islepilot/roles', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache, no-store' },
+      });
       if (!res.ok) throw new Error('Không thể tải cấu hình roles');
       return res.json();
     },
+    staleTime: 0,
+    gcTime: 0,
   });
 
   const roles = rolesData?.roles || [];
@@ -263,10 +268,17 @@ export default function RolesManagementPage() {
       setAssignSteamId('');
       setAssignPlayerName('');
       setAssignNote('');
+      if (data.steamRoleAssignments) {
+        queryClient.setQueryData(['discord-roles'], (old: any) => ({
+          ...old,
+          steamRoleAssignments: data.steamRoleAssignments,
+        }));
+      }
       queryClient.invalidateQueries({ queryKey: ['discord-roles'] });
     },
     onError: (err: any) => {
       addToast('error', 'Lỗi cấp quyền', err.message);
+      alert(`[LỖI CẤP QUYỀN BQT]: ${err.message}\n\nVui lòng kiểm tra lại phiên đăng nhập BQT của bạn.`);
     },
   });
 
@@ -287,10 +299,17 @@ export default function RolesManagementPage() {
     },
     onSuccess: (data) => {
       addToast('info', 'Đã thu hồi quyền', data.message);
+      if (data.steamRoleAssignments) {
+        queryClient.setQueryData(['discord-roles'], (old: any) => ({
+          ...old,
+          steamRoleAssignments: data.steamRoleAssignments,
+        }));
+      }
       queryClient.invalidateQueries({ queryKey: ['discord-roles'] });
     },
     onError: (err: any) => {
       addToast('error', 'Lỗi thu hồi quyền', err.message);
+      alert(`[LỖI THU HỒI QUYỀN]: ${err.message}`);
     },
   });
 

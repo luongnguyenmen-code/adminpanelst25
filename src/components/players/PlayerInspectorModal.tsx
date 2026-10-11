@@ -36,6 +36,7 @@ import { useApp } from '@/components/providers/AppProviders';
 import { SafetyConfirmModal } from '@/components/modals/SafetyConfirmModal';
 import { TeleportModal } from '@/components/players/TeleportModal';
 import { MutationGrantModal, ALL_THE_ISLE_MUTATIONS } from '@/components/players/MutationGrantModal';
+import { ReviveDinoModal } from '@/components/modals/ReviveDinoModal';
 import { HexagonSlot } from '@/components/common/HexagonSlot';
 
 interface PlayerInspectorModalProps {
@@ -61,6 +62,7 @@ export function PlayerInspectorModal({
   const [showBanModal, setShowBanModal] = useState(false);
   const [showTeleportModal, setShowTeleportModal] = useState(false);
   const [showMutationModal, setShowMutationModal] = useState(false);
+  const [showReviveModal, setShowReviveModal] = useState(false);
 
   // Stored Dinos (Garage / Trùng Sinh) State
   const [garageSlots, setGarageSlots] = useState<DinoSlot[]>([]);
@@ -586,11 +588,11 @@ export function PlayerInspectorModal({
               </button>
 
               <button
-                onClick={() => handleAction('revive', 'Hồi sinh dino kẹt hoặc tử vong do glitch')}
-                className="px-3 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 text-xs font-semibold flex items-center gap-1.5 transition"
+                onClick={() => setShowReviveModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600/30 to-teal-600/30 hover:from-emerald-600/50 hover:to-teal-600/50 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
               >
-                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                Hồi Sinh (Revive)
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                Hồi Sinh Khủng Long
               </button>
 
               <button
@@ -1346,6 +1348,23 @@ export function PlayerInspectorModal({
         isOpen={showMutationModal}
         onClose={() => setShowMutationModal(false)}
         onSuccess={onRefresh}
+      />
+
+      {/* Revive Dino Modal */}
+      <ReviveDinoModal
+        isOpen={showReviveModal}
+        onClose={() => setShowReviveModal(false)}
+        target={
+          player
+            ? {
+                steamId: player.steamId,
+                name: player.name,
+                species: player.species,
+                growth: player.growth,
+              }
+            : null
+        }
+        onSuccess={() => onRefresh?.()}
       />
     </>
   );

@@ -433,13 +433,13 @@ class AdminDataStore {
       if (targetFile) {
         const raw = fs.readFileSync(targetFile, 'utf-8');
         const parsed = JSON.parse(raw);
-        if (parsed.auditLogs) this.auditLogs = parsed.auditLogs;
-        if (parsed.playerNotes) this.playerNotes = parsed.playerNotes;
-        if (parsed.primeMembers) this.primeMembers = parsed.primeMembers;
-        if (parsed.mutationLogs) this.mutationLogs = parsed.mutationLogs;
-        if (parsed.playerMutations) this.playerMutations = parsed.playerMutations;
-        if (parsed.garageSlotMutations) this.garageSlotMutations = parsed.garageSlotMutations;
-        if (parsed.dinoStore) this.dinoStore = parsed.dinoStore;
+        if (parsed.auditLogs && Array.isArray(parsed.auditLogs)) this.auditLogs = parsed.auditLogs;
+        if (parsed.playerNotes && typeof parsed.playerNotes === 'object') this.playerNotes = parsed.playerNotes;
+        if (parsed.primeMembers && typeof parsed.primeMembers === 'object') this.primeMembers = parsed.primeMembers;
+        if (parsed.mutationLogs && Array.isArray(parsed.mutationLogs)) this.mutationLogs = parsed.mutationLogs;
+        if (parsed.playerMutations && typeof parsed.playerMutations === 'object') this.playerMutations = parsed.playerMutations;
+        if (parsed.garageSlotMutations && typeof parsed.garageSlotMutations === 'object') this.garageSlotMutations = parsed.garageSlotMutations;
+        if (parsed.dinoStore && typeof parsed.dinoStore === 'object') this.dinoStore = parsed.dinoStore;
         if (parsed.announcementTemplates && Array.isArray(parsed.announcementTemplates) && parsed.announcementTemplates.length > 0) {
           this.announcementTemplates = parsed.announcementTemplates;
         }
@@ -460,7 +460,10 @@ class AdminDataStore {
           };
         }
         if (parsed.steamRoleAssignments && typeof parsed.steamRoleAssignments === 'object') {
-          this.steamRoleAssignments = parsed.steamRoleAssignments;
+          this.steamRoleAssignments = {
+            ...this.steamRoleAssignments,
+            ...parsed.steamRoleAssignments,
+          };
         }
       }
     } catch (err) {
@@ -471,7 +474,27 @@ class AdminDataStore {
   private saveToDisk() {
     try {
       ensureDir(DB_FILE);
+      // Read current disk to avoid stomping concurrent changes
+      let existingOnDisk: any = {};
+      const targetFile = fs.existsSync(DB_FILE)
+        ? DB_FILE
+        : fs.existsSync(DEFAULT_SEED_FILE)
+        ? DEFAULT_SEED_FILE
+        : null;
+      if (targetFile) {
+        try {
+          const raw = fs.readFileSync(targetFile, 'utf-8');
+          existingOnDisk = JSON.parse(raw) || {};
+        } catch {}
+      }
+
+      const mergedSteamAssignments = {
+        ...(existingOnDisk.steamRoleAssignments || {}),
+        ...this.steamRoleAssignments,
+      };
+
       const data = {
+        ...existingOnDisk,
         auditLogs: this.auditLogs,
         playerNotes: this.playerNotes,
         primeMembers: this.primeMembers,
@@ -485,7 +508,13 @@ class AdminDataStore {
         rolePermissions: this.rolePermissions,
         steamRoleAssignments: this.steamRoleAssignments,
       };
-      fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+      const jsonStr = JSON.stringify(data, null, 2);
+      fs.writeFileSync(DB_FILE, jsonStr, 'utf-8');
+      if (DB_FILE !== DEFAULT_SEED_FILE && fs.existsSync(path.dirname(DEFAULT_SEED_FILE))) {
+        try {
+          fs.writeFileSync(DEFAULT_SEED_FILE, jsonStr, 'utf-8');
+        } catch {}
+      }
     } catch (err) {
       console.warn('[AdminDataStore] Failed to save data to disk:', err);
     }
@@ -495,6 +524,7 @@ class AdminDataStore {
   // STEAMID DIRECT ROLE ASSIGNMENTS
   // ==========================================
   getSteamRoleAssignments(): Record<string, SteamRoleAssignment> {
+    this.loadFromDisk();
     return this.steamRoleAssignments;
   }
 
@@ -505,6 +535,7 @@ class AdminDataStore {
     playerName?: string,
     actor?: string
   ): SteamRoleAssignment {
+    this.loadFromDisk();
     const roleTitles: Record<AdminRole, string> = {
       SUPER_ADMIN: 'Quan Khâm Sai (Toàn Quyền)',
       SENIOR_ADMIN: 'Senior Admin',
@@ -527,6 +558,7 @@ class AdminDataStore {
   }
 
   removeRoleFromSteamId(steamId: string): boolean {
+    this.loadFromDisk();
     if (this.steamRoleAssignments[steamId]) {
       delete this.steamRoleAssignments[steamId];
       this.saveToDisk();
@@ -536,6 +568,7 @@ class AdminDataStore {
   }
 
   getRoleForSteamId(steamId: string): AdminRole | null {
+    this.loadFromDisk();
     return this.steamRoleAssignments[steamId]?.role || null;
   }
 
@@ -966,5 +999,7 @@ class AdminDataStore {
   }
 }
 
-export const adminStore = new AdminDataStore();
+const globalForAdminStore = globalThis as unknown as { adminStore?: AdminDataStore };
+export const adminStore = globalForAdminStore.adminStore ?? new AdminDataStore();
+globalForAdminStore.adminStore = adminStore;
 

@@ -12,10 +12,13 @@ import {
   RefreshCw,
   Skull,
   HeartCrack,
+  Sparkles,
+  HeartHandshake,
 } from 'lucide-react';
 import { KillfeedItem } from '@/types/islepilot';
 import { formatTimeAgo, formatNumber, getDinoSpeciesImage, getHealthDeducted } from '@/lib/utils';
 import { useApp } from '@/components/providers/AppProviders';
+import { ReviveDinoModal } from '@/components/modals/ReviveDinoModal';
 
 const COMBAT_TABS = [
   { id: 'all', label: 'Tất cả Kills & Combat' },
@@ -29,6 +32,10 @@ export default function CombatPage() {
   const [activeTab, setActiveTab] = useState<string>('all');
   const [search, setSearch] = useState('');
   const [selectedKill, setSelectedKill] = useState<KillfeedItem | null>(null);
+
+  // Revive Modal state
+  const [reviveTarget, setReviveTarget] = useState<any | null>(null);
+  const [showReviveModal, setShowReviveModal] = useState(false);
 
   const { data, isLoading, refetch, isFetching } = useQuery<{ kills: KillfeedItem[] }>({
     queryKey: ['killfeed-combat'],
@@ -79,16 +86,29 @@ export default function CombatPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => {
-            refetch();
-            addToast('info', 'Làm mới dữ liệu', 'Đã cập nhật Killfeed mới nhất!');
-          }}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 hover:text-white transition shadow-sm"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${isFetching ? 'animate-spin text-emerald-400' : ''}`} />
-          Làm mới Killfeed
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => {
+              setReviveTarget(null);
+              setShowReviveModal(true);
+            }}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-xs font-bold text-white transition shadow-lg shadow-emerald-600/30"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-emerald-200" />
+            Hồi Sinh Khủng Long
+          </button>
+
+          <button
+            onClick={() => {
+              refetch();
+              addToast('info', 'Làm mới dữ liệu', 'Đã cập nhật Killfeed mới nhất!');
+            }}
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 hover:text-white transition shadow-sm"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${isFetching ? 'animate-spin text-emerald-400' : ''}`} />
+            Làm mới Killfeed
+          </button>
+        </div>
       </div>
 
       {/* Combat Filter Tabs Bar */}
@@ -276,15 +296,40 @@ export default function CombatPage() {
                       </td>
 
                       <td className="py-3.5 px-4 text-right">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedKill(kill);
-                          }}
-                          className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setReviveTarget({
+                                steamId: kill.victimSteamId,
+                                name: kill.victimName,
+                                species: kill.victimSpecies,
+                                growth: kill.victimGrowth,
+                                coordinates: kill.coordinates,
+                                reason: `Hồi sinh nạn nhân ${kill.victimName} (${kill.victimSpecies} ${(kill.victimGrowth * 100).toFixed(0)}%) sau giao tranh #${kill.id}`,
+                              });
+                              setShowReviveModal(true);
+                            }}
+                            title="Hồi sinh khủng long nạn nhân"
+                            className="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-semibold transition flex items-center gap-1 shadow-sm"
+                          >
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
+                            <span>Hồi Sinh</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedKill(kill);
+                            }}
+                            className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition"
+                            title="Xem chi tiết"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -384,8 +429,29 @@ export default function CombatPage() {
               </div>
             )}
 
-            <div className="mt-5 flex justify-end">
+            <div className="mt-5 flex items-center justify-between border-t border-zinc-800 pt-4">
               <button
+                type="button"
+                onClick={() => {
+                  setReviveTarget({
+                    steamId: selectedKill.victimSteamId,
+                    name: selectedKill.victimName,
+                    species: selectedKill.victimSpecies,
+                    growth: selectedKill.victimGrowth,
+                    coordinates: selectedKill.coordinates,
+                    reason: `Hồi sinh nạn nhân ${selectedKill.victimName} (${selectedKill.victimSpecies}) sau giao tranh #${selectedKill.id}`,
+                  });
+                  setSelectedKill(null);
+                  setShowReviveModal(true);
+                }}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-xs font-bold text-white transition flex items-center gap-2 shadow-lg shadow-emerald-600/30"
+              >
+                <Sparkles className="w-4 h-4 text-emerald-200" />
+                <span>Hồi Sinh Khủng Long Nạn Nhân</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => setSelectedKill(null)}
                 className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs text-white"
               >
@@ -395,6 +461,14 @@ export default function CombatPage() {
           </div>
         </div>
       )}
+
+      {/* Revive Dino Modal */}
+      <ReviveDinoModal
+        isOpen={showReviveModal}
+        onClose={() => setShowReviveModal(false)}
+        target={reviveTarget}
+        onSuccess={() => refetch()}
+      />
     </div>
   );
 }

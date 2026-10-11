@@ -150,9 +150,23 @@ export async function POST(request: NextRequest) {
       case 'slay':
         executionResult = await islePilotClient.slayPlayer(steamId);
         break;
-      case 'revive':
-        executionResult = await islePilotClient.healPlayer(steamId, 10000);
+      case 'revive': {
+        const species = params.species;
+        if (species) {
+          executionResult = await islePilotClient.reviveDino(steamId, {
+            species,
+            growth: params.growth ?? 1.0,
+            healFull: params.healFull !== false,
+            teleportLocationId: params.teleportLocationId || params.locationId,
+          });
+        } else {
+          // Fallback to full heal & unfreeze
+          executionResult = await islePilotClient.healPlayer(steamId, 10000);
+          await islePilotClient.feedPlayer(steamId, 10000).catch(() => null);
+          await islePilotClient.waterPlayer(steamId, 10000).catch(() => null);
+        }
         break;
+      }
       case 'teleport':
         executionResult = await islePilotClient.teleportPlayer(
           steamId,

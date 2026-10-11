@@ -531,6 +531,70 @@ export class IslePilotClient {
     return statsResult;
   }
 
+  /**
+   * Phục hồi / Hồi sinh toàn diện khủng long tử nạn
+   * Khôi phục loài (swap), thiết lập growth, bơm đầy HP/Food/Water, unfreeze và tùy chọn dịch chuyển
+   */
+  async reviveDino(
+    steamId: string,
+    options: {
+      species: string;
+      growth?: number;
+      healFull?: boolean;
+      teleportLocationId?: string;
+    }
+  ): Promise<{ success: boolean; message: string }> {
+    const growth = options.growth ?? 1.0;
+    const normalizedGrowth = growth > 1 ? Number((growth / 100).toFixed(4)) : Number(growth.toFixed(4));
+
+    // 1. Thực hiện Swap loài & kích cỡ trưởng thành
+    const swapResult = await this.executeAdminCommand({
+      action: 'swap',
+      steamId,
+      species: options.species,
+      growth: normalizedGrowth,
+    });
+
+    // 2. Bơm đầy chỉ số sinh tồn (HP, Thức ăn, Nước uống, hồi máu, xóa gãy chân)
+    if (options.healFull !== false) {
+      await this.executeAdminCommand({
+        action: 'setstats',
+        steamId,
+        health: 10000,
+        hunger: 10000,
+        thirst: 10000,
+        bleed: 0,
+        brokenLeg: false,
+        growth: normalizedGrowth,
+      }).catch(() => null);
+    }
+
+    // 3. Mở khóa tiến trình trưởng thành (unfreeze)
+    await this.executeAdminCommand({
+      action: 'setgrowth',
+      steamId,
+      frozen: false,
+    }).catch(() => null);
+
+    // 4. Nếu có chọn vị trí an toàn, dịch chuyển người chơi
+    if (options.teleportLocationId) {
+      await this.teleportPlayer(steamId, options.teleportLocationId).catch(() => null);
+    }
+
+    // 5. Fallback lệnh trực tiếp cho console
+    await this.executeAdminCommand({
+      action: 'execute_command',
+      command: `setgrowth ${steamId} ${normalizedGrowth}`,
+    }).catch(() => null);
+
+    return {
+      success: swapResult.success,
+      message: swapResult.success
+        ? `Đã hồi sinh khủng long ${options.species} (${(normalizedGrowth * 100).toFixed(0)}% Growth) cho người chơi thành công!`
+        : (swapResult.message || 'Lỗi từ máy chủ khi thực hiện hồi sinh khủng long'),
+    };
+  }
+
   async grantPlayerMutations(
     steamId: string,
     mutations: string[],

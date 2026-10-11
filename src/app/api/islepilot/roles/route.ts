@@ -34,12 +34,21 @@ export async function GET(request: NextRequest) {
 
     const steamRoleAssignments = adminStore.getSteamRoleAssignments();
 
-    return NextResponse.json({
-      success: true,
-      roles,
-      defaults: DEFAULT_ST25_ROLES,
-      steamRoleAssignments,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        roles,
+        defaults: DEFAULT_ST25_ROLES,
+        steamRoleAssignments,
+      },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
+      }
+    );
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
@@ -81,6 +90,19 @@ export async function POST(request: NextRequest) {
         targetName,
         session.username
       );
+
+      adminStore.addAuditLog({
+        actorId: session.id || session.steamId || 'admin',
+        actorName: session.username || 'SuperAdmin',
+        actorRole: session.role,
+        action: 'ASSIGN_STEAM_ROLE',
+        targetSteamId,
+        targetName,
+        reason: `Cấp vai trò ${targetRole} cho SteamID ${targetSteamId} (${targetName || 'N/A'})`,
+        payload: { steamId: targetSteamId, role: targetRole, note, targetName },
+        status: 'SUCCESS',
+      });
+
       return NextResponse.json({
         success: true,
         message: `Đã cấp vai trò ${targetRole} cho SteamID ${targetSteamId}`,
@@ -96,6 +118,18 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: false, error: 'Thiếu SteamID cần thu hồi quyền' }, { status: 400 });
       }
       const ok = adminStore.removeRoleFromSteamId(targetSteamId.trim());
+
+      adminStore.addAuditLog({
+        actorId: session.id || session.steamId || 'admin',
+        actorName: session.username || 'SuperAdmin',
+        actorRole: session.role,
+        action: 'REMOVE_STEAM_ROLE',
+        targetSteamId,
+        reason: `Thu hồi vai trò BQT của SteamID ${targetSteamId}`,
+        payload: { steamId: targetSteamId },
+        status: 'SUCCESS',
+      });
+
       return NextResponse.json({
         success: ok,
         message: ok ? `Đã thu hồi quyền của SteamID ${targetSteamId}` : 'Không tìm thấy SteamID',
