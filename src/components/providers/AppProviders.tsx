@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AdminRole, AdminUserSession } from '@/types/islepilot';
+import { PermissionDefinition, ROLE_PERMISSIONS } from '@/lib/auth/rbac';
 
 interface ToastMessage {
   id: string;
@@ -14,6 +15,10 @@ interface ToastMessage {
 interface AppContextType {
   currentSession: AdminUserSession;
   setCurrentRole: (role: AdminRole) => void;
+  permissions: PermissionDefinition;
+  hasPermission: (perm: keyof PermissionDefinition) => boolean;
+  checkPermissionOrToast: (perm: keyof PermissionDefinition, actionLabel: string) => boolean;
+  isLoadingAuth: boolean;
   toasts: ToastMessage[];
   addToast: (type: 'success' | 'error' | 'warning' | 'info', title: string, message?: string) => void;
   removeToast: (id: string) => void;
@@ -50,6 +55,9 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
     authenticated: false,
   });
 
+  const [permissions, setPermissions] = useState<PermissionDefinition>(ROLE_PERMISSIONS.GUEST);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
+
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -66,8 +74,33 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   };
 
   const setCurrentRole = (role: AdminRole) => {
-    setCurrentSession((prev) => ({ ...prev, role, authenticated: role !== 'GUEST' }));
+    const isAuthed = role !== 'GUEST';
+    setCurrentSession((prev) => ({
+      ...prev,
+      role,
+      authenticated: isAuthed,
+      username: isAuthed ? (prev.username === 'Khách' ? `Admin (${role})` : prev.username) : 'Khách',
+    }));
+    setPermissions(ROLE_PERMISSIONS[role] || ROLE_PERMISSIONS.GUEST);
     addToast('info', 'RBAC Role Switch', `Đã chuyển sang vai trò: ${role}`);
+  };
+
+  // Permission Check Helpers
+  const hasPerm = (perm: keyof PermissionDefinition): boolean => {
+    if (!currentSession.authenticated || currentSession.role === 'GUEST') return false;
+    return !!permissions[perm];
+  };
+
+  const checkPermissionOrToast = (perm: keyof PermissionDefinition, actionLabel: string): boolean => {
+    if (!hasPerm(perm)) {
+      addToast(
+        'error',
+        '⛔ TỪ CHỐI QUYỀN TRUY CẬP',
+        `Chức vụ "${currentSession.role}" không có quyền thực hiện: "${actionLabel}". Yêu cầu quyền: [${perm}]`
+      );
+      return false;
+    }
+    return true;
   };
 
   // Keyboard shortcut Ctrl+K / Cmd+K
@@ -84,21 +117,25 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
 
   // Fetch verified session from /api/auth/me on mount
   React.useEffect(() => {
+    setIsLoadingAuth(true);
     fetch('/api/auth/me')
       .then((res) => res.json())
       .then((data) => {
-        if (data.authenticated && data.session) {
+        if (data.authenticated && data.session && data.session.role !== 'GUEST') {
           setCurrentSession({
             ...data.session,
             authenticated: true,
           });
+          setPermissions(data.permissions || ROLE_PERMISSIONS[data.session.role as AdminRole] || ROLE_PERMISSIONS.GUEST);
         } else {
           setCurrentSession({
             id: 'guest',
-            username: 'Khách',
+            username: data.session?.username || 'Khách',
+            steamId: data.session?.steamId,
             role: 'GUEST',
-            authenticated: false,
+            authenticated: !!data.session?.steamId, // Logged in with Steam but no BQT role
           });
+          setPermissions(ROLE_PERMISSIONS.GUEST);
         }
       })
       .catch(() => {
@@ -108,17 +145,30 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
           role: 'GUEST',
           authenticated: false,
         });
+        setPermissions(ROLE_PERMISSIONS.GUEST);
+      })
+      .finally(() => {
+        setIsLoadingAuth(false);
       });
 
     // Check for Steam Auth redirects
     if (typeof window !== 'undefined') {
       const url = new URL(window.location.href);
       if (url.searchParams.get('auth_success')) {
-        addToast(
-          'success',
-          'Đăng nhập Steam thành công!',
-          `Đã kết nối tài khoản & nhận quyền hạn từ hệ thống ST25`
-        );
+        const grantedRole = url.searchParams.get('role');
+        if (grantedRole === 'GUEST') {
+          addToast(
+            'warning',
+            'Xác thực Steam thành công nhưng không có quyền BQT',
+            'Tài khoản của bạn chưa được cấp vai trò Ban Quản Trị trên server Discord ST25.'
+          );
+        } else {
+          addToast(
+            'success',
+            'Đăng nhập Steam thành công!',
+            `Đã kết nối tài khoản & nhận quyền hạn Ban Quản Trị (${grantedRole})`
+          );
+        }
         url.searchParams.delete('auth_success');
         url.searchParams.delete('role');
         window.history.replaceState({}, '', url.toString());
@@ -134,14 +184,19 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
     () => ({
       currentSession,
       setCurrentRole,
+      permissions,
+      hasPermission: hasPerm,
+      checkPermissionOrToast,
+      isLoadingAuth,
       toasts,
       addToast,
       removeToast,
       searchOpen,
       setSearchOpen,
     }),
-    [currentSession, toasts, searchOpen]
+    [currentSession, permissions, isLoadingAuth, toasts, searchOpen]
   );
+
 
   return (
     <QueryClientProvider client={queryClient}>

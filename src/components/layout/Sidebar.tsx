@@ -7,81 +7,100 @@ import {
   LayoutDashboard,
   Users,
   Database,
-  Swords,
-  Crown,
-  Scroll,
-  ShieldCheck,
   Radio,
+  Swords,
+  Scroll,
+  Crown,
+  ShieldCheck,
   Server,
   Terminal,
   Dna,
   Megaphone,
   Shield,
+  Lock,
 } from 'lucide-react';
 import { useApp } from '@/components/providers/AppProviders';
-import { ROLE_BADGE_STYLE } from '@/lib/auth/rbac';
+import { ROLE_BADGE_STYLE, PermissionDefinition } from '@/lib/auth/rbac';
 
-const NAVIGATION_ITEMS = [
+interface NavItem {
+  name: string;
+  href: string;
+  icon: any;
+  badge?: string;
+  requiredPerm: keyof PermissionDefinition;
+}
+
+const NAVIGATION_ITEMS: NavItem[] = [
   {
     name: 'Tổng quan máy chủ',
     href: '/',
     icon: LayoutDashboard,
     badge: 'LIVE',
+    requiredPerm: 'canViewDashboard',
   },
   {
     name: 'Quản lý người chơi',
     href: '/players',
     icon: Users,
+    requiredPerm: 'canViewPlayers',
   },
   {
     name: 'Gara & Slot Khủng Long',
     href: '/garage',
     icon: Database,
+    requiredPerm: 'canManageGarage',
   },
   {
     name: 'Quản lý Đột biến (Mutations)',
     href: '/mutations',
     icon: Dna,
     badge: 'NEW',
+    requiredPerm: 'canEditMutations',
   },
   {
     name: 'Thông báo Server (Broadcast)',
     href: '/announcements',
     icon: Megaphone,
     badge: 'AUTO',
+    requiredPerm: 'canBroadcast',
   },
   {
     name: 'Phân quyền Discord (Roles)',
     href: '/roles',
     icon: Shield,
     badge: 'RBAC',
+    requiredPerm: 'canManageRoles',
   },
   {
     name: 'PvP & Combat Logs',
     href: '/combat',
     icon: Swords,
     badge: 'AI Flag',
+    requiredPerm: 'canViewCombatLogs',
   },
   {
     name: 'Prime & Đặc quyền',
     href: '/prime',
     icon: Crown,
+    requiredPerm: 'canManagePrime',
   },
   {
     name: 'Nhiệm vụ & Phần thưởng',
     href: '/quests',
     icon: Scroll,
+    requiredPerm: 'canManageQuests',
   },
   {
     name: 'Nhật ký hệ thống (Logs)',
     href: '/audit',
     icon: ShieldCheck,
+    requiredPerm: 'canViewAuditLogs',
   },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { currentSession } = useApp();
+  const { currentSession, hasPermission, addToast } = useApp();
   const roleStyle = ROLE_BADGE_STYLE[currentSession.role];
 
   return (
@@ -95,7 +114,6 @@ export function Sidebar() {
               alt="ST25 VIETNAM"
               className="w-full h-full object-contain"
               onError={(e) => {
-                // Fallback to ST25-LOGO.png if st25.png fails
                 (e.target as HTMLElement).setAttribute('src', '/images/logo/ST25-LOGO.png');
               }}
             />
@@ -122,6 +140,31 @@ export function Sidebar() {
         {NAVIGATION_ITEMS.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
+          const isAllowed = hasPermission(item.requiredPerm);
+
+          if (!isAllowed) {
+            return (
+              <button
+                key={item.href}
+                type="button"
+                onClick={() =>
+                  addToast(
+                    'error',
+                    '⛔ TỪ CHỐI QUYỀN TRUY CẬP',
+                    `Chức vụ "${currentSession.role}" không có quyền truy cập mục "${item.name}". Yêu cầu quyền: [${item.requiredPerm}]`
+                  )
+                }
+                title={`Chức vụ ${currentSession.role} không có quyền truy cập ${item.name}`}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-600 hover:text-zinc-400 hover:bg-red-500/5 transition opacity-60 cursor-not-allowed group"
+              >
+                <div className="flex items-center gap-3">
+                  <Icon className="w-4 h-4 text-zinc-600 group-hover:text-red-400 transition" />
+                  <span className="line-through decoration-zinc-700">{item.name}</span>
+                </div>
+                <Lock className="w-3.5 h-3.5 text-zinc-600 group-hover:text-red-400" />
+              </button>
+            );
+          }
 
           return (
             <Link
@@ -185,7 +228,6 @@ export function Sidebar() {
           </div>
         </div>
       </div>
-
     </aside>
   );
 }

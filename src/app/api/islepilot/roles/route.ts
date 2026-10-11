@@ -45,15 +45,23 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerAdminSession();
-    const actorRole = session?.role || 'SUPER_ADMIN';
+    if (!session || session.role === 'GUEST') {
+      return NextResponse.json(
+        { success: false, error: 'Yêu cầu đăng nhập tài khoản BQT trước khi cấu hình phân quyền hệ thống!' },
+        { status: 401 }
+      );
+    }
+
+    const actorRole = session.role;
 
     // Verify permission to manage roles
     if (!hasPermission(actorRole, 'canManageRoles')) {
       return NextResponse.json(
-        { success: false, error: 'Bạn không có quyền quản lý phân quyền hệ thống (canManageRoles)' },
+        { success: false, error: 'Từ chối truy cập: Bạn không có quyền quản lý phân quyền hệ thống (canManageRoles)' },
         { status: 403 }
       );
     }
+
 
     const body = await request.json();
     const { action } = body;

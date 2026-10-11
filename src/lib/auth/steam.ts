@@ -207,13 +207,13 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     };
   }
 
-  // Fallback: If player has no admin role on Discord, grant TRIAL_MOD or SURVIVOR based on config
-  // For development & initial setup, default to TRIAL_MOD so valid Steam users can preview their dashboard
+  // 5. Fallback: If player has no admin role on Discord, assign GUEST (No BQT Permission)
   return {
-    role: 'TRIAL_MOD',
-    roleTitle: 'THÀNH VIÊN BQT (Trial)',
+    role: 'GUEST',
+    roleTitle: 'Người Chơi (Không có quyền BQT)',
     name,
     avatarUrl,
     discord,
   };
 }
+

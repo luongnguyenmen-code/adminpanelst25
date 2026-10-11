@@ -36,8 +36,24 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerAdminSession();
-    const actorName = session?.username || 'Admin';
-    const actorRole = session?.role || 'SUPER_ADMIN';
+    if (!session || session.role === 'GUEST') {
+      return NextResponse.json(
+        { success: false, error: 'Yêu cầu đăng nhập BQT trước khi phát sóng hoặc cài đặt thông báo!' },
+        { status: 401 }
+      );
+    }
+
+    const actorName = session.username;
+    const actorRole = session.role;
+
+    const { hasPermission } = await import('@/lib/auth/rbac');
+    if (!hasPermission(actorRole, 'canBroadcast')) {
+      return NextResponse.json(
+        { success: false, error: 'Từ chối truy cập: Bạn không có quyền phát sóng thông báo (canBroadcast)' },
+        { status: 403 }
+      );
+    }
+
 
     const body = await request.json();
     const { action, payload } = body;

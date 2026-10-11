@@ -21,9 +21,21 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Default to SuperAdmin if development/initial, or reject if unauthenticated
-    const actorRole: AdminRole = session?.role || 'SUPER_ADMIN';
-    const actorName: string = session?.username || 'SuperAdmin (Master Key)';
+    // 2. Reject if unauthenticated or GUEST role
+    if (!session || session.role === 'GUEST') {
+      return NextResponse.json(
+        {
+          success: false,
+          error: '[BẢO MẬT RBAC] Yêu cầu đăng nhập tài khoản Ban Quản Trị ST25 trước khi thực hiện thao tác này!',
+          authenticated: false,
+        },
+        { status: 401 }
+      );
+    }
+
+    const actorRole: AdminRole = session.role;
+    const actorName: string = session.username;
+
 
     const body = await request.json();
     const {
