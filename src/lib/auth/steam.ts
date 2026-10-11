@@ -133,7 +133,19 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     };
   }
 
-  // 3. Check Discord Roles mapped in IslePilot
+  // 3. Dynamic Check from AdminStore RBAC Matrix
+  const effective = adminStore.getUserEffectivePermissions(discordRoles);
+  if (effective.canManageRoles) {
+    return {
+      role: 'SUPER_ADMIN',
+      roleTitle: 'QUAN KHÂM SAI (Toàn quyền)',
+      name,
+      avatarUrl,
+      discord,
+    };
+  }
+
+  // 4. Check Discord Roles mapped in IslePilot by keywords
   const lowerRoles = discordRoles.map((r) => r.toLowerCase());
 
   if (
@@ -151,6 +163,7 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
       discord,
     };
   }
+
 
   if (
     lowerRoles.some((r) =>
