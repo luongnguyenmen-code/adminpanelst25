@@ -16,7 +16,36 @@ export async function GET(
     }
 
     // Fetch real garage slots from IslePilot
-    const garageSlots = await islePilotClient.getPlayerGarage(steamId).catch(() => []);
+    const rawGarageSlots = await islePilotClient.getPlayerGarage(steamId).catch(() => []);
+
+    // Enrich player with stored mutations & lineage
+    const savedPlayerMuts = adminStore.getPlayerMutations(steamId);
+    if (savedPlayerMuts) {
+      if (!player.mutations || player.mutations.length === 0) {
+        player.mutations = savedPlayerMuts.mutations;
+      }
+      (player as any).lineage = savedPlayerMuts.lineage;
+      if (savedPlayerMuts.elder) {
+        (player as any).elder = savedPlayerMuts.elder;
+      }
+    }
+
+    // Enrich garage slots with stored mutations & lineage
+    const garageSlots = rawGarageSlots.map((slot) => {
+      const savedDino = adminStore.getGarageSlotMutations(slot.id);
+      if (savedDino) {
+        return {
+          ...slot,
+          mutations:
+            savedDino.mutations && savedDino.mutations.length > 0
+              ? savedDino.mutations
+              : slot.mutations,
+          elder: savedDino.elder || (slot.isPrimeElder ? 'Prime' : 'No elder'),
+          lineage: savedDino.lineage,
+        };
+      }
+      return slot;
+    });
 
     const notes = adminStore.getPlayerNotes(steamId);
     return NextResponse.json({ player, garage: garageSlots, notes });

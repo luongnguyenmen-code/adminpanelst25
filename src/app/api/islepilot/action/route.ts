@@ -335,6 +335,11 @@ export async function POST(request: NextRequest) {
             lineage,
           });
         }
+        adminStore.setPlayerMutations(steamId, {
+          mutations: activeMuts,
+          elder,
+          lineage,
+        });
 
         // Send to IslePilot with active mutations + lineage hierarchy
         executionResult = await islePilotClient.grantPlayerMutations(

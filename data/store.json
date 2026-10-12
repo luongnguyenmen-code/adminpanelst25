@@ -182,7 +182,33 @@
   "mutationLogs": [],
   "playerMutations": {
     "76561198789527189": {
-      "mutations": []
+      "mutations": [
+        "Hemomania",
+        "Cannibalistic",
+        "Osteosclerosis",
+        "Cannibalistic"
+      ],
+      "elder": "Prime",
+      "lineage": {
+        "parent": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "elderA": [
+          "Advanced Gestation",
+          null,
+          null,
+          null
+        ],
+        "elderB": [
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
     "76561198870866539": {
       "mutations": []
@@ -336,8 +362,29 @@
         "Hemomania",
         "Cannibalistic",
         "Osteosclerosis",
-        "Epidermal Fibrosis"
-      ]
+        "Cannibalistic"
+      ],
+      "elder": "Prime",
+      "lineage": {
+        "parent": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "elderA": [
+          "Advanced Gestation",
+          null,
+          null,
+          null
+        ],
+        "elderB": [
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
     "cmv40qts413yur101el46u03l": {
       "mutations": [
@@ -1428,14 +1475,35 @@
         "Hemomania",
         "Cannibalistic",
         "Osteosclerosis",
-        "Epidermal Fibrosis"
+        "Cannibalistic"
       ],
       "reincarnationCount": 0,
       "steamId": "76561198789527189",
       "playerName": "Báo",
       "species": "Tyrannosaurus",
       "isPrimeElder": true,
-      "updatedAt": "2026-10-11T19:02:37.811Z"
+      "updatedAt": "2026-10-12T04:32:00.608Z",
+      "elder": "Prime",
+      "lineage": {
+        "parent": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "elderA": [
+          "Advanced Gestation",
+          null,
+          null,
+          null
+        ],
+        "elderB": [
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
     "cmv40qts413yur101el46u03l": {
       "dinoId": "cmv40qts413yur101el46u03l",
@@ -4128,10 +4196,42 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-12T03:53:43.719Z",
-    "nextBroadcastAt": "2026-10-12T04:03:43.719Z"
+    "lastBroadcastAt": "2026-10-12T04:33:50.172Z",
+    "nextBroadcastAt": "2026-10-12T04:43:50.172Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791779630622-h8a6",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:33:50.622Z"
+    },
+    {
+      "id": "bc-1791779025075-858i",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:23:45.075Z"
+    },
+    {
+      "id": "bc-1791778424818-kuou",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:13:44.818Z"
+    },
+    {
+      "id": "bc-1791777824526-bq7y",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:03:44.526Z"
+    },
     {
       "id": "bc-1791777224145-cx8s",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
