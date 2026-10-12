@@ -701,15 +701,47 @@ export class IslePilotClient {
     reason = 'Khôi phục đột biến bị lỗi',
     extra?: { dinoId?: string; elder?: string; lineage?: any }
   ): Promise<{ success: boolean; message: string }> {
-    return this.executeAdminCommand({
+    // Lọc danh sách active mutations (tối đa 4 slots hợp lệ)
+    const active = (mutations || [])
+      .slice(0, 4)
+      .filter((m) => m && m !== 'None' && m !== '-');
+
+    const cleanLineage = (arr?: (string | null)[]) =>
+      (arr || []).filter((m): m is string => Boolean(m && m !== 'None' && m !== '-'));
+
+    const parent = cleanLineage(extra?.lineage?.parent);
+    const elderA = cleanLineage(extra?.lineage?.elderA);
+    const elderB = cleanLineage(extra?.lineage?.elderB);
+
+    // IslePilot API: POST /commands với action: 'mutations'
+    // Schema chuẩn: { action: 'mutations', steamId, active, parent?, elderA?, elderB? }
+    const commandPayload: Record<string, any> = {
       action: 'mutations',
       steamId,
-      dinoId: extra?.dinoId || undefined,
-      mutations,
-      elder: extra?.elder || undefined,
-      lineage: extra?.lineage || undefined,
-      reason,
-    });
+      active,
+    };
+
+    if (parent.length > 0) commandPayload.parent = parent;
+    if (elderA.length > 0) commandPayload.elderA = elderA;
+    if (elderB.length > 0) commandPayload.elderB = elderB;
+
+    const res = await this.executeAdminCommand(commandPayload);
+
+    // Nếu là Elder 'Prime', kích hoạt setprime
+    if (extra?.elder === 'Prime') {
+      await this.executeAdminCommand({
+        action: 'setprime',
+        steamId,
+        eligible: true,
+      }).catch(() => null);
+    }
+
+    // Xóa cache để dashboard cập nhật mutations mới tức thì
+    invalidateCache(`garage:${steamId}`);
+    invalidateCache(`player:${steamId}`);
+    invalidateCache('server:all_garage');
+
+    return res;
   }
 
   async getTeleportLocations(): Promise<Array<{ id: string; name: string }>> {

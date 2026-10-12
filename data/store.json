@@ -4128,10 +4128,18 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-11T21:39:08.186Z",
-    "nextBroadcastAt": "2026-10-11T21:49:08.186Z"
+    "lastBroadcastAt": "2026-10-12T03:53:43.719Z",
+    "nextBroadcastAt": "2026-10-12T04:03:43.719Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791777224145-cx8s",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T03:53:44.145Z"
+    },
     {
       "id": "bc-1791754748579-5yk9",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
