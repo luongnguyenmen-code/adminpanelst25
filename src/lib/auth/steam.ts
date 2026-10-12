@@ -115,7 +115,7 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
           avatarUrl = pInfo.avatarfull;
         }
       }
-    } catch {}
+    } catch { }
   }
 
   // 2. DUY NHẤT CHỦ SỞ HỮU MỚI ĐƯỢC LÀ SUPER_ADMIN (Owner Master SteamID)
@@ -124,7 +124,7 @@ export async function resolveAdminRoleForSteamId(steamId: string): Promise<{
     .map((s) => s.trim())
     .filter(Boolean);
 
-  if (masterSteamIds.includes(steamId) || steamId === '76561198681721956') {
+  if (masterSteamIds.includes(steamId) || steamId === '76561198681721956' || steamId === '76561198682056372' || steamId === '76561198130578953') {
     return {
       role: 'SUPER_ADMIN',
       roleTitle: 'CHỦ SERVER / QUAN KHÂM SAI (Toàn quyền)',
