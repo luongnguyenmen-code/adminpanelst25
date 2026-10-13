@@ -347,7 +347,9 @@ export default function GaragePage() {
     const s = dropdownSearch.toLowerCase();
     return (
       m.name.toLowerCase().includes(s) ||
+      (m.viName && m.viName.toLowerCase().includes(s)) ||
       (m.description && m.description.toLowerCase().includes(s)) ||
+      (m.sourceDescription && m.sourceDescription.toLowerCase().includes(s)) ||
       m.category.toLowerCase().includes(s)
     );
   });
@@ -631,9 +633,16 @@ export default function GaragePage() {
                     className="w-full text-left px-3.5 py-2.5 hover:bg-cyan-500/10 transition flex flex-col gap-0.5 group"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-zinc-200 group-hover:text-cyan-300">
-                        {mut.name}
-                      </span>
+                      <div className="flex items-baseline gap-1.5 flex-wrap">
+                        <span className="font-semibold text-zinc-200 group-hover:text-cyan-300">
+                          {mut.name}
+                        </span>
+                        {mut.viName && (
+                          <span className="text-[11px] text-cyan-400 font-medium">
+                            ({mut.viName})
+                          </span>
+                        )}
+                      </div>
                       <span className={`text-[9px] px-1.5 py-0.2 rounded border font-mono ${badgeColor}`}>
                         {mut.category}
                       </span>
