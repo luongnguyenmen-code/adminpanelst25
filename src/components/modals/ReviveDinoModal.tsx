@@ -17,6 +17,7 @@ import {
   RotateCcw,
   Warehouse,
   Compass,
+  Search,
 } from 'lucide-react';
 import { KNOWN_SPECIES_LIST, TELEPORT_SAFE_ZONES, getDinoSpeciesImage } from '@/lib/utils';
 import { useApp } from '@/components/providers/AppProviders';
@@ -128,6 +129,52 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
 
   const handleQuickGrowth = (val: number) => {
     setGrowth(val);
+  };
+
+  const [isLookingUpUid, setIsLookingUpUid] = useState(false);
+
+  const handleLookupByUid = async () => {
+    const trimmedId = dinoId.trim();
+    if (!trimmedId) {
+      addToast('error', 'Lỗi', 'Vui lòng nhập UID khủng long để tra cứu');
+      return;
+    }
+    setIsLookingUpUid(true);
+    try {
+      const res = await fetch(`/api/islepilot/garage?search=${encodeURIComponent(trimmedId)}`);
+      const data = await res.json();
+      const slots = data?.garage || [];
+      const found = slots.find((s: any) => s.id?.toLowerCase() === trimmedId.toLowerCase()) || slots[0];
+
+      if (found) {
+        if (found.steamId) setSteamId(found.steamId);
+        if (found.playerName) setPlayerName(found.playerName);
+        if (found.species) {
+          const match = KNOWN_SPECIES_LIST.find((s) => s.toLowerCase() === found.species?.toLowerCase());
+          setSpecies(match || found.species);
+        }
+        if (found.growth !== undefined) setGrowth(Number(found.growth));
+
+        const allMuts = [
+          ...(found.mutations || []),
+          ...(found.lineage?.parent || []),
+          ...(found.lineage?.elderA || []),
+          ...(found.lineage?.elderB || []),
+        ].filter((m: string) => m && m !== 'None' && m !== '-');
+
+        if (allMuts.length > 0) {
+          setPlayerMutations(allMuts);
+          setRestoreMutations(true);
+        }
+        addToast('success', 'Đã tìm thấy hồ sơ UID!', `Đã nạp khủng long ${found.species} (${Math.round((found.growth || 1) * 100)}%) kèm đột biến gen.`);
+      } else {
+        addToast('info', 'Thông báo UID', 'UID này hợp lệ, bạn có thể tiếp tục tiến hành khôi phục.');
+      }
+    } catch {
+      addToast('error', 'Lỗi tra cứu', 'Không thể kết nối đến máy chủ để tìm UID');
+    } finally {
+      setIsLookingUpUid(false);
+    }
   };
 
   const handleRevive = async () => {
@@ -248,17 +295,36 @@ export function ReviveDinoModal({ isOpen, onClose, target, onSuccess }: ReviveDi
             </div>
           </div>
 
-          {/* Dino ID Server Badge */}
-          <div className="p-3 rounded-xl bg-zinc-950/90 border border-cyan-500/30 flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-[11px]">
-              <span className="text-zinc-500 text-[10px] uppercase font-bold">Dino ID Trên Server:</span>
-              <span className="bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-700/80 font-bold text-cyan-300 select-all">
-                {dinoId}
+          {/* Dino ID / UID Input & Fast Lookup */}
+          <div className="p-3.5 rounded-xl bg-zinc-950/90 border border-cyan-500/30 space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-zinc-400 text-[10px] uppercase font-bold flex items-center gap-1.5 font-mono">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                Dino ID / UID Của Con Khủng Long:
+              </label>
+              <span className="text-[10px] text-zinc-500 italic">
+                Nhập hoặc dán UID để load lại đúng con đó
               </span>
             </div>
-            <span className="text-[10px] text-zinc-400 italic">
-              Định danh lưu trên máy chủ
-            </span>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={dinoId}
+                onChange={(e) => setDinoId(e.target.value)}
+                placeholder="Ví dụ: dino_c1a2b3... hoặc ID trong Gara"
+                className="flex-1 bg-zinc-900/90 border border-cyan-700/60 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300 placeholder-zinc-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/50"
+              />
+              <button
+                type="button"
+                disabled={isLookingUpUid}
+                onClick={handleLookupByUid}
+                className="px-3 py-2 rounded-lg bg-cyan-600/25 border border-cyan-500/50 hover:bg-cyan-600/40 text-cyan-200 text-xs font-semibold flex items-center gap-1.5 transition disabled:opacity-50"
+                title="Tự động tra cứu hồ sơ khủng long theo UID này"
+              >
+                {isLookingUpUid ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Search className="w-3.5 h-3.5" />}
+                <span>Tra Cứu UID</span>
+              </button>
+            </div>
           </div>
 
           {/* DESTINATION SELECTOR: AUTO BACK TO GARAGE vs ROLLBACK LIVE MAP */}

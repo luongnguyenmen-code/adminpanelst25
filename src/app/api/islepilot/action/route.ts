@@ -155,12 +155,19 @@ export async function POST(request: NextRequest) {
         executionResult = await islePilotClient.slayPlayer(steamId);
         break;
       case 'revive': {
-        const species = params.species;
+        const targetDinoId = params.dinoId || params.slotId;
+        const storedDino = targetDinoId
+          ? adminStore.getDino(targetDinoId)
+          : adminStore.getDinoBySteamId(steamId);
+
+        const species = params.species || storedDino?.species;
+        const growth = Number(params.growth ?? storedDino?.growth ?? 1.0);
+        const gender = params.gender || (storedDino?.gender as any) || 'male';
 
         // Auto retrieve pre-death mutations from store or target dino record if not provided
-        let targetMutations = params.mutations;
-        let targetElder = params.elder;
-        let targetLineage = params.lineage;
+        let targetMutations = params.mutations || storedDino?.mutations;
+        let targetElder = params.elder || storedDino?.elder;
+        let targetLineage = params.lineage || storedDino?.lineage;
 
         if (!targetMutations || targetMutations.length === 0) {
           const storedMutInfo = adminStore.getPlayerMutations(steamId);
@@ -168,22 +175,19 @@ export async function POST(request: NextRequest) {
             targetMutations = storedMutInfo.mutations;
             targetElder = storedMutInfo.elder;
             targetLineage = storedMutInfo.lineage;
-          } else {
-            const storedDino = adminStore.getDinoBySteamId(steamId);
-            if (storedDino?.mutations && storedDino.mutations.length > 0) {
-              targetMutations = storedDino.mutations;
-              targetElder = storedDino.elder;
-              targetLineage = storedDino.lineage;
-            }
           }
         }
 
-          if (species) {
+        const coordinates =
+          params.coordinates || (storedDino as any)?.casualtyLocation || (storedDino as any)?.position;
+
+        if (species) {
           executionResult = await islePilotClient.reviveDino(steamId, {
             species,
-            growth: params.growth ?? 1.0,
+            growth,
+            gender,
             healFull: params.healFull !== false,
-            coordinates: params.coordinates,
+            coordinates,
             teleportLocationId: params.teleportLocationId || params.locationId,
             mutations: targetMutations,
             elder: targetElder,
@@ -192,11 +196,14 @@ export async function POST(request: NextRequest) {
           });
 
           if (executionResult.success) {
-            adminStore.saveDino(`revived_${steamId}_${Date.now()}`, {
+            const savedUid = targetDinoId || `revived_${steamId}_${Date.now()}`;
+            adminStore.saveDino(savedUid, {
+              dinoId: savedUid,
               steamId,
-              playerName,
+              playerName: playerName || storedDino?.playerName,
               species,
-              growth: params.growth ?? 1.0,
+              growth,
+              gender,
               mutations: targetMutations || [],
               elder: targetElder,
               lineage: targetLineage,
@@ -263,28 +270,54 @@ export async function POST(request: NextRequest) {
         executionResult = await islePilotClient.restoreGarageDino(steamId, dinoId);
         break;
       }
+      case 'deploy_garage_dino': {
+        const dinoId = params.dinoId || params.slotId;
+        const targetDino = dinoId ? adminStore.getDino(dinoId) : undefined;
+        const species = params.species || targetDino?.species || 'Tyrannosaurus';
+        const growth = Number(params.growth ?? targetDino?.growth ?? 1.0);
+        const mutations = params.mutations || targetDino?.mutations || [];
+        const elder = params.elder || targetDino?.elder || 'No elder';
+        const lineage = params.lineage || targetDino?.lineage;
+
+        executionResult = await islePilotClient.reviveDino(steamId, {
+          species,
+          growth,
+          gender: params.gender || (targetDino?.gender as any) || 'male',
+          healFull: true,
+          mutations,
+          elder,
+          lineage,
+          destination: 'LIVE_MAP',
+        });
+        break;
+      }
       case 'back_dino_to_garage': {
         const dinoId = params.dinoId || params.slotId || `dino_${steamId}_${Date.now()}`;
-        const species = params.species || 'Tyrannosaurus';
-        const growth = Number(params.growth ?? 1.0);
-        const mutations = params.mutations || [];
+        const existingDino = adminStore.getDino(dinoId);
+
+        const species = params.species || existingDino?.species || 'Tyrannosaurus';
+        const growth = Number(params.growth ?? existingDino?.growth ?? 1.0);
+        const gender = params.gender || (existingDino?.gender as any) || 'male';
+        const mutations = params.mutations || existingDino?.mutations || [];
+        const elder = params.elder || existingDino?.elder || 'No elder';
+        const lineage = params.lineage || existingDino?.lineage;
 
         adminStore.saveDino(dinoId, {
           dinoId,
           steamId,
-          playerName,
+          playerName: playerName || existingDino?.playerName,
           species,
           growth,
-          gender: params.gender || 'male',
+          gender,
           mutations,
-          elder: params.elder,
-          lineage: params.lineage,
+          elder,
+          lineage,
         });
 
         executionResult = await islePilotClient.restoreDinoToGarageById(steamId, dinoId, {
           species,
           growth,
-          gender: params.gender || 'male',
+          gender,
           mutations,
         });
         break;

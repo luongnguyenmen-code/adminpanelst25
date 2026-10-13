@@ -581,6 +581,7 @@ export class IslePilotClient {
     options: {
       species: string;
       growth?: number;
+      gender?: 'male' | 'female';
       healFull?: boolean;
       coordinates?: { x: number; y: number; z: number };
       teleportLocationId?: string;
@@ -593,12 +594,13 @@ export class IslePilotClient {
     const growth = options.growth ?? 1.0;
     const normalizedGrowth = growth > 1 ? Number((growth / 100).toFixed(4)) : Number(growth.toFixed(4));
 
-    // 1. Thực hiện Swap loài & kích cỡ trưởng thành
+    // 1. Thực hiện Swap loài & kích cỡ trưởng thành & giới tính
     const swapResult = await this.executeAdminCommand({
       action: 'swap',
       steamId,
       species: options.species,
       growth: normalizedGrowth,
+      female: options.gender === 'female',
     });
 
     // 2. Khôi phục toàn bộ đột biến gen (Mutations) nếu có
@@ -615,6 +617,15 @@ export class IslePilotClient {
           }
         ).catch(() => null);
       }
+    }
+
+    // Nếu là Prime Elder -> set prime
+    if (options.elder === 'Prime') {
+      await this.executeAdminCommand({
+        action: 'setprime',
+        steamId,
+        eligible: true,
+      }).catch(() => null);
     }
 
     // 3. Bơm đầy chỉ số sinh tồn (HP 10,000, Thức ăn 10,000, Nước uống 10,000, hồi máu, xóa gãy chân)
@@ -920,6 +931,7 @@ export class IslePilotClient {
     }
   }
 
+
   /**
    * Back / Khôi phục đúng con khủng long theo Dino ID vào Gara của người chơi
    */
@@ -933,7 +945,7 @@ export class IslePilotClient {
       const growth = dinoInfo.growth ?? 1.0;
       const gender = dinoInfo.gender || 'male';
 
-      // Nạp thẳng vào Gara của người chơi qua API IslePilot
+      // Nạp thẳng vào Gara của người chơi qua API IslePilot nếu có hỗ trợ
       const addRes = await this.addDinoToGarage(steamId, {
         species,
         growth,

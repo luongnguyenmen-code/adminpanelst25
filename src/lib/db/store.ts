@@ -67,6 +67,7 @@ export interface DinoRecord {
     elderA?: (string | null)[];
     elderB?: (string | null)[];
   };
+  coordinates?: { x: number; y: number; z?: number };
   updatedAt?: string;
 }
 
@@ -391,6 +392,7 @@ class AdminDataStore {
     string,
     {
       mutations: string[];
+      species?: string;
       elder?: 'No elder' | 'Frail' | 'Prime';
       lineage?: {
         parent?: (string | null)[];
@@ -725,6 +727,7 @@ class AdminDataStore {
     data:
       | {
           mutations: string[];
+          species?: string;
           elder?: 'No elder' | 'Frail' | 'Prime';
           lineage?: any;
         }

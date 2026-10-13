@@ -252,6 +252,50 @@ export default function GaragePage() {
     }
   };
 
+  const handleDeploySlot = async (slot: DinoSlot) => {
+    if (!slot.steamId) {
+      addToast('error', 'Lỗi', 'Không tìm thấy SteamID của người chơi cho khủng long này');
+      return;
+    }
+    const confirmDeploy = window.confirm(
+      `Hồi sinh khủng long ${slot.species} (${Math.round(slot.growth * 100)}%) ra Map ngay cho người chơi ${slot.playerName || slot.steamId}?\n\n- UID: ${slot.id}\n- Khôi phục nguyên vẹn 16 gen và thông số.`
+    );
+    if (!confirmDeploy) return;
+
+    try {
+      const res = await fetch('/api/islepilot/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'deploy_garage_dino',
+          steamId: slot.steamId,
+          playerName: slot.playerName,
+          reason: `Hồi sinh trực tiếp khủng long ${slot.species} (UID: ${slot.id}) từ Gara ra Map`,
+          actorRole: currentSession.role,
+          actorName: currentSession.username,
+          params: {
+            dinoId: slot.id,
+            slotId: slot.id,
+            species: slot.species,
+            growth: slot.growth,
+            gender: slot.gender,
+            mutations: slot.mutations,
+            elder: slot.elder,
+            lineage: slot.lineage,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success !== false) {
+        addToast('success', 'HỒI SINH RA MAP THÀNH CÔNG! ⚡', `Đã hồi sinh ${slot.species} (UID: ${slot.id}) cho ${slot.playerName || slot.steamId}`);
+      } else {
+        addToast('error', 'Hồi sinh thất bại', data.error || data.message || 'Lỗi máy chủ');
+      }
+    } catch (err: any) {
+      addToast('error', 'Lỗi kết nối máy chủ', err.message);
+    }
+  };
+
   const handleWipeGarage = async () => {
     try {
       const res = await fetch('/api/islepilot/action', {
@@ -474,6 +518,7 @@ export default function GaragePage() {
                         setEditingTarget({ slotId: slot.id, group, index })
                       }
                       onSaveMutations={() => handleSaveMutations(slot.id)}
+                      onDeploy={handleDeploySlot}
                     />
                   );
                 })
@@ -672,6 +717,7 @@ function ParkedDinoRow({
   elderBMutations,
   onSlotClick,
   onSaveMutations,
+  onDeploy,
 }: {
   slot: DinoSlot;
   expandedType: 'stats' | 'mutations' | null;
@@ -687,6 +733,7 @@ function ParkedDinoRow({
   elderBMutations: (string | null)[];
   onSlotClick: (group: 'active' | 'parent' | 'elderA' | 'elderB', index: number) => void;
   onSaveMutations: () => void;
+  onDeploy?: (slot: DinoSlot) => void;
 }) {
   const dinoImg = getDinoSpeciesImage(slot.species);
 
@@ -800,7 +847,18 @@ function ParkedDinoRow({
         </td>
 
         {/* Action Links (Matching IslePilot Screenshot 1: Mutations & Edit/Close) */}
-        <td className="py-4 px-6 text-right space-x-3">
+        <td className="py-4 px-6 text-right space-x-2.5 whitespace-nowrap">
+          {onDeploy && (
+            <button
+              type="button"
+              onClick={() => onDeploy(slot)}
+              className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25 transition inline-flex items-center gap-1 shadow-sm"
+              title={`Hồi sinh trực tiếp khủng long ${slot.species} (UID: ${slot.id}) ra Map cho người chơi`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Hồi Sinh Ra Map</span>
+            </button>
+          )}
           <button
             type="button"
             onClick={onToggleMutations}

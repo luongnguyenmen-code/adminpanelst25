@@ -189,24 +189,25 @@
         "Cannibalistic"
       ],
       "elder": "Prime",
+      "species": "Triceratops",
       "lineage": {
         "parent": [
-          null,
-          null,
-          null,
-          null
+          "-",
+          "-",
+          "-",
+          "-"
         ],
         "elderA": [
           "Advanced Gestation",
-          null,
-          null,
-          null
+          "-",
+          "-",
+          "-"
         ],
         "elderB": [
-          null,
-          null,
-          null,
-          null
+          "-",
+          "-",
+          "-",
+          "-"
         ]
       }
     },
@@ -4196,10 +4197,290 @@
     "intervalMinutes": 10,
     "mode": "sequential",
     "currentTemplateIndex": 0,
-    "lastBroadcastAt": "2026-10-12T04:33:50.172Z",
-    "nextBroadcastAt": "2026-10-12T04:43:50.172Z"
+    "lastBroadcastAt": "2026-10-13T11:12:44.021Z",
+    "nextBroadcastAt": "2026-10-13T11:22:44.021Z"
   },
   "broadcastHistory": [
+    {
+      "id": "bc-1791889964490-jgc3",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T11:12:44.490Z"
+    },
+    {
+      "id": "bc-1791889364247-1bik",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T11:02:44.247Z"
+    },
+    {
+      "id": "bc-1791888763924-vkhl",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:52:43.924Z"
+    },
+    {
+      "id": "bc-1791888163643-4khj",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:42:43.643Z"
+    },
+    {
+      "id": "bc-1791887563544-2v78",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:32:43.544Z"
+    },
+    {
+      "id": "bc-1791886962963-3b90",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:22:42.963Z"
+    },
+    {
+      "id": "bc-1791886362652-5w53",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:12:42.653Z"
+    },
+    {
+      "id": "bc-1791885762287-kbvu",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T10:02:42.287Z"
+    },
+    {
+      "id": "bc-1791885158437-hco4",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-13T09:52:38.437Z"
+    },
+    {
+      "id": "bc-1791795256276-ltq4",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:54:16.276Z"
+    },
+    {
+      "id": "bc-1791794655957-k2ve",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:44:15.957Z"
+    },
+    {
+      "id": "bc-1791794055774-6xx7",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:34:15.774Z"
+    },
+    {
+      "id": "bc-1791793455496-836l",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:24:15.496Z"
+    },
+    {
+      "id": "bc-1791792847084-ju2i",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:14:07.084Z"
+    },
+    {
+      "id": "bc-1791792246771-i0nw",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T08:04:06.771Z"
+    },
+    {
+      "id": "bc-1791791646525-ql1c",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:54:06.525Z"
+    },
+    {
+      "id": "bc-1791791046249-nb95",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:44:06.249Z"
+    },
+    {
+      "id": "bc-1791790445975-m9x6",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:34:05.975Z"
+    },
+    {
+      "id": "bc-1791789843764-zhwz",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:24:03.764Z"
+    },
+    {
+      "id": "bc-1791789235489-wos9",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:13:55.489Z"
+    },
+    {
+      "id": "bc-1791788635174-a3p4",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T07:03:55.174Z"
+    },
+    {
+      "id": "bc-1791788034911-uqba",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:53:54.911Z"
+    },
+    {
+      "id": "bc-1791787434605-npke",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:43:54.605Z"
+    },
+    {
+      "id": "bc-1791786834278-p7hq",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:33:54.278Z"
+    },
+    {
+      "id": "bc-1791786234029-l21p",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:23:54.029Z"
+    },
+    {
+      "id": "bc-1791785633663-ml4q",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:13:53.663Z"
+    },
+    {
+      "id": "bc-1791785033473-ucyj",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T06:03:53.473Z"
+    },
+    {
+      "id": "bc-1791784433089-cnny",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:53:53.090Z"
+    },
+    {
+      "id": "bc-1791783833071-enj3",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:43:53.071Z"
+    },
+    {
+      "id": "bc-1791783232487-m4p6",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:33:52.487Z"
+    },
+    {
+      "id": "bc-1791782632237-z6bx",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:23:52.237Z"
+    },
+    {
+      "id": "bc-1791782031961-l1eq",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:13:51.961Z"
+    },
+    {
+      "id": "bc-1791781431519-7dlt",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T05:03:51.519Z"
+    },
+    {
+      "id": "bc-1791780831387-sv9q",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:53:51.387Z"
+    },
+    {
+      "id": "bc-1791780230878-ew3l",
+      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
+      "source": "auto",
+      "senderName": "Hệ thống ST25 (Auto)",
+      "status": "SUCCESS",
+      "sentAt": "2026-10-12T04:43:50.878Z"
+    },
     {
       "id": "bc-1791779630622-h8a6",
       "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
@@ -4719,46 +5000,6 @@
       "senderName": "Hệ thống ST25 (Auto)",
       "status": "SUCCESS",
       "sentAt": "2026-10-11T05:09:23.393Z"
-    },
-    {
-      "id": "bc-1791694462863-sx0n",
-      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
-      "source": "auto",
-      "senderName": "Hệ thống ST25 (Auto)",
-      "status": "SUCCESS",
-      "sentAt": "2026-10-11T04:54:22.863Z"
-    },
-    {
-      "id": "bc-1791693562474-zd00",
-      "content": "[CẢNH BÁO] Không lợi dụng bug kẹt địa hình để né combat. Báo ngay Admin qua Discord khi gặp sự cố.",
-      "source": "auto",
-      "senderName": "Hệ thống ST25 (Auto)",
-      "status": "SUCCESS",
-      "sentAt": "2026-10-11T04:39:22.474Z"
-    },
-    {
-      "id": "bc-1791692662127-d3eq",
-      "content": "[ST25 VIETNAM] Tham gia Discord chính thức để nhận quà và cập nhật sự kiện: discord.gg/st25vn",
-      "source": "auto",
-      "senderName": "Hệ thống ST25 (Auto)",
-      "status": "SUCCESS",
-      "sentAt": "2026-10-11T04:24:22.127Z"
-    },
-    {
-      "id": "bc-1791691761773-fqzs",
-      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
-      "source": "auto",
-      "senderName": "Hệ thống ST25 (Auto)",
-      "status": "SUCCESS",
-      "sentAt": "2026-10-11T04:09:21.773Z"
-    },
-    {
-      "id": "bc-1791690734735-glkz",
-      "content": "Thứ 2 đến Thứ 7 Có luật  Chủ Nhật không áp dụng luật \nHôm nay mọi người được chơi thoải mái",
-      "source": "manual",
-      "senderName": "Admin",
-      "status": "SUCCESS",
-      "sentAt": "2026-10-11T03:52:14.735Z"
     }
   ],
   "rolePermissions": {
