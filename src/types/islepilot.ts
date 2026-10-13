@@ -82,9 +82,9 @@ export interface ServerStatus {
   playersOnline: number;
   lastPlayerCount: number;
   lastSeenAt: string;
-  cpuPct: number;
-  memoryUsedMb: number;
-  memoryTotalMb: number;
+  cpuPct?: number;
+  memoryUsedMb?: number;
+  memoryTotalMb?: number;
   maxSlots?: number;
   tickrate?: number;
   uptimeSeconds?: number;

@@ -144,15 +144,15 @@ export class IslePilotClient {
       const data = await this.request<any>('/server');
       const result: ServerStatus = {
         name: data.name || 'ST25 VIETNAM',
-        playersOnline: data.playersOnline ?? 0,
-        lastPlayerCount: data.lastPlayerCount ?? 0,
+        playersOnline: typeof data.playersOnline === 'number' ? data.playersOnline : (data.players?.length ?? 0),
+        lastPlayerCount: data.lastPlayerCount ?? (data.players?.length ?? 0),
         lastSeenAt: data.lastSeenAt || new Date().toISOString(),
-        cpuPct: data.cpuPct ?? 15,
-        memoryUsedMb: data.memoryUsedMb ?? 4000,
-        memoryTotalMb: data.memoryTotalMb ?? 8192,
-        maxSlots: 100,
-        tickrate: 60.0,
-        pingMs: 24,
+        cpuPct: typeof data.cpuPct === 'number' ? data.cpuPct : undefined,
+        memoryUsedMb: typeof data.memoryUsedMb === 'number' ? data.memoryUsedMb : undefined,
+        memoryTotalMb: typeof data.memoryTotalMb === 'number' ? data.memoryTotalMb : undefined,
+        maxSlots: data.maxSlots || 200,
+        tickrate: typeof data.tickrate === 'number' ? data.tickrate : undefined,
+        pingMs: typeof data.pingMs === 'number' ? data.pingMs : undefined,
       };
       setInCache(cacheKey, result, 10);
       return result;
@@ -163,9 +163,6 @@ export class IslePilotClient {
         playersOnline: 0,
         lastPlayerCount: 0,
         lastSeenAt: new Date().toISOString(),
-        cpuPct: 0,
-        memoryUsedMb: 0,
-        memoryTotalMb: 8192,
       };
     }
   }

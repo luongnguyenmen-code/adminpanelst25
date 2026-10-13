@@ -158,13 +158,13 @@ export default function DashboardPage() {
             <span className="text-3xl font-black text-white">
               {serverStatus?.playersOnline ?? onlinePlayers.length}
             </span>
-            <span className="text-xs font-mono text-zinc-500">/ 100 slots</span>
+            <span className="text-xs font-mono text-zinc-500">/ {serverStatus?.maxSlots || 200} slots</span>
           </div>
           <div className="mt-3 w-full h-1.5 rounded-full bg-zinc-800 overflow-hidden">
             <div
               className="h-full bg-emerald-500 rounded-full"
               style={{
-                width: `${Math.min(100, ((serverStatus?.playersOnline ?? 0) / 100) * 100)}%`,
+                width: `${Math.min(100, (((serverStatus?.playersOnline ?? onlinePlayers.length) / (serverStatus?.maxSlots || 200)) * 100))}%`,
               }}
             />
           </div>
@@ -180,9 +180,12 @@ export default function DashboardPage() {
           </div>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-3xl font-black text-cyan-400">
-              {serverStatus?.tickrate ? `${serverStatus.tickrate.toFixed(1)}` : '60.0'}
+              {serverStatus?.tickrate ? `${serverStatus.tickrate.toFixed(1)}` : '—'}
             </span>
-            <span className="text-xs font-mono text-zinc-500">TPS • 24ms Ping</span>
+            <span className="text-xs font-mono text-zinc-500">
+              {serverStatus?.tickrate ? 'TPS' : ''}
+              {serverStatus?.pingMs ? ` • ${serverStatus.pingMs}ms Ping` : ''}
+            </span>
           </div>
           <p className="mt-3 text-[11px] text-zinc-400 flex items-center gap-1 font-mono">
             <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
@@ -200,14 +203,16 @@ export default function DashboardPage() {
           </div>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-3xl font-black text-white">
-              {serverStatus?.cpuPct ? `${serverStatus.cpuPct.toFixed(1)}%` : '18.2%'}
+              {typeof serverStatus?.cpuPct === 'number' ? `${serverStatus.cpuPct.toFixed(1)}%` : '—'}
             </span>
-            <span className="text-xs font-mono text-zinc-500">8 Cores</span>
+            <span className="text-xs font-mono text-zinc-500">
+              {typeof serverStatus?.cpuPct === 'number' ? 'Host Load' : 'Không báo cáo'}
+            </span>
           </div>
           <div className="mt-3 w-full h-1.5 rounded-full bg-zinc-800 overflow-hidden">
             <div
               className="h-full bg-amber-500 rounded-full"
-              style={{ width: `${Math.min(100, serverStatus?.cpuPct || 20)}%` }}
+              style={{ width: `${Math.min(100, serverStatus?.cpuPct || 0)}%` }}
             />
           </div>
         </div>
@@ -222,13 +227,15 @@ export default function DashboardPage() {
           </div>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-3xl font-black text-white">
-              {serverStatus?.memoryUsedMb
-                ? `${(serverStatus.memoryUsedMb / 1024).toFixed(1)}`
-                : '5.2'}
+              {typeof serverStatus?.memoryUsedMb === 'number'
+                ? `${(serverStatus.memoryUsedMb / 1024).toFixed(1)}GB`
+                : '—'}
             </span>
-            <span className="text-xs font-mono text-zinc-500">
-              / {serverStatus?.memoryTotalMb ? `${Math.round(serverStatus.memoryTotalMb / 1024)}GB` : '8GB'}
-            </span>
+            {serverStatus?.memoryTotalMb ? (
+              <span className="text-xs font-mono text-zinc-500">
+                / {Math.round(serverStatus.memoryTotalMb / 1024)}GB
+              </span>
+            ) : null}
           </div>
           <div className="mt-3 w-full h-1.5 rounded-full bg-zinc-800 overflow-hidden">
             <div
@@ -236,7 +243,9 @@ export default function DashboardPage() {
               style={{
                 width: `${Math.min(
                   100,
-                  ((serverStatus?.memoryUsedMb || 5000) / (serverStatus?.memoryTotalMb || 8192)) * 100
+                  serverStatus?.memoryUsedMb && serverStatus?.memoryTotalMb
+                    ? (serverStatus.memoryUsedMb / serverStatus.memoryTotalMb) * 100
+                    : 0
                 )}%`,
               }}
             />
