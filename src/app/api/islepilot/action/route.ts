@@ -368,40 +368,23 @@ export async function POST(request: NextRequest) {
             lineage,
           });
         }
-        // 1. Persist directly to internal database (data/store.json)
         adminStore.setPlayerMutations(steamId, {
           mutations: activeMuts,
           elder,
-          species: params.species,
           lineage,
         });
 
-        // 2. Sync to IslePilot cloud / game in background or non-blocking
-        try {
-          executionResult = await islePilotClient.grantPlayerMutations(
-            steamId,
-            activeMuts,
-            reason || `Cấp cấu trúc đột biến (${allConfiguredCount}/16 mutations - Elder: ${elder})`,
-            {
-              dinoId: targetDinoId,
-              elder,
-              lineage,
-            }
-          );
-        } catch {
-          executionResult = {
-            success: true,
-            message: `Đã lưu ${allConfiguredCount} đột biến trực tiếp vào cơ sở dữ liệu!`,
-          };
-        }
-
-        // Always guarantee success from database snapshot
-        if (!executionResult || !executionResult.success) {
-          executionResult = {
-            success: true,
-            message: `Đã lưu ${allConfiguredCount} đột biến vào database thành công!`,
-          };
-        }
+        // Send to IslePilot with active mutations + lineage hierarchy
+        executionResult = await islePilotClient.grantPlayerMutations(
+          steamId,
+          activeMuts,
+          reason || `Cấp cấu trúc đột biến (${allConfiguredCount}/16 mutations - Elder: ${elder})`,
+          {
+            dinoId: targetDinoId,
+            elder,
+            lineage,
+          }
+        );
 
         // Record mutation audit log
         adminStore.addMutationLog({
@@ -413,7 +396,7 @@ export async function POST(request: NextRequest) {
           mutations: activeMuts,
           elder,
           reason: reason || `Cấp đột biến gen (${allConfiguredCount}/16 slots kích hoạt - Elder: ${elder})`,
-          status: 'SUCCESS',
+          status: executionResult.success ? 'SUCCESS' : 'FAILED',
         });
         break;
       }

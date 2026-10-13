@@ -120,36 +120,6 @@ export async function POST(
         break;
       }
 
-      case 'water': {
-        const cmd = `setstats ${steamId} 5000 1000 1000`;
-        const res = await theIsleRcon.execute(cmd);
-        resultMessage = res.response || 'Đã hồi đầy nước uống cho người chơi';
-        break;
-      }
-
-      case 'kick': {
-        const reason = actionParams.reason || 'Kicked by Admin via ST25 Panel';
-        const cmd = `kick ${steamId} ${reason}`;
-        const res = await theIsleRcon.execute(cmd);
-        resultMessage = res.response || `Đã kick người chơi ${steamId}`;
-        break;
-      }
-
-      case 'ban': {
-        const reason = actionParams.reason || 'Banned by Admin via ST25 Panel';
-        const cmd = `ban ${steamId} ${reason}`;
-        const res = await theIsleRcon.execute(cmd);
-        resultMessage = res.response || `Đã ban người chơi ${steamId}`;
-        break;
-      }
-
-      case 'unban': {
-        const cmd = `unban ${steamId}`;
-        const res = await theIsleRcon.execute(cmd);
-        resultMessage = res.response || `Đã gỡ ban cho người chơi ${steamId}`;
-        break;
-      }
-
       default:
         throw new Error(`Hành động không hợp lệ: ${action}`);
     }

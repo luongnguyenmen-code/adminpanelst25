@@ -21,25 +21,16 @@ export interface ST25PlayerProfile {
   brokenLeg: boolean;
   position?: { x: number; y: number; z: number };
   lastSeenAt?: string;
-  totalPlaySec?: number;
-  discord?: { id?: string; username: string } | null;
   dinoId?: string;
   elder: 'No elder' | 'Frail' | 'Prime';
   isPrimeElder: boolean;
-  // Mutations list (for table filtering & legacy compatibility)
-  mutations: string[];
   // 16 full mutation slots
-  mutationSlots: {
+  mutations: {
     active: string[];
     parent: string[];
     elderA: string[];
     elderB: string[];
     totalCount: number;
-  };
-  lineage?: {
-    parent: string[];
-    elderA: string[];
-    elderB: string[];
   };
   garage: any[];
   notes?: any;
@@ -61,7 +52,7 @@ export interface ST25PlayerUpdatePayload {
 
 export class ST25PlayerEngine {
   /**
-   * Get full player profile with complete 16 mutations, live stats, and garage from internal DB.
+   * Get full player profile with complete 16 mutations, live stats, and garage.
    */
   async getPlayer(steamId: string): Promise<ST25PlayerProfile | null> {
     const rawPlayer = await islePilotClient.getPlayerDetail(steamId).catch(() => null);
@@ -92,8 +83,7 @@ export class ST25PlayerEngine {
     const elderB = (savedPlayerMuts?.lineage?.elderB || ['-', '-', '-', '-']).map((x) => x || '-').slice(0, 4);
     while (elderB.length < 4) elderB.push('-');
 
-    const allValidMuts = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None');
-    const validCount = allValidMuts.length;
+    const validCount = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None').length;
 
     const elder = savedPlayerMuts?.elder || (rawPlayer?.isPrimeElder ? 'Prime' : 'No elder');
 
@@ -127,23 +117,15 @@ export class ST25PlayerEngine {
       brokenLeg: !!rawPlayer?.brokenLeg,
       position: rawPlayer?.position,
       lastSeenAt: rawPlayer?.lastSeenAt,
-      totalPlaySec: rawPlayer?.totalPlaySec ?? 0,
-      discord: rawPlayer?.discord || null,
       dinoId: `dino_${steamId}_${species.toLowerCase()}`,
       elder,
       isPrimeElder: elder === 'Prime',
-      mutations: allValidMuts,
-      mutationSlots: {
+      mutations: {
         active,
         parent,
         elderA,
         elderB,
         totalCount: validCount,
-      },
-      lineage: {
-        parent,
-        elderA,
-        elderB,
       },
       garage,
       notes,
@@ -171,8 +153,7 @@ export class ST25PlayerEngine {
       const elderB = (savedMuts?.lineage?.elderB || ['-', '-', '-', '-']).map((x) => x || '-').slice(0, 4);
       while (elderB.length < 4) elderB.push('-');
 
-      const allValidMuts = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None');
-      const validCount = allValidMuts.length;
+      const validCount = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None').length;
 
       profiles.push({
         steamId: p.steamId,
@@ -193,95 +174,18 @@ export class ST25PlayerEngine {
         brokenLeg: false,
         position: p.position,
         lastSeenAt: p.lastSeenAt,
-        totalPlaySec: p.totalPlaySec ?? 0,
-        discord: p.discord || null,
         dinoId: `dino_${p.steamId}_${p.species.toLowerCase()}`,
         elder: savedMuts?.elder || (p.isPrimeElder ? 'Prime' : 'No elder'),
         isPrimeElder: !!p.isPrimeElder,
-        mutations: allValidMuts,
-        mutationSlots: {
+        mutations: {
           active,
           parent,
           elderA,
           elderB,
           totalCount: validCount,
         },
-        lineage: {
-          parent,
-          elderA,
-          elderB,
-        },
         garage: [],
       });
-    }
-
-    // Merge database players who have mutations stored in internal database (data/store.json)
-    const seenSteamIds = new Set<string>(profiles.map((p) => p.steamId));
-    const storedMap = adminStore.getAllStoredPlayerMutations();
-
-    if (!onlineOnly) {
-      for (const [steamId, savedMuts] of Object.entries(storedMap)) {
-        if (seenSteamIds.has(steamId)) continue;
-        if (search && !steamId.includes(search)) continue;
-
-        const active = (savedMuts?.mutations || []).slice(0, 4);
-        while (active.length < 4) active.push('-');
-
-        const parent = (savedMuts?.lineage?.parent || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
-        while (parent.length < 4) parent.push('-');
-
-        const elderA = (savedMuts?.lineage?.elderA || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
-        while (elderA.length < 4) elderA.push('-');
-
-        const elderB = (savedMuts?.lineage?.elderB || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
-        while (elderB.length < 4) elderB.push('-');
-
-        const allValidMuts = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None');
-
-        const savedDino = adminStore.getDinoBySteamId(steamId);
-        const species = savedMuts?.species || savedDino?.species || 'Tyrannosaurus';
-
-        profiles.push({
-          steamId,
-          name: savedDino?.playerName || 'Survivor',
-          online: false,
-          species,
-          female: savedDino?.gender === 'female',
-          growth: savedDino?.growth ?? 1.0,
-          health: 1000,
-          maxHealth: 1000,
-          hunger: 300,
-          maxHunger: 300,
-          thirst: 800,
-          maxThirst: 800,
-          stamina: 100,
-          maxStamina: 100,
-          bleed: 0,
-          brokenLeg: false,
-          position: undefined,
-          lastSeenAt: savedDino?.updatedAt,
-          totalPlaySec: 0,
-          discord: null,
-          dinoId: `dino_${steamId}_${species.toLowerCase()}`,
-          elder: savedMuts?.elder || 'No elder',
-          isPrimeElder: savedMuts?.elder === 'Prime',
-          mutations: allValidMuts,
-          mutationSlots: {
-            active,
-            parent,
-            elderA,
-            elderB,
-            totalCount: allValidMuts.length,
-          },
-          lineage: {
-            parent,
-            elderA,
-            elderB,
-          },
-          garage: [],
-        });
-        seenSteamIds.add(steamId);
-      }
     }
 
     return profiles;
@@ -340,10 +244,10 @@ export class ST25PlayerEngine {
     }
 
     // 5. Update Full 16 Mutations
-    const nextActive = payload.activeMutations || current.mutationSlots?.active || ['-', '-', '-', '-'];
-    const nextParent = payload.parentMutations || current.mutationSlots?.parent || ['-', '-', '-', '-'];
-    const nextElderA = payload.elderAMutations || current.mutationSlots?.elderA || ['-', '-', '-', '-'];
-    const nextElderB = payload.elderBMutations || current.mutationSlots?.elderB || ['-', '-', '-', '-'];
+    const nextActive = payload.activeMutations || current.mutations.active;
+    const nextParent = payload.parentMutations || current.mutations.parent;
+    const nextElderA = payload.elderAMutations || current.mutations.elderA;
+    const nextElderB = payload.elderBMutations || current.mutations.elderB;
 
     const allValidMuts = [...nextActive, ...nextParent, ...nextElderA, ...nextElderB].filter(
       (m) => m && m !== '-' && m !== 'None'

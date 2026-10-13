@@ -32,14 +32,12 @@ import {
 } from 'lucide-react';
 import { IslePilotPlayer, DinoSlot } from '@/types/islepilot';
 import { getDinoSpeciesImage, formatPlaytime, formatTimeAgo } from '@/lib/utils';
-import { useQuery } from '@tanstack/react-query';
 import { useApp } from '@/components/providers/AppProviders';
 import { SafetyConfirmModal } from '@/components/modals/SafetyConfirmModal';
 import { TeleportModal } from '@/components/players/TeleportModal';
-import { MutationGrantModal } from '@/components/players/MutationGrantModal';
+import { MutationGrantModal, ALL_THE_ISLE_MUTATIONS } from '@/components/players/MutationGrantModal';
 import { ReviveDinoModal } from '@/components/modals/ReviveDinoModal';
 import { HexagonSlot } from '@/components/common/HexagonSlot';
-import { OFFICIAL_EVRIMA_MUTATIONS, EvrimaMutationInfo } from '@/lib/constants/mutations';
 
 interface PlayerInspectorModalProps {
   player: IslePilotPlayer | null;
@@ -86,24 +84,7 @@ export function PlayerInspectorModal({
     index: number;
   } | null>(null);
   const [slotDropdownSearch, setSlotDropdownSearch] = useState('');
-  const [selectedMutationCategory, setSelectedMutationCategory] = useState<string>('all');
   const slotDropdownRef = useRef<HTMLDivElement>(null);
-
-  // Load official Evrima mutations directly from ST25 API
-  const { data: catalogData } = useQuery<{
-    mutations: EvrimaMutationInfo[];
-    names: string[];
-  }>({
-    queryKey: ['officialMutations'],
-    queryFn: async () => {
-      const res = await fetch('/api/st25/mutations');
-      if (!res.ok) return { mutations: OFFICIAL_EVRIMA_MUTATIONS, names: [] };
-      return res.json();
-    },
-    staleTime: 1000 * 60 * 60,
-  });
-
-  const availableMutations: EvrimaMutationInfo[] = catalogData?.mutations || OFFICIAL_EVRIMA_MUTATIONS;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -183,20 +164,19 @@ export function PlayerInspectorModal({
         player.elder || (player.isPrimeElder ? 'Prime' : 'No elder')
       );
 
-      // Fetch garage slots & full player profile from internal database
+      // Fetch garage slots (trùng sinh) for this player
       setIsLoadingGarage(true);
-      fetch(`/api/st25/players/${player.steamId}`)
+      fetch(`/api/islepilot/players/${player.steamId}`)
         .then((res) => res.json())
         .then((data) => {
+          if (data?.garage && Array.isArray(data.garage)) {
+            setGarageSlots(data.garage);
+          }
           if (data?.player) {
-            const p = data.player;
-            if (p.garage && Array.isArray(p.garage)) {
-              setGarageSlots(p.garage);
-            }
             loadMutationsIntoEditor(
-              p.mutations || [],
-              p.lineage || p.mutationSlots,
-              p.elder || (p.isPrimeElder ? 'Prime' : 'No elder')
+              data.player.mutations || [],
+              data.player.lineage,
+              data.player.elder || (data.player.isPrimeElder ? 'Prime' : 'No elder')
             );
           }
         })
@@ -216,10 +196,10 @@ export function PlayerInspectorModal({
 
   const dinoImage = getDinoSpeciesImage(player.species);
 
-  // ST25 Direct Database & RCON Action Dispatcher
+  // API Action Dispatcher
   const handleAction = async (action: string, reason?: string, params?: any) => {
     try {
-      const res = await fetch(`/api/st25/players/${player.steamId}/action`, {
+      const res = await fetch('/api/islepilot/action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -227,6 +207,8 @@ export function PlayerInspectorModal({
           steamId: player.steamId,
           playerName: player.name,
           reason: reason || `Admin can thiệp: ${action}`,
+          actorRole: currentSession.role,
+          actorName: currentSession.username,
           params,
         }),
       });
@@ -317,17 +299,28 @@ export function PlayerInspectorModal({
       : `Khủng long hiện tại (${player.species}${targetDinoId ? ` - UID: ${targetDinoId}` : ''})`;
 
     try {
-      const res = await fetch(`/api/st25/players/${player.steamId}`, {
-        method: 'PUT',
+      const res = await fetch('/api/islepilot/action', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          species: targetSlot?.species || player.species,
-          growth: editGrowth / 100,
-          elder: elderStatus,
-          activeMutations: activeClean,
-          parentMutations: parentClean,
-          elderAMutations: elderAClean,
-          elderBMutations: elderBClean,
+          action: 'mutations',
+          steamId: player.steamId,
+          playerName: player.name,
+          reason: `Lưu cấu trúc 16 đột biến gen cho ${targetLabel}: ${totalValidCount}/16 kích hoạt (Elder: ${elderStatus})`,
+          actorRole: currentSession.role,
+          actorName: currentSession.username,
+          params: {
+            dinoId: targetDinoId,
+            slotId: targetDinoId,
+            species: targetSlot?.species || player.species,
+            mutations: activeClean,
+            elder: elderStatus,
+            lineage: {
+              parent: parentClean,
+              elderA: elderAClean,
+              elderB: elderBClean,
+            },
+          },
         }),
       });
 
@@ -455,14 +448,21 @@ export function PlayerInspectorModal({
       : `Khủng long hiện tại (${player.species})`;
 
     try {
-      const res = await fetch(`/api/st25/players/${player.steamId}`, {
-        method: 'PUT',
+      const res = await fetch('/api/islepilot/action', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          growth: editGrowth / 100,
-          health: editHealth,
-          hunger: editHunger,
-          thirst: editThirst,
+          action: 'setgrowth',
+          steamId: player.steamId,
+          playerName: player.name,
+          reason: `Chỉnh tăng trưởng cho ${targetLabel}: Growth ${editGrowth}%`,
+          actorRole: currentSession.role,
+          actorName: currentSession.username,
+          params: {
+            dinoId: targetDinoId,
+            slotId: targetDinoId,
+            growth: editGrowth / 100,
+          },
         }),
       });
       const data = await res.json();
@@ -1129,27 +1129,9 @@ export function PlayerInspectorModal({
                           autoFocus
                           value={slotDropdownSearch}
                           onChange={(e) => setSlotDropdownSearch(e.target.value)}
-                          placeholder="Tìm kiếm đột biến gen chuẩn..."
+                          placeholder="Search mutation..."
                           className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#0e1424] border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 font-sans"
                         />
-                      </div>
-
-                      {/* Category filter tabs */}
-                      <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-1 border-b border-zinc-800 text-[10px]">
-                        {(['all', 'Universal', 'Carnivore', 'Herbivore', 'Elder', 'Unlockable'] as const).map((cat) => (
-                          <button
-                            key={cat}
-                            type="button"
-                            onClick={() => setSelectedMutationCategory(cat)}
-                            className={`px-2 py-0.5 rounded-md font-semibold transition whitespace-nowrap ${
-                              selectedMutationCategory === cat
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-zinc-900 text-zinc-400 hover:text-zinc-200'
-                            }`}
-                          >
-                            {cat === 'all' ? 'Tất cả' : cat}
-                          </button>
-                        ))}
                       </div>
 
                       {/* Clear slot option */}
@@ -1158,61 +1140,23 @@ export function PlayerInspectorModal({
                         onClick={() => handleSelectSlotMutation(null)}
                         className="text-left px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:bg-zinc-800/80 hover:text-white transition flex items-center justify-between border-b border-zinc-800/60"
                       >
-                        <span>— None (Xóa slot này) —</span>
+                        <span>— None (Xóa slot) —</span>
                       </button>
 
-                      {/* Scrollable list of Evrima mutations loaded from API */}
-                      <div className="overflow-y-auto max-h-52 space-y-1 pr-1">
-                        {availableMutations
-                          .filter((m) => {
-                            if (selectedMutationCategory !== 'all' && m.category !== selectedMutationCategory) {
-                              return false;
-                            }
-                            if (slotDropdownSearch.trim()) {
-                              const s = slotDropdownSearch.toLowerCase();
-                              return (
-                                m.name.toLowerCase().includes(s) ||
-                                (m.description && m.description.toLowerCase().includes(s)) ||
-                                m.category.toLowerCase().includes(s)
-                              );
-                            }
-                            return true;
-                          })
-                          .map((m) => {
-                            const badgeColor =
-                              m.category === 'Carnivore'
-                                ? 'bg-red-950/80 text-red-300 border-red-800/60'
-                                : m.category === 'Herbivore'
-                                ? 'bg-emerald-950/80 text-emerald-300 border-emerald-800/60'
-                                : m.category === 'Elder'
-                                ? 'bg-amber-950/80 text-amber-300 border-amber-800/60'
-                                : m.category === 'Unlockable'
-                                ? 'bg-purple-950/80 text-purple-300 border-purple-800/60'
-                                : 'bg-cyan-950/80 text-cyan-300 border-cyan-800/60';
-
-                            return (
-                              <button
-                                key={m.name}
-                                type="button"
-                                onClick={() => handleSelectSlotMutation(m.name)}
-                                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium text-zinc-200 hover:bg-blue-600/20 hover:text-cyan-200 transition flex flex-col gap-0.5 border border-transparent hover:border-blue-500/30 group"
-                              >
-                                <div className="flex items-center justify-between w-full">
-                                  <span className="font-semibold text-white group-hover:text-cyan-300">
-                                    {m.name}
-                                  </span>
-                                  <span className={`text-[9px] px-1.5 py-0.2 rounded border font-mono ${badgeColor}`}>
-                                    {m.category}
-                                  </span>
-                                </div>
-                                {m.description && (
-                                  <span className="text-[10px] text-zinc-400 line-clamp-1 font-sans">
-                                    {m.description}
-                                  </span>
-                                )}
-                              </button>
-                            );
-                          })}
+                      {/* Scrollable list of Evrima mutations */}
+                      <div className="overflow-y-auto max-h-48 space-y-0.5 pr-1">
+                        {ALL_THE_ISLE_MUTATIONS.filter((m) =>
+                          m.toLowerCase().includes(slotDropdownSearch.toLowerCase())
+                        ).map((m) => (
+                          <button
+                            key={m}
+                            type="button"
+                            onClick={() => handleSelectSlotMutation(m)}
+                            className="w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-200 hover:bg-blue-600/20 hover:text-cyan-300 transition flex items-center justify-between"
+                          >
+                            <span>{m}</span>
+                          </button>
+                        ))}
                       </div>
                     </div>
                   )}

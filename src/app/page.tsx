@@ -41,15 +41,15 @@ export default function DashboardPage() {
     refetchInterval: 10000,
   });
 
-  // 2. Fetch Live Online Players from Internal ST25 Database
+  // 2. Fetch Live Online Players
   const { data: playersData, refetch: refetchPlayers } = useQuery<{ players: IslePilotPlayer[] }>({
     queryKey: ['players', 'online'],
     queryFn: async () => {
-      const res = await fetch('/api/st25/players?online=true');
+      const res = await fetch('/api/islepilot/players?online=true');
       if (!res.ok) throw new Error('Failed to fetch online players');
       return res.json();
     },
-    refetchInterval: 10000,
+    refetchInterval: 12000,
   });
 
   // 3. Fetch Killfeed stream
@@ -72,15 +72,15 @@ export default function DashboardPage() {
       return;
     }
     try {
-      const res = await fetch(`/api/st25/players/${quickTargetId.trim()}/action`, {
+      const res = await fetch('/api/islepilot/action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'kick',
           steamId: quickTargetId.trim(),
-          params: {
-            reason: quickReason || 'Admin quick kick from dashboard',
-          },
+          reason: quickReason || 'Admin quick kick from dashboard',
+          actorRole: currentSession.role,
+          actorName: currentSession.username,
         }),
       });
       const data = await res.json();

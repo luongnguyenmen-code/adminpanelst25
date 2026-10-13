@@ -33,11 +33,11 @@ export default function PlayersPage() {
       const q = new URLSearchParams();
       if (onlineFilter === 'online') q.set('online', 'true');
       if (search) q.set('search', search);
-      const res = await fetch(`/api/st25/players?${q.toString()}`);
+      const res = await fetch(`/api/islepilot/players?${q.toString()}`);
       if (!res.ok) throw new Error('Failed to load players');
       return res.json();
     },
-    refetchInterval: 12000,
+    refetchInterval: 15000,
   });
 
   const players = data?.players || [];

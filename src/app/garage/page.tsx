@@ -18,8 +18,8 @@ import { DinoSlot, IslePilotPlayer } from '@/types/islepilot';
 import { getDinoSpeciesImage, KNOWN_SPECIES_LIST } from '@/lib/utils';
 import { useApp } from '@/components/providers/AppProviders';
 import { SafetyConfirmModal } from '@/components/modals/SafetyConfirmModal';
+import { ALL_THE_ISLE_MUTATIONS } from '@/components/players/MutationGrantModal';
 import { HexagonSlot } from '@/components/common/HexagonSlot';
-import { OFFICIAL_EVRIMA_MUTATIONS, EvrimaMutationInfo } from '@/lib/constants/mutations';
 
 export default function GaragePage() {
   const { currentSession, addToast } = useApp();
@@ -59,25 +59,7 @@ export default function GaragePage() {
     index: number;
   } | null>(null);
   const [dropdownSearch, setDropdownSearch] = useState('');
-  const [dropdownCategory, setDropdownCategory] = useState<string>('all');
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Load official Evrima mutations directly from ST25 API
-  const { data: mutationsCatalog } = useQuery<{
-    mutations: EvrimaMutationInfo[];
-    names: string[];
-  }>({
-    queryKey: ['officialMutations'],
-    queryFn: async () => {
-      const res = await fetch('/api/st25/mutations');
-      if (!res.ok) return { mutations: OFFICIAL_EVRIMA_MUTATIONS, names: [] };
-      return res.json();
-    },
-    staleTime: 1000 * 60 * 60,
-  });
-
-  const availableMutations: EvrimaMutationInfo[] =
-    mutationsCatalog?.mutations || OFFICIAL_EVRIMA_MUTATIONS;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -339,20 +321,9 @@ export default function GaragePage() {
     }
   };
 
-  const filteredMutations = availableMutations.filter((m) => {
-    if (dropdownCategory !== 'all' && m.category !== dropdownCategory) {
-      return false;
-    }
-    if (!dropdownSearch.trim()) return true;
-    const s = dropdownSearch.toLowerCase();
-    return (
-      m.name.toLowerCase().includes(s) ||
-      (m.viName && m.viName.toLowerCase().includes(s)) ||
-      (m.description && m.description.toLowerCase().includes(s)) ||
-      (m.sourceDescription && m.sourceDescription.toLowerCase().includes(s)) ||
-      m.category.toLowerCase().includes(s)
-    );
-  });
+  const filteredMutations = ALL_THE_ISLE_MUTATIONS.filter((m) =>
+    m.toLowerCase().includes(dropdownSearch.toLowerCase())
+  );
 
   return (
     <div className="space-y-6">
@@ -557,54 +528,31 @@ export default function GaragePage() {
         </div>
       </div>
 
-      {/* Floating Dropdown Selector (Matching IslePilot Screenshot 2) */}
+      {/* Floating Dropdown Selector (Matching Screenshot 2) */}
       {editingTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
           <div
             ref={dropdownRef}
-            className="w-84 max-w-full rounded-xl bg-[#0f172a] border border-cyan-500/40 shadow-2xl overflow-hidden animate-in zoom-in-95 flex flex-col max-h-[85vh]"
+            className="w-72 rounded-xl bg-[#0f172a] border border-cyan-500/40 shadow-2xl overflow-hidden animate-in zoom-in-95"
           >
-            <div className="p-3 border-b border-zinc-800 bg-[#090d16] space-y-2">
-              <div className="flex items-center justify-between">
-                <p className="text-[11px] font-bold text-cyan-400 uppercase font-mono">
-                  Chọn Đột Biến: Slot {editingTarget.index + 1} ({editingTarget.group})
-                </p>
-                <span className="text-[10px] text-zinc-500 font-mono">
-                  {filteredMutations.length} mutations
-                </span>
-              </div>
-              <div className="flex items-center gap-2 bg-zinc-900 px-2.5 py-1.5 rounded-lg border border-zinc-700">
+            <div className="p-2.5 border-b border-zinc-800 bg-[#090d16]">
+              <p className="text-[11px] font-bold text-cyan-400 uppercase font-mono mb-1.5">
+                Chọn Đột Biến: Slot {editingTarget.index + 1} ({editingTarget.group})
+              </p>
+              <div className="flex items-center gap-2 bg-zinc-900 px-2 py-1 rounded-lg border border-zinc-700">
                 <Search className="w-3.5 h-3.5 text-zinc-400" />
                 <input
                   type="text"
                   autoFocus
                   value={dropdownSearch}
                   onChange={(e) => setDropdownSearch(e.target.value)}
-                  placeholder="Tìm theo tên hoặc công dụng..."
+                  placeholder="Tìm kiếm đột biến..."
                   className="w-full bg-transparent text-xs text-white placeholder-zinc-500 focus:outline-none"
                 />
               </div>
-
-              {/* Category tabs */}
-              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pt-1 text-[10px]">
-                {(['all', 'Universal', 'Carnivore', 'Herbivore', 'Elder', 'Unlockable'] as const).map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setDropdownCategory(cat)}
-                    className={`px-2 py-0.5 rounded-md font-semibold transition whitespace-nowrap ${
-                      dropdownCategory === cat
-                        ? 'bg-cyan-600 text-white'
-                        : 'bg-zinc-800 text-zinc-400 hover:text-zinc-200'
-                    }`}
-                  >
-                    {cat === 'all' ? 'Tất cả' : cat}
-                  </button>
-                ))}
-              </div>
             </div>
 
-            <div className="max-h-72 overflow-y-auto divide-y divide-zinc-800/40 text-xs">
+            <div className="max-h-64 overflow-y-auto divide-y divide-zinc-800/40 text-xs">
               <button
                 type="button"
                 onClick={() => handleSelectMutation(null)}
@@ -613,48 +561,17 @@ export default function GaragePage() {
                 — Xóa / Để trống (None)
               </button>
 
-              {filteredMutations.map((mut) => {
-                const badgeColor =
-                  mut.category === 'Carnivore'
-                    ? 'bg-red-500/20 text-red-300 border-red-500/30'
-                    : mut.category === 'Herbivore'
-                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-                    : mut.category === 'Elder'
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                    : mut.category === 'Unlockable'
-                    ? 'bg-purple-500/20 text-purple-300 border-purple-500/30'
-                    : 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-
-                return (
-                  <button
-                    key={mut.name}
-                    type="button"
-                    onClick={() => handleSelectMutation(mut.name)}
-                    className="w-full text-left px-3.5 py-2.5 hover:bg-cyan-500/10 transition flex flex-col gap-0.5 group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-baseline gap-1.5 flex-wrap">
-                        <span className="font-semibold text-zinc-200 group-hover:text-cyan-300">
-                          {mut.name}
-                        </span>
-                        {mut.viName && (
-                          <span className="text-[11px] text-cyan-400 font-medium">
-                            ({mut.viName})
-                          </span>
-                        )}
-                      </div>
-                      <span className={`text-[9px] px-1.5 py-0.2 rounded border font-mono ${badgeColor}`}>
-                        {mut.category}
-                      </span>
-                    </div>
-                    {mut.description && (
-                      <p className="text-[10px] text-zinc-500 line-clamp-1 group-hover:text-zinc-400">
-                        {mut.description}
-                      </p>
-                    )}
-                  </button>
-                );
-              })}
+              {filteredMutations.map((mut) => (
+                <button
+                  key={mut}
+                  type="button"
+                  onClick={() => handleSelectMutation(mut)}
+                  className="w-full text-left px-3.5 py-2 hover:bg-cyan-500/10 hover:text-cyan-300 text-zinc-300 transition flex items-center justify-between group"
+                >
+                  <span>{mut}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-zinc-600 group-hover:text-cyan-400 -rotate-90" />
+                </button>
+              ))}
             </div>
           </div>
         </div>
