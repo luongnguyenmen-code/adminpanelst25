@@ -11,11 +11,14 @@ export async function GET(request: NextRequest) {
 
     const logs = adminStore.getMutationLogs();
     const filteredLogs = steamId ? logs.filter((l) => l.targetSteamId === steamId) : logs;
+    const mutations = adminStore.getMutationsCatalog();
+    const names = adminStore.getMutationNames();
 
     return NextResponse.json({
+      source: 'database',
       logs: filteredLogs,
-      catalog: ALL_MUTATION_NAMES,
-      mutations: OFFICIAL_EVRIMA_MUTATIONS,
+      catalog: names,
+      mutations,
       totalLogs: filteredLogs.length,
     });
   } catch (error: any) {

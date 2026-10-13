@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { AuditLogItem, AdminRole, PrimeMemberInfo } from '@/types/islepilot';
+import { OFFICIAL_EVRIMA_MUTATIONS, EvrimaMutationInfo } from '@/lib/constants/mutations';
 
 const DEFAULT_SEED_FILE = path.join(process.cwd(), 'data', 'store.json');
 const DB_FILE = process.env.VERCEL
@@ -412,6 +413,7 @@ class AdminDataStore {
 
   private rolePermissions: Record<string, DiscordRolePermissionItem> = {};
   private steamRoleAssignments: Record<string, SteamRoleAssignment> = {};
+  private mutationsCatalog: EvrimaMutationInfo[] = [...OFFICIAL_EVRIMA_MUTATIONS];
 
   constructor() {
     this.initDefaultRoles();
@@ -467,6 +469,11 @@ class AdminDataStore {
             ...parsed.steamRoleAssignments,
           };
         }
+        if (parsed.mutationsCatalog && Array.isArray(parsed.mutationsCatalog) && parsed.mutationsCatalog.length > 0) {
+          this.mutationsCatalog = parsed.mutationsCatalog;
+        } else {
+          this.mutationsCatalog = [...OFFICIAL_EVRIMA_MUTATIONS];
+        }
       }
     } catch (err) {
       console.warn('[AdminDataStore] Failed to load data from disk:', err);
@@ -509,6 +516,7 @@ class AdminDataStore {
         broadcastHistory: this.broadcastHistory,
         rolePermissions: this.rolePermissions,
         steamRoleAssignments: this.steamRoleAssignments,
+        mutationsCatalog: this.mutationsCatalog,
       };
       const jsonStr = JSON.stringify(data, null, 2);
       fs.writeFileSync(DB_FILE, jsonStr, 'utf-8');
@@ -740,6 +748,43 @@ class AdminDataStore {
       };
     } else {
       this.playerMutations[steamId] = data;
+    }
+    this.saveToDisk();
+  }
+
+  getAllStoredPlayerMutations(): Record<string, any> {
+    this.loadFromDisk();
+    return this.playerMutations;
+  }
+
+  // ==========================================
+  // OFFICIAL MUTATIONS CATALOG IN DATABASE
+  // ==========================================
+  getMutationsCatalog(): EvrimaMutationInfo[] {
+    this.loadFromDisk();
+    return this.mutationsCatalog && this.mutationsCatalog.length > 0
+      ? this.mutationsCatalog
+      : OFFICIAL_EVRIMA_MUTATIONS;
+  }
+
+  getMutationNames(): string[] {
+    return this.getMutationsCatalog().map((m) => m.name);
+  }
+
+  setMutationsCatalog(catalog: EvrimaMutationInfo[]): void {
+    this.mutationsCatalog = catalog;
+    this.saveToDisk();
+  }
+
+  addMutationToCatalog(mutation: EvrimaMutationInfo): void {
+    this.loadFromDisk();
+    const existingIdx = this.mutationsCatalog.findIndex(
+      (m) => m.name.toLowerCase() === mutation.name.toLowerCase()
+    );
+    if (existingIdx >= 0) {
+      this.mutationsCatalog[existingIdx] = mutation;
+    } else {
+      this.mutationsCatalog.push(mutation);
     }
     this.saveToDisk();
   }

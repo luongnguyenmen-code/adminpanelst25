@@ -215,6 +215,75 @@ export class ST25PlayerEngine {
       });
     }
 
+    // Merge database players who have mutations stored in internal database (data/store.json)
+    const seenSteamIds = new Set<string>(profiles.map((p) => p.steamId));
+    const storedMap = adminStore.getAllStoredPlayerMutations();
+
+    if (!onlineOnly) {
+      for (const [steamId, savedMuts] of Object.entries(storedMap)) {
+        if (seenSteamIds.has(steamId)) continue;
+        if (search && !steamId.includes(search)) continue;
+
+        const active = (savedMuts?.mutations || []).slice(0, 4);
+        while (active.length < 4) active.push('-');
+
+        const parent = (savedMuts?.lineage?.parent || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
+        while (parent.length < 4) parent.push('-');
+
+        const elderA = (savedMuts?.lineage?.elderA || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
+        while (elderA.length < 4) elderA.push('-');
+
+        const elderB = (savedMuts?.lineage?.elderB || ['-', '-', '-', '-']).map((x: any) => x || '-').slice(0, 4);
+        while (elderB.length < 4) elderB.push('-');
+
+        const allValidMuts = [...active, ...parent, ...elderA, ...elderB].filter((m) => m && m !== '-' && m !== 'None');
+
+        const savedDino = adminStore.getDinoBySteamId(steamId);
+        const species = savedMuts?.species || savedDino?.species || 'Tyrannosaurus';
+
+        profiles.push({
+          steamId,
+          name: savedDino?.playerName || 'Survivor',
+          online: false,
+          species,
+          female: savedDino?.gender === 'female',
+          growth: savedDino?.growth ?? 1.0,
+          health: 1000,
+          maxHealth: 1000,
+          hunger: 300,
+          maxHunger: 300,
+          thirst: 800,
+          maxThirst: 800,
+          stamina: 100,
+          maxStamina: 100,
+          bleed: 0,
+          brokenLeg: false,
+          position: undefined,
+          lastSeenAt: savedDino?.updatedAt,
+          totalPlaySec: 0,
+          discord: null,
+          dinoId: `dino_${steamId}_${species.toLowerCase()}`,
+          elder: savedMuts?.elder || 'No elder',
+          isPrimeElder: savedMuts?.elder === 'Prime',
+          mutations: allValidMuts,
+          mutationSlots: {
+            active,
+            parent,
+            elderA,
+            elderB,
+            totalCount: allValidMuts.length,
+          },
+          lineage: {
+            parent,
+            elderA,
+            elderB,
+          },
+          garage: [],
+        });
+        seenSteamIds.add(steamId);
+      }
+    }
+
     return profiles;
   }
 
